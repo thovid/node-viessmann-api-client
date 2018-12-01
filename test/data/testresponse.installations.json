@@ -1,0 +1,264 @@
+{
+    "class": [
+        "collection"
+    ],
+    "entities": [
+        {
+            "class": [
+                "model.installation"
+            ],
+            "properties": {
+                "_id": "99999",
+                "id": 99999,
+                "registeredAt": "2017-08-05T17:28:19.000Z",
+                "updatedAt": "2018-06-09T17:57:43.643Z",
+                "aggregatedStatus": "WorksProperly"
+            },
+            "entities": [
+                {
+                    "properties": {
+                        "serial": "123456",
+                        "version": "1.4.0.0",
+                        "autoUpdate": false,
+                        "createdAt": "2016-10-18T18:52:31.403Z",
+                        "producedAt": "2016-10-13T10:46:12.000Z",
+                        "lastStatusChangedAt": "2018-11-26T14:48:09.302Z",
+                        "aggregatedStatus": "WorksProperly",
+                        "targetRealm": "Genesis",
+                        "gatewayType": "VitoconnectOptolink",
+                        "installationId": 99999,
+                        "registeredAt": "2017-08-05T17:28:19.700Z"
+                    },
+                    "entities": [
+                        {
+                            "properties": {
+                                "gatewaySerial": "123456",
+                                "id": "0",
+                                "boilerSerial": "45678",
+                                "boilerSerialEditor": "DeviceCommunication",
+                                "bmuSerial": "67890",
+                                "bmuSerialEditor": "DeviceCommunication",
+                                "createdAt": "2018-06-08T02:10:03.488Z",
+                                "editedAt": "2018-11-26T14:48:09.297Z",
+                                "modelId": "VScotHO1_200_01",
+                                "status": "Online"
+                            },
+                            "class": [
+                                "model.device"
+                            ],
+                            "rel": [
+                                "https://wiki.viessmann.com/display/VPL/Relations#Relations-device",
+                                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+                            ]
+                        }
+                    ],
+                    "class": [
+                        "model.gateway"
+                    ],
+                    "rel": [
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-gateway",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection"
+                    ],
+                    "actions": [
+                        {
+                            "name": "unlinkGatewayFromInstallation",
+                            "method": "DELETE",
+                            "href": "https://api.viessmann-platform.io/general-management/installations/99999/gateways/123456"
+                        }
+                    ],
+                    "links": [
+                        {
+                            "rel": [
+                                "https://wiki.viessmann.com/display/VPL/Relations#Relations-live-updates",
+                                "https://wiki.viessmann.com/display/VPL/Relations#Relations-gateway-status"
+                            ],
+                            "href": "/general-management/installations/99999/gateways/123456/aggregated-status"
+                        }
+                    ]
+                },
+                {
+                    "properties": {
+                        "street": "Teststreet",
+                        "houseNumber": "22",
+                        "zip": "10117",
+                        "city": "Berlin",
+                        "country": "de",
+                        "geolocation": {
+                            "latitude": 52.529886, 
+                            "longitude": 13.366586,
+                            "timeZone": "Europe/Berlin"
+                        }
+                    },
+                    "class": [
+                        "model.postalAddress"
+                    ],
+                    "rel": [
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-postalAddress",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ]
+                },
+                {
+                    "class": [
+                        "model.linkedEntity"
+                    ],
+                    "rel": [
+                        "https://wiki.viessmann.com/display/VPL/Relations#Relations-accessList",
+                        "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
+                    ],
+                    "href": "https://api.viessmann-platform.io/general-management/installations/99999/access-list"
+                }
+            ],
+            "links": [
+                {
+                    "rel": [
+                        "self"
+                    ],
+                    "href": "https://api.viessmann-platform.io/general-management/installations/99999"
+                }
+            ],
+            "actions": [
+                {
+                    "name": "linkGatewayToInstallation",
+                    "method": "POST",
+                    "href": "https://api.viessmann-platform.io/general-management/installations/99999/gateways",
+                    "fields": [
+                        {
+                            "name": "serial",
+                            "type": "text"
+                        },
+                        {
+                            "name": "password",
+                            "type": "text"
+                        }
+                    ]
+                },
+                {
+                    "name": "updateInstallation",
+                    "method": "PUT",
+                    "href": "https://api.viessmann-platform.io/general-management/installations/99999",
+                    "fields": [
+                        {
+                            "name": "description",
+                            "type": "text"
+                        },
+                        {
+                            "name": "address.street",
+                            "type": "text"
+                        },
+                        {
+                            "name": "address.houseNumber",
+                            "type": "text"
+                        },
+                        {
+                            "name": "address.zip",
+                            "type": "text"
+                        },
+                        {
+                            "name": "address.city",
+                            "type": "text"
+                        },
+                        {
+                            "name": "address.region",
+                            "type": "text"
+                        },
+                        {
+                            "name": "address.country",
+                            "type": "text"
+                        },
+                        {
+                            "name": "address.phoneNumber",
+                            "type": "text"
+                        },
+                        {
+                            "name": "address.faxNumber",
+                            "type": "text"
+                        },
+                        {
+                            "name": "address.latitude",
+                            "type": "number"
+                        },
+                        {
+                            "name": "address.longitude",
+                            "type": "number"
+                        },
+                        {
+                            "name": "address.timeZone",
+                            "type": "text"
+                        }
+                    ]
+                },
+                {
+                    "name": "deleteInstallation",
+                    "method": "DELETE",
+                    "href": "https://api.viessmann-platform.io/general-management/installations/99999"
+                }
+            ],
+            "rel": [
+                "item",
+                "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-collection",
+                "https://wiki.viessmann.com/display/VPL/Relations#Relations-installation"
+            ]
+        }
+    ],
+    "links": [
+        {
+            "rel": [
+                "self"
+            ],
+            "href": "https://api.viessmann-platform.io/general-management/installations?expanded=true"
+        }
+    ],
+    "actions": [
+        {
+            "name": "createInstallation",
+            "method": "POST",
+            "href": "https://api.viessmann-platform.io/general-management/installations",
+            "fields": [
+                {
+                    "name": "description",
+                    "type": "text"
+                },
+                {
+                    "name": "gateway.serial",
+                    "type": "text"
+                },
+                {
+                    "name": "gateway.password",
+                    "type": "text"
+                },
+                {
+                    "name": "address.street",
+                    "type": "text"
+                },
+                {
+                    "name": "address.houseNumber",
+                    "type": "text"
+                },
+                {
+                    "name": "address.zip",
+                    "type": "text"
+                },
+                {
+                    "name": "address.city",
+                    "type": "text"
+                },
+                {
+                    "name": "address.region",
+                    "type": "text"
+                },
+                {
+                    "name": "address.country",
+                    "type": "text"
+                },
+                {
+                    "name": "address.phoneNumber",
+                    "type": "text"
+                },
+                {
+                    "name": "address.faxNumber",
+                    "type": "text"
+                }
+            ]
+        }
+    ]
+}
