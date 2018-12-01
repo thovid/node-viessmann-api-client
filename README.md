@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/thovid/node-viessmann-api-client.svg?branch=master)](https://travis-ci.org/thovid/node-viessmann-api-client)
+
 # node-viessmann-api-client
 
 A nodejs client for the viessmann heating api
