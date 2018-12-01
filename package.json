@@ -28,6 +28,7 @@
     "chai-as-promised": "^7.1.1",
     "mocha": "^5.2.0",
     "nock": "^10.0.2",
-    "ts-node": "^7.0.1"
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.1"
   }
 }
