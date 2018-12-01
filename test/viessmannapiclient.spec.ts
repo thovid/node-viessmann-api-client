@@ -2,10 +2,10 @@ import { expect } from 'chai';
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import * as nock from 'nock';
-import { Interceptor } from 'nock';
+import * as sinon from 'sinon';
 import 'mocha';
 
-import { initializeClient, ViessmannClientConfig, ViessmannInstallation } from '../src/viessmann-api-client';
+import { initializeClient, ViessmannClient, ViessmannClientConfig, ViessmannInstallation, ViessmannFeature } from '../src/viessmann-api-client';
 import { ViessmannOAuthConfig, AuthenticationFailed } from '../src/oauth-client';
 
 // Note: augmenting nock.Interceptor here until type def is fixed
@@ -21,6 +21,8 @@ const refreshToken = 'refresh_token';
 const accessToken = 'access_token';
 
 describe('viessmann api client', () => {
+
+    let client: ViessmannClient;
 
     afterEach('cleanup nock', () => {
         nock.cleanAll();
@@ -49,7 +51,7 @@ describe('viessmann api client', () => {
             let authScope = setupOAuth(auth);
             setupData(config);
 
-            await initializeClient(config);
+            client = await initializeClient(config);
             authScope.done();
         });
 
@@ -92,7 +94,7 @@ describe('viessmann api client', () => {
                     expires_in: 3600
                 });
             setupData(config);
-            await initializeClient(config);
+            client = await initializeClient(config);
         });
     });
 
@@ -119,7 +121,7 @@ describe('viessmann api client', () => {
             setupOAuth(config.auth);
             setupData(config);
 
-            await initializeClient(config);
+            client = await initializeClient(config);
             expect(notifiedToken).to.be.equal(refreshToken);
         });
 
@@ -132,7 +134,7 @@ describe('viessmann api client', () => {
                 gatewayId: '123456',
                 deviceId: '0'
             };
-            const client = await initializeClient(config);
+            client = await initializeClient(config);
             expect(client.getInstallation()).to.be.deep.equal(expectedInstallation);
             dataScope.done();
         });
@@ -155,7 +157,7 @@ describe('viessmann api client', () => {
                 });
 
             let dataScope = setupData(config, newAccessToken);
-            await initializeClient(config);
+            client = await initializeClient(config);
 
             expect(notifiedToken).to.be.equal(newRefreshToken);
             authScope.done();
@@ -180,7 +182,7 @@ describe('viessmann api client', () => {
                 .matchHeader('authorization', 'Bearer ' + newAccessToken)
                 .reply(200, responseBody('installations'));
 
-            await initializeClient(config);
+            client = await initializeClient(config);
         });
 
         it('should report error of access token could not be retrieved', () => {
@@ -218,6 +220,16 @@ describe('viessmann api client', () => {
             }
         };
 
+        let clock;
+        beforeEach('mock clock', () => {
+            clock = sinon.useFakeTimers();
+        });
+
+        afterEach('reset mocked clock', () => {
+            clock.restore();
+        });
+
+
         it('should fetch the current external temperature upon request', async () => {
             setupOAuth(config.auth);
             setupData(config)
@@ -225,8 +237,8 @@ describe('viessmann api client', () => {
                 .reply(200, responseBody('heating.sensors.temperature.outside'));
 
 
-            const client = await initializeClient(config);
-            const temperature = client.getExternalTemperature();
+            client = await initializeClient(config);
+            const temperature = client.getValue(ViessmannFeature.EXTERNAL_TEMPERATURE);
             return expect(temperature).to.eventually.be.equal(7.6);
         });
 
@@ -236,9 +248,29 @@ describe('viessmann api client', () => {
                 .get(dataPath('heating.boiler.sensors.temperature.main'))
                 .reply(200, responseBody('heating.boiler.sensors.temperature.main'));
 
-            const client = await initializeClient(config);
-            const temperature = client.getBoilerTemperature();
+            client = await initializeClient(config);
+            const temperature = client.getValue(ViessmannFeature.BOILER_TEMPERATURE);
             return expect(temperature).to.eventually.be.equal(36);
+        });
+
+        it('should observe external temperature if requested', async () => {
+            setupOAuth(config.auth);
+            setupData(config)
+                .get(dataPath('heating.sensors.temperature.outside'))
+                .reply(200, responseBody('heating.sensors.temperature.outside'));
+
+            // wrap into promise to assert eventually below
+            let observed: Promise<number> = new Promise(async (resolve, reject) => {
+                client = await initializeClient(config);
+                client.observe(ViessmannFeature.EXTERNAL_TEMPERATURE, (value) => {
+                    resolve(value);
+                    client.clearObservers();
+                });
+
+                clock.tick(60000);
+            });
+
+            return expect(observed).to.eventually.be.equal(7.6);
         });
     });
 });
