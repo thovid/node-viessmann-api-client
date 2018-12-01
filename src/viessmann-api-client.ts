@@ -1,4 +1,5 @@
 import { Siren } from "siren-types";
+import { log } from './logger';
 const sirenParser = require('siren-parser');
 
 import { ViessmannOAuthConfig, createOAuthClient, ViessmannOAuthClient } from './oauth-client';
@@ -22,7 +23,9 @@ export class ViessmannClient {
 
     constructor(private readonly oauth: ViessmannOAuthClient,
         private readonly config: ViessmannClientConfig,
-        private readonly installation: ViessmannInstallation) { }
+        private readonly installation: ViessmannInstallation) {
+        log(`ViessmannClient: initialized with installation=${JSON.stringify(installation)}`, 'info');
+    }
 
     public getInstallation(): ViessmannInstallation {
         return this.installation;
@@ -37,6 +40,7 @@ export class ViessmannClient {
     }
 
     private async getProperty(feature: string): Promise<any> {
+        log(`ViessmannClient: getting property ${feature}`, 'debug');
         const basePath = this.basePath();
         return this.oauth
             .authenticatedGet(basePath + feature)
@@ -67,6 +71,7 @@ class ViessmannInitializer {
     }
 
     private async initInstallation(authClient: ViessmannOAuthClient): Promise<ViessmannClient> {
+        log('ViessmannClient: requesting installation details during initialization' , 'debug');
         return authClient.authenticatedGet(this.config.api.host + '/general-management/installations')
             .then((body) => sirenParser(body))
             .then((entity) => {

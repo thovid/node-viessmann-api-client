@@ -12,7 +12,6 @@ Inspired by https://github.com/thetrueavatar and his project https://github.com/
 ```typescript
 let config: ViessmannClientConfig = {
     auth: {
-        // FIXME read credentials from private file!
         credentials: {
             user: 'your username',
             password: 'your password'
@@ -63,6 +62,9 @@ const config: ViessmannClientConfig = {
 ```
 ### Token refresh:
 The client will refresh the token proactively if it is expired and also will try to refresh the token if requesting a resource returns `401`. If it receives a new token & refresh token, the callback `onRefresh` is called with the new refresh token.
+
+### Logging
+A custom log fuction can be provided by importing `customLogger` from `logger` to set a log function.
 
 # Licence
 (c) 2018 by Thomas Vidic - see LICENCE for the licence under which this project is provided
