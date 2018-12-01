@@ -27,8 +27,13 @@ let config: ViessmannClientConfig = {
 ```
 2. initialize the client and request some feature
 ```typescript
-initializeClient(config).then((client) => client.getExternalTemperature())
+initializeClient(config).then((client) => client.getValue(ViessmannFeature.EXTERNAL_TEMPERATURE))
     .then((temp) => console.log(`external temperature = ${temp}`))
+```
+3. subscribe to updates of a feature
+```typescript
+let client: ViessmannClient = ...;
+client.observe(ViessmannFeature.BOILER_TEMPERATURE, (value) => doSomething(value));
 ```
 
 ## Authentication
