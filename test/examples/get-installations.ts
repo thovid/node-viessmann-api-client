@@ -1,6 +1,6 @@
-import { initializeClient, ViessmannClientConfig, ViessmannInstallation } from '../../src/viessmann-api-client';
+import { initializeClient } from '../../src/viessmann-api-client';
 
-let config: ViessmannClientConfig = {
+let config = {
     auth: {
         // FIXME read credentials from private file!
         credentials: {

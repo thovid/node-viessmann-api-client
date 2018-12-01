@@ -9,6 +9,13 @@
   "keywords": [],
   "author": "Thomas Vidic",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thovid/node-viessmann-api-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thovid/node-viessmann-api-client/issues"
+  },
   "dependencies": {
     "@types/request": "^2.48.1",
     "@types/request-promise-native": "^1.0.15",
