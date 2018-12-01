@@ -4,7 +4,18 @@
   "description": "a node js api client for the viessmann heating api",
   "scripts": {
     "build": "tsc",
-    "test": "mocha -r ts-node/register test/**/*.spec.ts"
+    "test": "nyc mocha -r ts-node/register test/**/*.spec.ts",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "all": true
   },
   "keywords": [],
   "author": "Thomas Vidic",
@@ -36,7 +47,9 @@
     "chai-as-promised": "^7.1.1",
     "mocha": "^5.2.0",
     "nock": "^10.0.2",
+    "nyc": "^13.1.0",
     "sinon": "^7.1.1",
+    "source-map-support": "^0.5.9",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.1"
   }
