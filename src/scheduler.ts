@@ -1,5 +1,3 @@
-import { isNull } from "util";
-
 export type OnTick = () => void;
 export class Scheduler {
 
