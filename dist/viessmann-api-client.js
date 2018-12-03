@@ -12,6 +12,11 @@ const logger_1 = require("./logger");
 const scheduler_1 = require("./scheduler");
 const sirenParser = require('siren-parser');
 const oauth_client_1 = require("./oauth-client");
+var ViessmannFeature;
+(function (ViessmannFeature) {
+    ViessmannFeature["EXTERNAL_TEMPERATURE"] = "heating.sensors.temperature.outside";
+    ViessmannFeature["BOILER_TEMPERATURE"] = "heating.boiler.sensors.temperature.main";
+})(ViessmannFeature = exports.ViessmannFeature || (exports.ViessmannFeature = {}));
 class ViessmannClient {
     constructor(oauth, config, installation) {
         this.oauth = oauth;
@@ -21,7 +26,7 @@ class ViessmannClient {
         logger_1.log(`ViessmannClient: initialized with installation=${JSON.stringify(installation)}`, 'info');
         this.scheduler = new scheduler_1.Scheduler(60, () => {
             this.observers.forEach((obs, feature) => {
-                this.getProperty(feature)
+                this.getValue(feature)
                     .then(res => obs(res))
                     .catch((err) => logger_1.log(`ViessmannClient: Error [${err}] during update of observer for [${feature}]`, 'error'));
             });
@@ -34,20 +39,7 @@ class ViessmannClient {
     getInstallation() {
         return this.installation;
     }
-    getExternalTemperature() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.getProperty('heating.sensors.temperature.outside');
-        });
-    }
-    observeExternalTemperature(observer) {
-        this.addObserver('heating.sensors.temperature.outside', observer);
-    }
-    getBoilerTemperature() {
-        return __awaiter(this, void 0, void 0, function* () {
-            return this.getProperty('heating.boiler.sensors.temperature.main');
-        });
-    }
-    getProperty(feature) {
+    getValue(feature) {
         return __awaiter(this, void 0, void 0, function* () {
             logger_1.log(`ViessmannClient: getting property ${feature}`, 'debug');
             const basePath = this.basePath();
@@ -57,7 +49,7 @@ class ViessmannClient {
                 .then((entity) => entity.properties['value']['value']);
         });
     }
-    addObserver(feature, observer) {
+    observe(feature, observer) {
         this.observers.set(feature, observer);
         this.scheduler.start();
     }
