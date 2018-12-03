@@ -20,8 +20,8 @@
   "keywords": [],
   "author": "Thomas Vidic",
   "license": "MIT",
-  "main": "dist/viessmann-api-client.js",
-  "types": "dist/viessmann-api-client.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/thovid/node-viessmann-api-client.git"
