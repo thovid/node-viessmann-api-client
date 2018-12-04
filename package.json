@@ -4,7 +4,7 @@
   "description": "a node js api client for the viessmann heating api",
   "scripts": {
     "build": "tsc",
-    "test": "nyc mocha -r ts-node/register test/**/*.spec.ts",
+    "test": "nyc mocha 'test/**/*.spec.ts'",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "nyc": {
@@ -35,9 +35,7 @@
     "@types/simple-oauth2": "^1.5.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
-    "simple-oauth2": "^1.5.0",
-    "siren-parser": "^7.1.0",
-    "siren-types": "^1.0.0-rc4"
+    "simple-oauth2": "^1.5.0"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",

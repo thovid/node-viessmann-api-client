@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = require("./logger");
 const scheduler_1 = require("./scheduler");
-const sirenParser = require('siren-parser');
+const entity_1 = require("./parser/entity");
 const oauth_client_1 = require("./oauth-client");
 var ViessmannFeature;
 (function (ViessmannFeature) {
@@ -45,7 +45,7 @@ class ViessmannClient {
             const basePath = this.basePath();
             return this.oauth
                 .authenticatedGet(basePath + feature)
-                .then((response) => sirenParser(response))
+                .then((response) => new entity_1.Entity(response))
                 .then((entity) => entity.properties['value']['value']);
         });
     }
@@ -73,7 +73,7 @@ function initInstallation(authClient, config) {
     return __awaiter(this, void 0, void 0, function* () {
         logger_1.log('ViessmannClient: requesting installation details during initialization', 'debug');
         return authClient.authenticatedGet(config.api.host + '/general-management/installations')
-            .then((body) => sirenParser(body))
+            .then((body) => new entity_1.Entity(body))
             .then((entity) => {
             const installation = entity.entities[0];
             const installationId = installation.properties['_id'];

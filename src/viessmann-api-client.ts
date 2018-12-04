@@ -1,8 +1,6 @@
-import { Siren } from "siren-types";
 import { log } from './logger';
 import { Scheduler } from './scheduler';
-
-const sirenParser = require('siren-parser');
+import { Entity } from './parser/entity';
 
 import { ViessmannOAuthConfig, createOAuthClient, ViessmannOAuthClient } from './oauth-client';
 
@@ -61,8 +59,8 @@ export class ViessmannClient {
         const basePath = this.basePath();
         return this.oauth
             .authenticatedGet(basePath + feature)
-            .then((response) => sirenParser(response))
-            .then((entity: Siren) => entity.properties['value']['value']);
+            .then((response) => new Entity(response))
+            .then((entity: Entity) => entity.properties['value']['value']);
     }
 
     public observe(feature: ViessmannFeature, observer: FeatureObserver): void {
@@ -87,11 +85,11 @@ export async function initializeClient(config: ViessmannClientConfig): Promise<V
 async function initInstallation(authClient: ViessmannOAuthClient, config: ViessmannClientConfig): Promise<ViessmannClient> {
     log('ViessmannClient: requesting installation details during initialization', 'debug');
     return authClient.authenticatedGet(config.api.host + '/general-management/installations')
-        .then((body) => sirenParser(body))
+        .then((body) => new Entity(body))
         .then((entity) => {
-            const installation: Siren = entity.entities[0];
+            const installation: Entity = entity.entities[0];
             const installationId: string = installation.properties['_id'];
-            const modelDevice: Siren = installation.entities[0];
+            const modelDevice: Entity = installation.entities[0];
             const gatewayId: string = modelDevice.properties['serial'];
 
             const result = {

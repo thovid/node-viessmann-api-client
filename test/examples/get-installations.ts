@@ -1,4 +1,4 @@
-import { initializeClient } from '../../src/viessmann-api-client';
+import { initializeClient, ViessmannFeature } from '../../src/viessmann-api-client';
 
 let config = {
     auth: {
@@ -16,6 +16,6 @@ let config = {
     }
 };
 
-initializeClient(config).then((client) => client.getExternalTemperature())
+initializeClient(config).then((client) => client.getValue(ViessmannFeature.EXTERNAL_TEMPERATURE))
     .then((temp) => console.log(`external temperature = ${temp}`))
     .catch((err) => console.log("An error occurred: " + JSON.stringify(err)));
