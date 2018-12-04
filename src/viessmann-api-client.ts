@@ -1,6 +1,6 @@
 import { log } from './logger';
 import { Scheduler } from './scheduler';
-import { Entity } from './parser/entity';
+import { Entity } from './parser/siren';
 
 import { ViessmannOAuthConfig, createOAuthClient, ViessmannOAuthClient } from './oauth-client';
 

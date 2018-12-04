@@ -17,7 +17,7 @@ export class Link {
     public readonly href?: string;
 }
 
-export type Properties = Object
+export type Properties = any;
 
 export class Entity {
 

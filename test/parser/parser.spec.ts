@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import 'mocha';
 
-import { Entity } from '../../src/parser/entity';
+import { Entity } from '../../src/parser/siren';
 
 describe('parser', () => {
     describe('parsing simple response', () => {
