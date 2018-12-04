@@ -91,15 +91,13 @@ describe('entity', () => {
     });
 
     it('should find direct children with specified class', () => {
-
-
         const foundRels = entity
             .childrenWithClass('findMe')
             .map(c => c.rel[0]);
         expect(foundRels).to.be.deep.equal(['1', '3']);
     });
 
-    it('should find chlidren with specified class recursively', () => {
+    it('should find children with specified class recursively', () => {
         const foundRels = entity
             .childrenWithClass('findMe', true)
             .map(c => c.rel[0]);

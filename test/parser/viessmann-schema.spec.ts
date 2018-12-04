@@ -121,5 +121,41 @@ describe('schema', () => {
 
             expect(viessmann.isFeatureWithComponents(entity)).to.be.true;
         });
+
+        it('should select leaf features (without components)', () => {
+            const entity = new Entity(
+                {
+                    href: ['root'],
+                    entities: [
+                        {
+                            href: ['middle'],
+                            class: ['feature', 'notleaf'],
+                            entities: [
+                                {
+                                    href: ['component'],
+                                    rel: ['http://schema.viessmann.com/link-relations#feature-components'],
+                                    properties: {
+                                        components: [
+                                            'time'
+                                        ]
+                                    }
+                                }
+                            ]
+                        }, {
+                            href: ['leaf'],
+                            class: ['feature', 'leaf'],
+                            entities: [{
+                                href: ['meta'],
+                                rel: ['http://schema.viessmann.com/link-relations#leaf-components'],
+                                properties: {}
+                            }]
+                        }
+                    ]
+                });
+
+            const foundHrefs = viessmann.selectLeafFeaturesOf(entity)
+                .map(e => e.href);
+            expect(foundHrefs).to.be.deep.equal(['leaf']);
+        });
     });
 });

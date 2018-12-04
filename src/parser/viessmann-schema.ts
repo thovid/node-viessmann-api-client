@@ -28,6 +28,10 @@ export function getMetaInformation(entity: Entity): MetaInformation | null {
     return result ? result : null;
 }
 
+export function selectLeafFeaturesOf(entity: Entity): Entity[] {
+    return null;
+}
+
 export function isFeatureWithComponents(entity: Entity): boolean {
     return isFeature(entity) && hasComponents(entity);
 }
