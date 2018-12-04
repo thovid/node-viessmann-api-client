@@ -56,6 +56,12 @@ export class Entity {
         } else {
             this.entities = [];
         }
+
+        if(entity.href && 'string' === typeof entity.href) {
+            this.href = entity.href;
+        } else {
+            this.href = undefined;
+        }
     };
 
     public readonly rel: string[];
@@ -63,6 +69,7 @@ export class Entity {
     public readonly properties: Properties;
     public readonly entities: Entity[];
     public readonly class: string[];
+    public readonly href?: string;
 
     public hasClass(aClass: string): boolean {
         return this.class.indexOf(aClass) > -1;
