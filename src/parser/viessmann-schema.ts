@@ -1,5 +1,4 @@
 import { Entity } from './siren';
-import { is } from 'bluebird';
 
 export interface MetaInformation {
     apiVersion: number;
@@ -29,19 +28,8 @@ export function getMetaInformation(entity: Entity): MetaInformation | null {
     return result ? result : null;
 }
 
-export function isFeature(entity: Entity): boolean {
-    return entity.hasClass('feature');
-}
-
 export function isFeatureWithComponents(entity: Entity): boolean {
     return isFeature(entity) && hasComponents(entity);
-}
-
-export function hasComponents(entity: Entity): boolean {
-    return entity.entities
-        .filter(e => e.properties !== undefined
-            && e.properties.components !== undefined
-            && Array.isArray(e.properties.components)).length > 0;
 }
 
 export function getFeatureName(entity: Entity): string | null {
@@ -55,4 +43,15 @@ export function getFeatureName(entity: Entity): string | null {
     }
     const tmpClasses = entity.class.slice(0, index).concat(entity.class.slice(index + 1));
     return tmpClasses[0];
+}
+
+export function isFeature(entity: Entity): boolean {
+    return entity.hasClass('feature');
+}
+
+function hasComponents(entity: Entity): boolean {
+    return entity.entities
+        .filter(e => e.properties !== undefined
+            && e.properties.components !== undefined
+            && Array.isArray(e.properties.components)).length > 0;
 }

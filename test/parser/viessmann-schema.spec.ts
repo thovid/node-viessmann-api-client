@@ -93,9 +93,7 @@ describe('schema', () => {
                 properties: {},
                 entities: [
                     {
-                        rel: [
-                            'http://schema.viessmann.com/link-relations#feature-meta-information',
-                        ],
+                        rel: ['http://schema.viessmann.com/link-relations#feature-meta-information'],
                         properties: {
                             apiVersion: 1,
                             isEnabled: true,
@@ -107,15 +105,11 @@ describe('schema', () => {
                         }
                     },
                     {
-                        rel: [
-                            'http://schema.viessmann.com/link-relations#time',
-                        ],
-                        href: 'https://api.viessmann-platform.io/operational-data/installations/42216/gateways/666/devices/0/features/heating.device.time'
+                        rel: ['http://schema.viessmann.com/link-relations#time'],
+                        href: 'https://api.viessmann-platform.io/operational-data/installations/1234/gateways/666/devices/0/features/heating.device.time'
                     },
                     {
-                        rel: [
-                            'http://schema.viessmann.com/link-relations#feature-components',
-                        ],
+                        rel: ['http://schema.viessmann.com/link-relations#feature-components'],
                         properties: {
                             components: [
                                 'time'
@@ -124,6 +118,8 @@ describe('schema', () => {
                     }
                 ]
             });
+
+            expect(viessmann.isFeatureWithComponents(entity)).to.be.true;
         });
     });
 });
