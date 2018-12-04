@@ -1,3 +1,3 @@
 ignore:
-  - dist
-  -test/examples
+  - "dist"
+  - "test/examples"
