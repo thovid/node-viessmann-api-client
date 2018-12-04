@@ -29,11 +29,12 @@ export function getMetaInformation(entity: Entity): MetaInformation | null {
 }
 
 export function selectLeafFeaturesOf(entity: Entity): Entity[] {
-    return null;
-}
-
-export function isFeatureWithComponents(entity: Entity): boolean {
-    return isFeature(entity) && hasComponents(entity);
+    const grandChildren = entity.entities.map(e => selectLeafFeaturesOf(e));
+    const leafs = flatten(grandChildren, []);
+    if (isLeaf(entity)) {
+        leafs.push(entity);
+    }
+    return leafs;
 }
 
 export function getFeatureName(entity: Entity): string | null {
@@ -49,8 +50,12 @@ export function getFeatureName(entity: Entity): string | null {
     return tmpClasses[0];
 }
 
-export function isFeature(entity: Entity): boolean {
+function isFeature(entity: Entity): boolean {
     return entity.hasClass('feature');
+}
+
+function isLeaf(entity: Entity): boolean {
+    return isFeature(entity) && !hasComponents(entity);
 }
 
 function hasComponents(entity: Entity): boolean {
@@ -59,3 +64,17 @@ function hasComponents(entity: Entity): boolean {
             && e.properties.components !== undefined
             && Array.isArray(e.properties.components)).length > 0;
 }
+
+function flatten<P>(arr: any[], result: P[] = []): P[] {
+    for (let i = 0, length = arr.length; i < length; i++) {
+        const value = (arr[i] as P);
+        if (value !== undefined) {
+            if (Array.isArray(value)) {
+                flatten(value, result);
+            } else {
+                result.push(value);
+            }
+        }
+    }
+    return result;
+};

@@ -21,6 +21,13 @@ export type Properties = any;
 
 export class Entity {
 
+    public readonly rel: string[];
+    public readonly links: Link[];
+    public readonly properties: Properties;
+    public readonly entities: Entity[];
+    public readonly class: string[];
+    public readonly href?: string;
+
     constructor(entity: any) {
         if (entity.rel && Array.isArray(entity.rel)) {
             this.rel = (<any[]>entity.rel)
@@ -57,46 +64,14 @@ export class Entity {
             this.entities = [];
         }
 
-        if(entity.href && 'string' === typeof entity.href) {
+        if (entity.href && 'string' === typeof entity.href) {
             this.href = entity.href;
         } else {
             this.href = undefined;
         }
     };
 
-    public readonly rel: string[];
-    public readonly links: Link[];
-    public readonly properties: Properties;
-    public readonly entities: Entity[];
-    public readonly class: string[];
-    public readonly href?: string;
-
     public hasClass(aClass: string): boolean {
         return this.class.indexOf(aClass) > -1;
     }
-
-    public childrenWithClass(aClass: string, recursive: boolean = false): Entity[] {
-        const grandChildren = recursive ?
-            this.entities
-                .map(e => e.childrenWithClass(aClass, true))
-            : [];
-        const children = this.entities
-            .filter(e => e.hasClass(aClass));
-
-        return Entity.flatten(grandChildren, children);
-    }
-
-    private static flatten<P>(arr: any[], result: P[] = []): P[] {
-        for (let i = 0, length = arr.length; i < length; i++) {
-            const value = (arr[i] as P);
-            if (value !== undefined) {
-                if (Array.isArray(value)) {
-                    this.flatten(value, result);
-                } else {
-                    result.push(value);
-                }
-            }
-        }
-        return result;
-    };
 }

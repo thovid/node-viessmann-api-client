@@ -89,19 +89,5 @@ describe('entity', () => {
         expect(entity.hasClass('findMe')).to.be.true;
         expect(entity.hasClass('not me')).to.be.false;
     });
-
-    it('should find direct children with specified class', () => {
-        const foundRels = entity
-            .childrenWithClass('findMe')
-            .map(c => c.rel[0]);
-        expect(foundRels).to.be.deep.equal(['1', '3']);
-    });
-
-    it('should find children with specified class recursively', () => {
-        const foundRels = entity
-            .childrenWithClass('findMe', true)
-            .map(c => c.rel[0]);
-        expect(foundRels).to.be.deep.equal(['1', '3', '3.1.1']);
-    });
 });
 

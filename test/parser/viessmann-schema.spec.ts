@@ -83,57 +83,18 @@ describe('schema', () => {
         });
     });
 
-    describe('testing components', () => {
-        it('should identify entity with components', () => {
-            const entity = new Entity({
-                class: [
-                    'heating.device',
-                    'feature'
-                ],
-                properties: {},
-                entities: [
-                    {
-                        rel: ['http://schema.viessmann.com/link-relations#feature-meta-information'],
-                        properties: {
-                            apiVersion: 1,
-                            isEnabled: true,
-                            isReady: true,
-                            gatewayId: '666',
-                            feature: 'heating.device',
-                            uri: '/v1/gateways/666/devices/0/features/heating.device',
-                            deviceId: '0'
-                        }
-                    },
-                    {
-                        rel: ['http://schema.viessmann.com/link-relations#time'],
-                        href: 'https://api.viessmann-platform.io/operational-data/installations/1234/gateways/666/devices/0/features/heating.device.time'
-                    },
-                    {
-                        rel: ['http://schema.viessmann.com/link-relations#feature-components'],
-                        properties: {
-                            components: [
-                                'time'
-                            ]
-                        }
-                    }
-                ]
-            });
-
-            expect(viessmann.isFeatureWithComponents(entity)).to.be.true;
-        });
-
+    describe('finding leafs', () => {
         it('should select leaf features (without components)', () => {
             const entity = new Entity(
                 {
-                    href: ['root'],
+                    rel: ['root'],
                     entities: [
                         {
-                            href: ['middle'],
+                            rel: ['middle'],
                             class: ['feature', 'notleaf'],
                             entities: [
                                 {
-                                    href: ['component'],
-                                    rel: ['http://schema.viessmann.com/link-relations#feature-components'],
+                                    rel: ['component'],
                                     properties: {
                                         components: [
                                             'time'
@@ -142,20 +103,19 @@ describe('schema', () => {
                                 }
                             ]
                         }, {
-                            href: ['leaf'],
+                            rel: ['leaf'],
                             class: ['feature', 'leaf'],
                             entities: [{
-                                href: ['meta'],
-                                rel: ['http://schema.viessmann.com/link-relations#leaf-components'],
+                                rel: ['meta'],
                                 properties: {}
                             }]
                         }
                     ]
                 });
 
-            const foundHrefs = viessmann.selectLeafFeaturesOf(entity)
-                .map(e => e.href);
-            expect(foundHrefs).to.be.deep.equal(['leaf']);
+            const foundRels = viessmann.selectLeafFeaturesOf(entity)
+                .map(e => e.rel[0]);
+            expect(foundRels).to.be.deep.equal(['leaf']);
         });
     });
 });
