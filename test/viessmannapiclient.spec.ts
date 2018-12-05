@@ -375,10 +375,6 @@ function setupData(config: ViessmannClientConfig, token?: string) {
         .reply(200, responseBody('features'));
 }
 
-function dataPath(feature: string): string {
-    return featuresPath() + '/' + feature;
-}
-
 function featuresPath(): string {
     return '/operational-data/installations/99999/gateways/123456/devices/0/features';
 }
