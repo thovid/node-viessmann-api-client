@@ -29,8 +29,7 @@ export declare class ComplexProperty implements Property {
 export declare class Feature {
     readonly meta: MetaInformation;
     readonly entity: Entity;
-    private readonly properties;
+    readonly properties: Property[];
     static createFeatures(entity: Entity, enabledOnly?: boolean): Map<string, Feature>;
     constructor(meta: MetaInformation, entity: Entity);
-    getProperties(): Property[];
 }

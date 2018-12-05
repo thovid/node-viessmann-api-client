@@ -95,7 +95,7 @@ describe('schema', () => {
             });
             const feature = new viessmann.Feature(defaultMetaInformation, entity);
 
-            const properties = feature.getProperties();
+            const properties = feature.properties;
             expect(properties).to.have.length(1);
             expect(properties[0]).to.have.property('type', 'boolean');
             expect(properties[0]).to.have.property('value', true);
@@ -116,7 +116,7 @@ describe('schema', () => {
             });
             const feature = new viessmann.Feature(defaultMetaInformation, entity);
 
-            const properties = feature.getProperties();
+            const properties = feature.properties;
             expect(properties).to.have.length(1);
             expect(properties[0]).to.have.property('name', 'something');
             expect(properties[0]).to.have.property('type', 'object');

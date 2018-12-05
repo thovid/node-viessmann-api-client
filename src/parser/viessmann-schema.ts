@@ -28,7 +28,7 @@ export class ComplexProperty implements Property {
 }
 
 export class Feature {
-    private readonly properties: Property[];
+    public readonly properties: Property[];
 
     public static createFeatures(entity: Entity, enabledOnly: boolean = true): Map<string, Feature> {
         const result: Map<string, Feature> = new Map();
@@ -53,10 +53,6 @@ export class Feature {
                 .filter(p => p !== null);
         }
         this.properties = properties;
-    }
-
-    public getProperties(): Property[] {
-        return this.properties;
     }
 }
 

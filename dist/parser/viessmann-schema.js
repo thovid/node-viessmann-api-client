@@ -45,9 +45,6 @@ class Feature {
             .forEach(f => result.set(f.meta.feature, f));
         return result;
     }
-    getProperties() {
-        return this.properties;
-    }
 }
 exports.Feature = Feature;
 function getMetaInformation(entity) {
