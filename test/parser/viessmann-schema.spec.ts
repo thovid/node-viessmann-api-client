@@ -93,7 +93,7 @@ describe('schema', () => {
                     }
                 }
             });
-            const feature = new viessmann.Feature(defaultMetaInformation, entity);
+            const feature = new viessmann.SirenFeature(defaultMetaInformation, entity);
 
             const properties = feature.properties;
             expect(properties).to.have.length(1);
@@ -114,7 +114,7 @@ describe('schema', () => {
                     }
                 }
             });
-            const feature = new viessmann.Feature(defaultMetaInformation, entity);
+            const feature = new viessmann.SirenFeature(defaultMetaInformation, entity);
 
             const properties = feature.properties;
             expect(properties).to.have.length(1);
@@ -132,7 +132,7 @@ describe('schema', () => {
 const defaultMetaInformation = null;
 
 function getMetaInformationOf(entity: Entity): viessmann.MetaInformation {
-    const features = viessmann.Feature.createFeatures(entity);
+    const features = viessmann.SirenFeature.createFeatures(entity);
     if (features.size > 0) {
         return Array.from(features.values())[0].meta;
     }
@@ -140,7 +140,7 @@ function getMetaInformationOf(entity: Entity): viessmann.MetaInformation {
 };
 
 function selectLeafEntitiesOf(entity: Entity, onlyEnabled: boolean = false): Entity[] {
-    const features = viessmann.Feature.createFeatures(entity, onlyEnabled);
+    const features = viessmann.SirenFeature.createFeatures(entity, onlyEnabled);
     if (features.size > 0) {
         return Array.from(features.values()).map(f => f.entity);
     }

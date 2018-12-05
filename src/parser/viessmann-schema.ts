@@ -27,15 +27,21 @@ export class ComplexProperty implements Property {
     }
 }
 
-export class Feature {
+export interface Feature {
+    properties: Property[];
+    meta: MetaInformation;
+    getProperty(name: string) : Property | null;
+}
+
+export class SirenFeature implements Feature {
     public readonly properties: Property[];
 
-    public static createFeatures(entity: Entity, enabledOnly: boolean = true): Map<string, Feature> {
-        const result: Map<string, Feature> = new Map();
+    public static createFeatures(entity: Entity, enabledOnly: boolean = true): Map<string, SirenFeature> {
+        const result: Map<string, SirenFeature> = new Map();
         selectLeafFeaturesOf(entity)
             .map(e => {
                 const meta = getMetaInformation(e);
-                return meta !== null ? new Feature(meta, e) : null;
+                return meta !== null ? new SirenFeature(meta, e) : null;
             }).filter(f => {
                 return (f !== null && (!enabledOnly || f.meta.isEnabled));
             })

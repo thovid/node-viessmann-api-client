@@ -5,8 +5,8 @@ import * as nock from 'nock';
 import * as sinon from 'sinon';
 import 'mocha';
 
-import { ViessmannClientConfig, ViessmannInstallation, ViessmannFeature, Client } from '../src/viessmann-api-client';
-import { ViessmannOAuthConfig, AuthenticationFailed } from '../src/oauth-client';
+import { ViessmannClientConfig, ViessmannInstallation, Client } from '../src/viessmann-api-client';
+import { ViessmannOAuthConfig, AuthenticationFailed, Credentials } from '../src/oauth-client';
 
 // Note: augmenting nock.Interceptor here until type def is fixed
 declare module "nock" {
@@ -31,10 +31,6 @@ describe('viessmann api client', () => {
     describe('initialized with user and password', () => {
 
         const auth: ViessmannOAuthConfig = {
-            credentials: {
-                user: 'some@user.com',
-                password: 'secret'
-            },
             host: 'https://iam.mockedapi.com',
             authorize: '/idp/v1/authorize',
             token: '/idp/v1/token'
@@ -47,12 +43,17 @@ describe('viessmann api client', () => {
             }
         };
 
+        const credentials: Credentials = {
+            user: 'some@user.com',
+            password: 'secret'
+        };
+
         it('should request auth code and access token', async () => {
             let authScope = setupOAuth(auth);
             setupData(config);
 
             client = new Client(config);
-            await client.connect(config.auth.credentials);
+            await client.connect(credentials);
             authScope.done();
         });
 
@@ -64,16 +65,13 @@ describe('viessmann api client', () => {
                 .reply(200, 'the response body') // api replies with login page if credentials don't match
 
             client = new Client(config);
-            return expect(client.connect(config.auth.credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
+            return expect(client.connect(credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
         });
     });
 
     describe('initialized with refresh token', async () => {
 
         const auth: ViessmannOAuthConfig = {
-            credentials: {
-                refreshToken: refreshToken
-            },
             host: 'https://iam.mockedapi.com',
             authorize: '/idp/v1/authorize',
             token: '/idp/v1/token'
@@ -84,6 +82,10 @@ describe('viessmann api client', () => {
             api: {
                 host: 'https://api.mockedapi.com'
             }
+        };
+
+        const credentials = {
+            refreshToken: refreshToken
         };
 
         it('should request a new access token', async () => {
@@ -97,17 +99,13 @@ describe('viessmann api client', () => {
                 });
             setupData(config);
             client = new Client(config);
-            await client.connect(config.auth.credentials);
+            await client.connect(credentials);
         });
     });
 
     describe('that is initialized', async () => {
         const config: ViessmannClientConfig = {
             auth: {
-                credentials: {
-                    user: 'some@user.com',
-                    password: 'secret'
-                },
                 host: 'https://iam.mockedapi.com',
                 authorize: '/idp/v1/authorize',
                 token: '/idp/v1/token'
@@ -115,6 +113,11 @@ describe('viessmann api client', () => {
             api: {
                 host: 'https://api.mockedapi.com'
             }
+        };
+
+        const credentials = {
+            user: 'some@user.com',
+            password: 'secret'
         };
 
         it('should notify about initial refresh token', async () => {
@@ -125,7 +128,7 @@ describe('viessmann api client', () => {
             setupData(config);
 
             client = new Client(config);
-            await client.connect(config.auth.credentials);
+            await client.connect(credentials);
 
             expect(notifiedToken).to.be.equal(refreshToken);
         });
@@ -140,7 +143,7 @@ describe('viessmann api client', () => {
                 deviceId: '0'
             };
             client = new Client(config);
-            await client.connect(config.auth.credentials);
+            await client.connect(credentials);
 
             expect(client.getInstallation()).to.be.deep.equal(expectedInstallation);
             dataScope.done();
@@ -165,7 +168,7 @@ describe('viessmann api client', () => {
 
             let dataScope = setupData(config, newAccessToken);
             client = new Client(config);
-            await client.connect(config.auth.credentials);
+            await client.connect(credentials);
 
             expect(notifiedToken).to.be.equal(newRefreshToken);
             authScope.done();
@@ -194,7 +197,7 @@ describe('viessmann api client', () => {
 
 
             client = new Client(config);
-            await client.connect(config.auth.credentials);
+            await client.connect(credentials);
         });
 
         it('should report error of access token could not be retrieved', () => {
@@ -203,7 +206,7 @@ describe('viessmann api client', () => {
                 .reply(400, { "error": "invalid-token-request" });
 
             client = new Client(config);
-            return expect(client.connect(config.auth.credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
+            return expect(client.connect(credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
         });
 
         it('should report error if access token could not be refreshed', () => {
@@ -213,7 +216,7 @@ describe('viessmann api client', () => {
                 .reply(400, { "error": "invalid-token-request" });
 
             client = new Client(config);
-            return expect(client.connect(config.auth.credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
+            return expect(client.connect(credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
         });
 
     });
@@ -221,10 +224,6 @@ describe('viessmann api client', () => {
     describe('requesting data', async () => {
         const config: ViessmannClientConfig = {
             auth: {
-                credentials: {
-                    user: 'some@user.com',
-                    password: 'secret'
-                },
                 host: 'https://iam.mockedapi.com',
                 authorize: '/idp/v1/authorize',
                 token: '/idp/v1/token'
@@ -232,6 +231,10 @@ describe('viessmann api client', () => {
             api: {
                 host: 'https://api.mockedapi.com'
             }
+        };
+        const credentials = {
+            user: 'some@user.com',
+            password: 'secret'
         };
 
         let clock;
@@ -249,8 +252,8 @@ describe('viessmann api client', () => {
             setupData(config);
 
             client = new Client(config);
-            await client.connect(config.auth.credentials);
-            const feature = client.getFeature(ViessmannFeature.EXTERNAL_TEMPERATURE);
+            await client.connect(credentials);
+            const feature = client.getFeature('heating.sensors.temperature.outside');
             const temperature = feature.getProperty('value').value;
             return expect(temperature).to.be.equal(7.8);
         });
@@ -262,8 +265,8 @@ describe('viessmann api client', () => {
                 .reply(200, responseBody('heating.boiler.sensors.temperature.main'));
 
             client = new Client(config);
-            await client.connect(config.auth.credentials);
-            const temperature = client.getValue(ViessmannFeature.BOILER_TEMPERATURE);
+            await client.connect(credentials);
+            const temperature = client.getValue('heating.boiler.sensors.temperature.main');
             return expect(temperature).to.eventually.be.equal(36);
         });
 
@@ -276,8 +279,8 @@ describe('viessmann api client', () => {
             // wrap into promise to assert eventually below
             let observed: Promise<number> = new Promise(async (resolve, reject) => {
                 client = new Client(config);
-                await client.connect(config.auth.credentials);
-                client.observe(ViessmannFeature.EXTERNAL_TEMPERATURE, (value) => {
+                await client.connect(credentials);
+                client.observe('heating.sensors.temperature.outside', (value) => {
                     resolve(value);
                     client.clearObservers();
                 });

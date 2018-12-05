@@ -1,38 +1,39 @@
-import { log } from './logger';
+import { log, LoggerFunction, setCustomLogger } from './logger';
 import { Scheduler } from './scheduler';
 import { Entity } from './parser/siren';
-import { Feature } from './parser/viessmann-schema';
-import { ViessmannOAuthConfig, createOAuthClient, ViessmannOAuthClient, UserCredentials, TokenCredentials } from './oauth-client';
+import { Feature, SirenFeature } from './parser/viessmann-schema';
+import { ViessmannOAuthConfig, createOAuthClient, ViessmannOAuthClient, Credentials } from './oauth-client';
 
 
 export interface ViessmannClientConfig {
-    auth: ViessmannOAuthConfig
+    auth: ViessmannOAuthConfig;
     api: ViessmannAPIURLs;
+    logger?: LoggerFunction;
 }
 
 export interface ViessmannAPIURLs {
-    host: string
+    host: string;
 }
 
 export interface ViessmannInstallation {
-    installationId: string
-    gatewayId: string
-    deviceId: string
+    installationId: string;
+    gatewayId: string;
+    deviceId: string;
 }
 
 export type FeatureObserver = (any) => void;
 
-export enum ViessmannFeature {
+enum ViessmannFeature {
     EXTERNAL_TEMPERATURE = 'heating.sensors.temperature.outside',
     BOILER_TEMPERATURE = 'heating.boiler.sensors.temperature.main'
 }
-
+/*
 export class NotConnected extends Error {
     constructor() {
         super('the Viessmann API Client is currently not connected');
         Object.setPrototypeOf(this, NotConnected.prototype);
     }
-}
+}*/
 
 export class Client {
 
@@ -41,10 +42,11 @@ export class Client {
     private installation: ViessmannInstallation;
     private features: Map<string, Feature>;
 
-    private observers: Map<ViessmannFeature, FeatureObserver> = new Map<ViessmannFeature, FeatureObserver>();
+    private observers: Map<string, FeatureObserver> = new Map<string, FeatureObserver>();
     private connected: boolean = false;
 
     constructor(private readonly config: ViessmannClientConfig) {
+        setCustomLogger(config.logger);
         this.scheduler = new Scheduler(60, () => {
             this.observers.forEach((obs, feature) => {
                 this.getValue(feature)
@@ -54,8 +56,8 @@ export class Client {
         });
     }
 
-    public async connect(credentials: UserCredentials | TokenCredentials): Promise<void> {
-        return createOAuthClient(this.config.auth)
+    public async connect(credentials: Credentials): Promise<void> {
+        return createOAuthClient(this.config.auth, credentials)
             .then(oauth => {
                 this.oauth = oauth;
                 return this.initInstallation();
@@ -78,7 +80,7 @@ export class Client {
         return this.features.get(name);
     }
 
-    public async getValue(feature: ViessmannFeature): Promise<any> {
+    public async getValue(feature: string): Promise<any> {
         log(`ViessmannClient: getting property ${feature}`, 'debug');
         const basePath = this.basePath();
         return this.oauth
@@ -87,7 +89,7 @@ export class Client {
             .then((entity: Entity) => entity.properties['value']['value']);
     }
 
-    public observe(feature: ViessmannFeature, observer: FeatureObserver): void {
+    public observe(feature: string, observer: FeatureObserver): void {
         this.observers.set(feature, observer);
         this.scheduler.start();
     }
@@ -101,7 +103,7 @@ export class Client {
         return this.oauth
             .authenticatedGet(this.basePath())
             .then((response) => new Entity(response))
-            .then((entity) => Feature.createFeatures(entity, true))
+            .then((entity) => SirenFeature.createFeatures(entity, true))
             .then((features) => this.features = features);
 
     }

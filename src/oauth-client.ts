@@ -3,12 +3,13 @@ import * as simpleOAuth from "simple-oauth2";
 import { log } from "./logger";
 
 export interface ViessmannOAuthConfig {
-    credentials: UserCredentials | TokenCredentials;
     host: string;
     authorize: string;
     token: string;
     onRefresh?: OnRefresh;
 }
+
+export type Credentials = UserCredentials | TokenCredentials;
 
 export interface UserCredentials {
     user: string;
@@ -85,8 +86,8 @@ export class ViessmannOAuthClient {
     }
 }
 
-export async function createOAuthClient(config: ViessmannOAuthConfig): Promise<ViessmannOAuthClient> {
-    return new Initializer(config).initialize(config.credentials);
+export async function createOAuthClient(config: ViessmannOAuthConfig, credentials: Credentials): Promise<ViessmannOAuthClient> {
+    return new Initializer(config).initialize(credentials);
 }
 
 class Initializer {
