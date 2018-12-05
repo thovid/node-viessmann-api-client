@@ -2,7 +2,7 @@ import { log } from './logger';
 import { Scheduler } from './scheduler';
 import { Entity } from './parser/siren';
 
-import { ViessmannOAuthConfig, createOAuthClient, ViessmannOAuthClient } from './oauth-client';
+import { ViessmannOAuthConfig, createOAuthClient, ViessmannOAuthClient, UserCredentials, TokenCredentials } from './oauth-client';
 
 export interface ViessmannClientConfig {
     auth: ViessmannOAuthConfig
@@ -26,16 +26,23 @@ export enum ViessmannFeature {
     BOILER_TEMPERATURE = 'heating.boiler.sensors.temperature.main'
 }
 
-export class ViessmannClient {
+export class NotConnected extends Error {
+    constructor() {
+        super('the Viessmann API Client is currently not connected');
+        Object.setPrototypeOf(this, NotConnected.prototype);
+    }
+}
+
+export class Client {
+
+    private scheduler: Scheduler;
+    private oauth: ViessmannOAuthClient;
+    private installation: ViessmannInstallation;
 
     private observers: Map<ViessmannFeature, FeatureObserver> = new Map<ViessmannFeature, FeatureObserver>();
-    private scheduler: Scheduler;
+    private connected: boolean = false;
 
-    constructor(private readonly oauth: ViessmannOAuthClient,
-        private readonly config: ViessmannClientConfig,
-        private readonly installation: ViessmannInstallation) {
-        log(`ViessmannClient: initialized with installation=${JSON.stringify(installation)}`, 'info');
-
+    constructor(private readonly config: ViessmannClientConfig) {
         this.scheduler = new Scheduler(60, () => {
             this.observers.forEach((obs, feature) => {
                 this.getValue(feature)
@@ -45,9 +52,19 @@ export class ViessmannClient {
         });
     }
 
-    public clearObservers(): void {
-        this.observers.clear();
-        this.scheduler.stop();
+    public async connect(credentials: UserCredentials | TokenCredentials): Promise<void> {
+        return createOAuthClient(this.config.auth)
+            .then(oauth => {
+                this.oauth = oauth;
+                return this.initInstallation();
+            }).then(() => {
+                log(`ViessmannClient: initialized with installation=${JSON.stringify(this.installation)}`, 'info');
+                this.connected = true;
+            });
+    }
+
+    public isConnected(): boolean {
+        return this.connected;
     }
 
     public getInstallation(): ViessmannInstallation {
@@ -68,6 +85,11 @@ export class ViessmannClient {
         this.scheduler.start();
     }
 
+    public clearObservers(): void {
+        this.observers.clear();
+        this.scheduler.stop();
+    }
+
     private basePath(): string {
         return this.config.api.host
             + '/operational-data/installations/' + this.installation.installationId
@@ -75,28 +97,22 @@ export class ViessmannClient {
             + '/devices/' + this.installation.deviceId
             + '/features/';
     }
+
+    private async initInstallation(): Promise<void> {
+        log('ViessmannClient: requesting installation details during initialization', 'debug');
+        return this.oauth.authenticatedGet(this.config.api.host + '/general-management/installations')
+            .then((body) => new Entity(body))
+            .then((entity) => {
+                const installation: Entity = entity.entities[0];
+                const installationId: string = installation.properties['_id'];
+                const modelDevice: Entity = installation.entities[0];
+                const gatewayId: string = modelDevice.properties['serial'];
+
+                this.installation = {
+                    installationId: installationId,
+                    gatewayId: gatewayId,
+                    deviceId: '0'
+                }
+            });
+    };
 }
-
-export async function initializeClient(config: ViessmannClientConfig): Promise<ViessmannClient> {
-    return createOAuthClient(config.auth)
-        .then((authClient) => initInstallation(authClient, config));
-}
-
-async function initInstallation(authClient: ViessmannOAuthClient, config: ViessmannClientConfig): Promise<ViessmannClient> {
-    log('ViessmannClient: requesting installation details during initialization', 'debug');
-    return authClient.authenticatedGet(config.api.host + '/general-management/installations')
-        .then((body) => new Entity(body))
-        .then((entity) => {
-            const installation: Entity = entity.entities[0];
-            const installationId: string = installation.properties['_id'];
-            const modelDevice: Entity = installation.entities[0];
-            const gatewayId: string = modelDevice.properties['serial'];
-
-            const result = {
-                installationId: installationId,
-                gatewayId: gatewayId,
-                deviceId: '0'
-            }
-            return new ViessmannClient(authClient, config, result);
-        });
-};

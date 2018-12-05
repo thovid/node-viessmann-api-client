@@ -1,4 +1,4 @@
-import { ViessmannOAuthConfig, ViessmannOAuthClient } from './oauth-client';
+import { ViessmannOAuthConfig, UserCredentials, TokenCredentials } from './oauth-client';
 export interface ViessmannClientConfig {
     auth: ViessmannOAuthConfig;
     api: ViessmannAPIURLs;
@@ -16,17 +16,23 @@ export declare enum ViessmannFeature {
     EXTERNAL_TEMPERATURE = "heating.sensors.temperature.outside",
     BOILER_TEMPERATURE = "heating.boiler.sensors.temperature.main"
 }
-export declare class ViessmannClient {
-    private readonly oauth;
+export declare class NotConnected extends Error {
+    constructor();
+}
+export declare class Client {
     private readonly config;
-    private readonly installation;
-    private observers;
     private scheduler;
-    constructor(oauth: ViessmannOAuthClient, config: ViessmannClientConfig, installation: ViessmannInstallation);
-    clearObservers(): void;
+    private oauth;
+    private installation;
+    private observers;
+    private connected;
+    constructor(config: ViessmannClientConfig);
+    connect(credentials: UserCredentials | TokenCredentials): Promise<void>;
+    isConnected(): boolean;
     getInstallation(): ViessmannInstallation;
     getValue(feature: ViessmannFeature): Promise<any>;
     observe(feature: ViessmannFeature, observer: FeatureObserver): void;
+    clearObservers(): void;
     private basePath;
+    private initInstallation;
 }
-export declare function initializeClient(config: ViessmannClientConfig): Promise<ViessmannClient>;

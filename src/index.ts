@@ -1,11 +1,10 @@
 export {
-    ViessmannClient,
+    Client,
     ViessmannClientConfig,
     ViessmannAPIURLs,
     ViessmannInstallation,
     FeatureObserver,
     ViessmannFeature,
-    initializeClient
 } from './viessmann-api-client';
 
 export {
