@@ -19,7 +19,7 @@ class ComplexProperty {
     }
 }
 exports.ComplexProperty = ComplexProperty;
-class Feature {
+class SirenFeature {
     constructor(meta, entity) {
         this.meta = meta;
         this.entity = entity;
@@ -38,15 +38,19 @@ class Feature {
         selectLeafFeaturesOf(entity)
             .map(e => {
             const meta = getMetaInformation(e);
-            return meta !== null ? new Feature(meta, e) : null;
+            return meta !== null ? new SirenFeature(meta, e) : null;
         }).filter(f => {
             return (f !== null && (!enabledOnly || f.meta.isEnabled));
         })
             .forEach(f => result.set(f.meta.feature, f));
         return result;
     }
+    getProperty(name) {
+        const result = this.properties.find(p => name === p.name);
+        return result || null;
+    }
 }
-exports.Feature = Feature;
+exports.SirenFeature = SirenFeature;
 function getMetaInformation(entity) {
     if (!isFeature(entity)) {
         return null;

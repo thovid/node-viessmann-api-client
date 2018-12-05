@@ -1,3 +1,4 @@
-export { Client, ViessmannClientConfig, ViessmannAPIURLs, ViessmannInstallation, FeatureObserver, ViessmannFeature, } from './viessmann-api-client';
-export { ViessmannOAuthConfig, UserCredentials, TokenCredentials, OnRefresh, AuthenticationFailed } from './oauth-client';
-export { LoggerFunction, setCustomLogger } from './logger';
+export { Client, ViessmannClientConfig, ViessmannAPIURLs, ViessmannInstallation, FeatureObserver } from './viessmann-api-client';
+export { ViessmannOAuthConfig, UserCredentials, TokenCredentials, Credentials, OnRefresh, AuthenticationFailed } from './oauth-client';
+export { Feature, MetaInformation, Property, ComplexProperty, SimpleProperty } from './parser/viessmann-schema';
+export { LoggerFunction } from './logger';

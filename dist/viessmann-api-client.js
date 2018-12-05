@@ -11,41 +11,35 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = require("./logger");
 const scheduler_1 = require("./scheduler");
 const siren_1 = require("./parser/siren");
+const viessmann_schema_1 = require("./parser/viessmann-schema");
 const oauth_client_1 = require("./oauth-client");
-var ViessmannFeature;
-(function (ViessmannFeature) {
-    ViessmannFeature["EXTERNAL_TEMPERATURE"] = "heating.sensors.temperature.outside";
-    ViessmannFeature["BOILER_TEMPERATURE"] = "heating.boiler.sensors.temperature.main";
-})(ViessmannFeature = exports.ViessmannFeature || (exports.ViessmannFeature = {}));
-class NotConnected extends Error {
-    constructor() {
-        super('the Viessmann API Client is currently not connected');
-        Object.setPrototypeOf(this, NotConnected.prototype);
-    }
-}
-exports.NotConnected = NotConnected;
 class Client {
     constructor(config) {
         this.config = config;
-        this.observers = new Map();
+        this.observers = [];
         this.connected = false;
+        logger_1.setCustomLogger(config.logger);
         this.scheduler = new scheduler_1.Scheduler(60, () => {
-            this.observers.forEach((obs, feature) => {
-                this.getValue(feature)
-                    .then(res => obs(res))
-                    .catch((err) => logger_1.log(`ViessmannClient: Error [${err}] during update of observer for [${feature}]`, 'error'));
-            });
+            this
+                .fetchFeatures()
+                .then(features => Array.from(features.values()))
+                .then(features => features
+                .forEach(f => f.properties
+                .forEach(p => this.observers
+                .forEach(o => o(f, p)))));
         });
     }
     connect(credentials) {
         return __awaiter(this, void 0, void 0, function* () {
-            return oauth_client_1.createOAuthClient(this.config.auth)
+            return oauth_client_1.createOAuthClient(this.config.auth, credentials)
                 .then(oauth => {
                 this.oauth = oauth;
                 return this.initInstallation();
-            }).then(() => {
+            }).then(() => this.fetchFeatures())
+                .then(() => {
                 logger_1.log(`ViessmannClient: initialized with installation=${JSON.stringify(this.installation)}`, 'info');
                 this.connected = true;
+                return this;
             });
         });
     }
@@ -55,30 +49,32 @@ class Client {
     getInstallation() {
         return this.installation;
     }
-    getValue(feature) {
-        return __awaiter(this, void 0, void 0, function* () {
-            logger_1.log(`ViessmannClient: getting property ${feature}`, 'debug');
-            const basePath = this.basePath();
-            return this.oauth
-                .authenticatedGet(basePath + feature)
-                .then((response) => new siren_1.Entity(response))
-                .then((entity) => entity.properties['value']['value']);
-        });
+    getFeature(name) {
+        return this.features.get(name);
     }
-    observe(feature, observer) {
-        this.observers.set(feature, observer);
+    observe(observer) {
+        this.observers.push(observer);
         this.scheduler.start();
     }
     clearObservers() {
-        this.observers.clear();
+        this.observers = [];
         this.scheduler.stop();
+    }
+    fetchFeatures() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.oauth
+                .authenticatedGet(this.basePath())
+                .then((response) => new siren_1.Entity(response))
+                .then((entity) => viessmann_schema_1.SirenFeature.createFeatures(entity, true))
+                .then((features) => this.features = features);
+        });
     }
     basePath() {
         return this.config.api.host
             + '/operational-data/installations/' + this.installation.installationId
             + '/gateways/' + this.installation.gatewayId
             + '/devices/' + this.installation.deviceId
-            + '/features/';
+            + '/features';
     }
     initInstallation() {
         return __awaiter(this, void 0, void 0, function* () {

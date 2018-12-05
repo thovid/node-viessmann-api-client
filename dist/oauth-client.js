@@ -81,9 +81,9 @@ class ViessmannOAuthClient {
     }
 }
 exports.ViessmannOAuthClient = ViessmannOAuthClient;
-function createOAuthClient(config) {
+function createOAuthClient(config, credentials) {
     return __awaiter(this, void 0, void 0, function* () {
-        return new Initializer(config).initialize(config.credentials);
+        return new Initializer(config).initialize(credentials);
     });
 }
 exports.createOAuthClient = createOAuthClient;

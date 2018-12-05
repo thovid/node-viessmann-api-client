@@ -26,10 +26,16 @@ export declare class ComplexProperty implements Property {
     readonly type: string;
     constructor(name: string, customType: string, value: Object);
 }
-export declare class Feature {
+export interface Feature {
+    properties: Property[];
+    meta: MetaInformation;
+    getProperty(name: string): Property | null;
+}
+export declare class SirenFeature implements Feature {
     readonly meta: MetaInformation;
     readonly entity: Entity;
     readonly properties: Property[];
-    static createFeatures(entity: Entity, enabledOnly?: boolean): Map<string, Feature>;
+    static createFeatures(entity: Entity, enabledOnly?: boolean): Map<string, SirenFeature>;
     constructor(meta: MetaInformation, entity: Entity);
+    getProperty(name: string): Property | null;
 }
