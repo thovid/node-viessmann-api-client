@@ -1,3 +1,4 @@
+import { Client, ViessmannClientConfig } from './viessmann-api-client';
 export {
     Client,
     ViessmannClientConfig,
@@ -26,3 +27,7 @@ export {
 export {
     LoggerFunction
 } from './logger';
+
+export default function (config: ViessmannClientConfig): Client {
+    return new Client(config);
+};
