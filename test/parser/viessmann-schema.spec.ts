@@ -68,9 +68,7 @@ describe('schema', () => {
                 .map(e => e.rel[0]);
             expect(foundRels).to.be.deep.equal(['leaf']);
         });
-    });
 
-    describe('finding leafs', () => {
         it('should select enabled leaf features if requested', () => {
             const enabledEntity = aComplexEntity(true);
             const disabledEntity = aComplexEntity(false);

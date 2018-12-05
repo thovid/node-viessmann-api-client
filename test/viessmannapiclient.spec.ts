@@ -7,6 +7,7 @@ import 'mocha';
 
 import { ViessmannClientConfig, ViessmannInstallation, Client } from '../src/viessmann-api-client';
 import { ViessmannOAuthConfig, AuthenticationFailed, Credentials } from '../src/oauth-client';
+import { Feature, Property } from '../src/parser/viessmann-schema';
 
 // Note: augmenting nock.Interceptor here until type def is fixed
 declare module "nock" {
@@ -52,8 +53,7 @@ describe('viessmann api client', () => {
             let authScope = setupOAuth(auth);
             setupData(config);
 
-            client = new Client(config);
-            await client.connect(credentials);
+            client = await new Client(config).connect(credentials);
             authScope.done();
         });
 
@@ -98,8 +98,7 @@ describe('viessmann api client', () => {
                     expires_in: 3600
                 });
             setupData(config);
-            client = new Client(config);
-            await client.connect(credentials);
+            client = await new Client(config).connect(credentials);
         });
     });
 
@@ -127,8 +126,7 @@ describe('viessmann api client', () => {
             setupOAuth(config.auth);
             setupData(config);
 
-            client = new Client(config);
-            await client.connect(credentials);
+            client = await new Client(config).connect(credentials);
 
             expect(notifiedToken).to.be.equal(refreshToken);
         });
@@ -142,8 +140,7 @@ describe('viessmann api client', () => {
                 gatewayId: '123456',
                 deviceId: '0'
             };
-            client = new Client(config);
-            await client.connect(credentials);
+            client = await new Client(config).connect(credentials);
 
             expect(client.getInstallation()).to.be.deep.equal(expectedInstallation);
             dataScope.done();
@@ -167,8 +164,7 @@ describe('viessmann api client', () => {
                 });
 
             let dataScope = setupData(config, newAccessToken);
-            client = new Client(config);
-            await client.connect(credentials);
+            client = await new Client(config).connect(credentials);
 
             expect(notifiedToken).to.be.equal(newRefreshToken);
             authScope.done();
@@ -196,17 +192,26 @@ describe('viessmann api client', () => {
                 .reply(200, responseBody('features'));
 
 
-            client = new Client(config);
-            await client.connect(credentials);
+            await new Client(config).connect(credentials);
         });
 
-        it('should report error of access token could not be retrieved', () => {
+        it('should report error of access token could not be retrieved', async () => {
             setupAuthCode(config.auth, 'irrelevant')
                 .post(config.auth.token, new RegExp('.*'))
                 .reply(400, { "error": "invalid-token-request" });
 
             client = new Client(config);
             return expect(client.connect(credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
+        });
+
+        it('should loose connection if access token could not be retrieved', async () => {
+            setupAuthCode(config.auth, 'irrelevant')
+                .post(config.auth.token, new RegExp('.*'))
+                .reply(400, { "error": "invalid-token-request" });
+
+            client = new Client(config);
+            await client.connect(credentials).catch(err => { });
+            expect(client.isConnected()).to.be.false;
         });
 
         it('should report error if access token could not be refreshed', () => {
@@ -219,6 +224,52 @@ describe('viessmann api client', () => {
             return expect(client.connect(credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
         });
 
+    });
+
+    describe('that failed to initialize', async () => {
+        const auth: ViessmannOAuthConfig = {
+            host: 'https://iam.mockedapi.com',
+            authorize: '/idp/v1/authorize',
+            token: '/idp/v1/token'
+        };
+
+        const config: ViessmannClientConfig = {
+            auth: auth,
+            api: {
+                host: 'https://api.mockedapi.com'
+            }
+        };
+
+        const credentials: Credentials = {
+            user: 'some@user.com',
+            password: 'secret'
+        };
+
+        it('should report connection failure', async () => {
+            setupOAuth(config.auth);
+            nock(config.api.host)
+                .matchHeader('authorization', 'Bearer ' + accessToken)
+                .get('/general-management/installations')
+                .reply(200, responseBody('installations'))
+                .get(featuresPath())
+                .reply(404, 'error');
+            client = new Client(config);
+            expect(client.isConnected()).to.be.false;
+            return expect(client.connect(credentials)).to.eventually.be.rejected
+        });
+
+        it('should not be connected', async () => {
+            setupOAuth(config.auth);
+            nock(config.api.host)
+                .matchHeader('authorization', 'Bearer ' + accessToken)
+                .get('/general-management/installations')
+                .reply(200, responseBody('installations'))
+                .get(featuresPath())
+                .reply(404, 'error');
+            client = new Client(config);
+            await client.connect(credentials).catch(err => { });
+            expect(client.isConnected()).to.be.false;
+        });
     });
 
     describe('requesting data', async () => {
@@ -251,44 +302,45 @@ describe('viessmann api client', () => {
             setupOAuth(config.auth);
             setupData(config);
 
-            client = new Client(config);
-            await client.connect(credentials);
-            const feature = client.getFeature('heating.sensors.temperature.outside');
-            const temperature = feature.getProperty('value').value;
+            client = await new Client(config).connect(credentials);
+            const temperature = client
+                .getFeature('heating.sensors.temperature.outside')
+                .getProperty('value').value;
             return expect(temperature).to.be.equal(7.8);
         });
 
         it('should fetch the current boiler temperature upon request', async () => {
             setupOAuth(config.auth);
-            setupData(config)
-                .get(dataPath('heating.boiler.sensors.temperature.main'))
-                .reply(200, responseBody('heating.boiler.sensors.temperature.main'));
+            setupData(config);
 
-            client = new Client(config);
-            await client.connect(credentials);
-            const temperature = client.getValue('heating.boiler.sensors.temperature.main');
-            return expect(temperature).to.eventually.be.equal(36);
+            client = await new Client(config).connect(credentials);
+            const temperature = client.
+                getFeature('heating.boiler.sensors.temperature.main')
+                .getProperty('value').value;
+            return expect(temperature).to.be.equal(36);
         });
 
-        it('should observe external temperature if requested', async () => {
+        it('should observe feature properties', async () => {
             setupOAuth(config.auth);
             setupData(config)
-                .get(dataPath('heating.sensors.temperature.outside'))
-                .reply(200, responseBody('heating.sensors.temperature.outside'));
+                .get(featuresPath())
+                .reply(200, responseBody('features'));
 
             // wrap into promise to assert eventually below
             let observed: Promise<number> = new Promise(async (resolve, reject) => {
-                client = new Client(config);
-                await client.connect(credentials);
-                client.observe('heating.sensors.temperature.outside', (value) => {
-                    resolve(value);
-                    client.clearObservers();
-                });
+                client = await new Client(config).connect(credentials);
+                client.observe((feature: Feature, property: Property) => {
+                    if('heating.sensors.temperature.outside' === feature.meta.feature
+                    && 'value' === property.name) {
+                        resolve(property.value);
+                        client.clearObservers();
+                    }
+                 });
 
                 clock.tick(60000);
             });
 
-            return expect(observed).to.eventually.be.equal(7.6);
+            return expect(observed).to.eventually.be.equal(7.8);
         });
     });
 });
