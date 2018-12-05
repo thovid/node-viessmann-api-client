@@ -1,8 +1,9 @@
 import { log } from './logger';
 import { Scheduler } from './scheduler';
 import { Entity } from './parser/siren';
-
+import { Feature } from './parser/viessmann-schema';
 import { ViessmannOAuthConfig, createOAuthClient, ViessmannOAuthClient, UserCredentials, TokenCredentials } from './oauth-client';
+
 
 export interface ViessmannClientConfig {
     auth: ViessmannOAuthConfig
@@ -38,6 +39,7 @@ export class Client {
     private scheduler: Scheduler;
     private oauth: ViessmannOAuthClient;
     private installation: ViessmannInstallation;
+    private features: Map<string, Feature>;
 
     private observers: Map<ViessmannFeature, FeatureObserver> = new Map<ViessmannFeature, FeatureObserver>();
     private connected: boolean = false;
@@ -57,7 +59,8 @@ export class Client {
             .then(oauth => {
                 this.oauth = oauth;
                 return this.initInstallation();
-            }).then(() => {
+            }).then(() => this.fetchFeatures())
+            .then(() => {
                 log(`ViessmannClient: initialized with installation=${JSON.stringify(this.installation)}`, 'info');
                 this.connected = true;
             });
@@ -71,11 +74,15 @@ export class Client {
         return this.installation;
     }
 
+    public getFeature(name: string): Feature | null {
+        return this.features.get(name);
+    }
+
     public async getValue(feature: ViessmannFeature): Promise<any> {
         log(`ViessmannClient: getting property ${feature}`, 'debug');
         const basePath = this.basePath();
         return this.oauth
-            .authenticatedGet(basePath + feature)
+            .authenticatedGet(basePath + '/' + feature)
             .then((response) => new Entity(response))
             .then((entity: Entity) => entity.properties['value']['value']);
     }
@@ -90,12 +97,21 @@ export class Client {
         this.scheduler.stop();
     }
 
+    private async fetchFeatures(): Promise<Map<string, Feature>> {
+        return this.oauth
+            .authenticatedGet(this.basePath())
+            .then((response) => new Entity(response))
+            .then((entity) => Feature.createFeatures(entity, true))
+            .then((features) => this.features = features);
+
+    }
+
     private basePath(): string {
         return this.config.api.host
             + '/operational-data/installations/' + this.installation.installationId
             + '/gateways/' + this.installation.gatewayId
             + '/devices/' + this.installation.deviceId
-            + '/features/';
+            + '/features';
     }
 
     private async initInstallation(): Promise<void> {

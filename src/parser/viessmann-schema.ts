@@ -54,6 +54,11 @@ export class Feature {
         }
         this.properties = properties;
     }
+
+    public getProperty(name: string) : Property | null {
+        const result = this.properties.find(p => name === p.name);
+        return result || null;
+    }
 }
 
 function getMetaInformation(entity: Entity): MetaInformation | null {

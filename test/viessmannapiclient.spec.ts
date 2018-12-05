@@ -5,7 +5,7 @@ import * as nock from 'nock';
 import * as sinon from 'sinon';
 import 'mocha';
 
-import {  ViessmannClientConfig, ViessmannInstallation, ViessmannFeature, Client } from '../src/viessmann-api-client';
+import { ViessmannClientConfig, ViessmannInstallation, ViessmannFeature, Client } from '../src/viessmann-api-client';
 import { ViessmannOAuthConfig, AuthenticationFailed } from '../src/oauth-client';
 
 // Note: augmenting nock.Interceptor here until type def is fixed
@@ -22,7 +22,7 @@ const accessToken = 'access_token';
 
 describe('viessmann api client', () => {
 
-    let _client: Client;
+    let client: Client;
 
     afterEach('cleanup nock', () => {
         nock.cleanAll();
@@ -51,8 +51,8 @@ describe('viessmann api client', () => {
             let authScope = setupOAuth(auth);
             setupData(config);
 
-            _client = new Client(config);
-            await _client.connect(config.auth.credentials);
+            client = new Client(config);
+            await client.connect(config.auth.credentials);
             authScope.done();
         });
 
@@ -63,8 +63,8 @@ describe('viessmann api client', () => {
                 .query(() => { return true; })
                 .reply(200, 'the response body') // api replies with login page if credentials don't match
 
-            _client = new Client(config);
-            return expect(_client.connect(config.auth.credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
+            client = new Client(config);
+            return expect(client.connect(config.auth.credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
         });
     });
 
@@ -96,8 +96,8 @@ describe('viessmann api client', () => {
                     expires_in: 3600
                 });
             setupData(config);
-            _client = new Client(config);
-            await _client.connect(config.auth.credentials);
+            client = new Client(config);
+            await client.connect(config.auth.credentials);
         });
     });
 
@@ -124,8 +124,8 @@ describe('viessmann api client', () => {
             setupOAuth(config.auth);
             setupData(config);
 
-            _client = new Client(config);
-            await _client.connect(config.auth.credentials);
+            client = new Client(config);
+            await client.connect(config.auth.credentials);
 
             expect(notifiedToken).to.be.equal(refreshToken);
         });
@@ -139,10 +139,10 @@ describe('viessmann api client', () => {
                 gatewayId: '123456',
                 deviceId: '0'
             };
-            _client = new Client(config);
-            await _client.connect(config.auth.credentials);
+            client = new Client(config);
+            await client.connect(config.auth.credentials);
 
-            expect(_client.getInstallation()).to.be.deep.equal(expectedInstallation);
+            expect(client.getInstallation()).to.be.deep.equal(expectedInstallation);
             dataScope.done();
         });
 
@@ -164,8 +164,8 @@ describe('viessmann api client', () => {
                 });
 
             let dataScope = setupData(config, newAccessToken);
-            _client = new Client(config);
-            await _client.connect(config.auth.credentials);
+            client = new Client(config);
+            await client.connect(config.auth.credentials);
 
             expect(notifiedToken).to.be.equal(newRefreshToken);
             authScope.done();
@@ -188,10 +188,13 @@ describe('viessmann api client', () => {
                 .reply(401, 'some error in body')
                 .get('/general-management/installations')
                 .matchHeader('authorization', 'Bearer ' + newAccessToken)
-                .reply(200, responseBody('installations'));
+                .reply(200, responseBody('installations'))
+                .get(featuresPath())
+                .reply(200, responseBody('features'));
 
-            _client = new Client(config);
-            await _client.connect(config.auth.credentials);
+
+            client = new Client(config);
+            await client.connect(config.auth.credentials);
         });
 
         it('should report error of access token could not be retrieved', () => {
@@ -199,8 +202,8 @@ describe('viessmann api client', () => {
                 .post(config.auth.token, new RegExp('.*'))
                 .reply(400, { "error": "invalid-token-request" });
 
-            _client = new Client(config);
-            return expect(_client.connect(config.auth.credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
+            client = new Client(config);
+            return expect(client.connect(config.auth.credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
         });
 
         it('should report error if access token could not be refreshed', () => {
@@ -209,8 +212,8 @@ describe('viessmann api client', () => {
                 .post(config.auth.token, new RegExp('grant_type=refresh_token&refresh_token=' + refreshToken))
                 .reply(400, { "error": "invalid-token-request" });
 
-            _client = new Client(config);
-            return expect(_client.connect(config.auth.credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
+            client = new Client(config);
+            return expect(client.connect(config.auth.credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
         });
 
     });
@@ -243,15 +246,13 @@ describe('viessmann api client', () => {
 
         it('should fetch the current external temperature upon request', async () => {
             setupOAuth(config.auth);
-            setupData(config)
-                .get(dataPath('heating.sensors.temperature.outside'))
-                .reply(200, responseBody('heating.sensors.temperature.outside'));
+            setupData(config);
 
-
-            _client = new Client(config);
-            await _client.connect(config.auth.credentials);
-            const temperature = _client.getValue(ViessmannFeature.EXTERNAL_TEMPERATURE);
-            return expect(temperature).to.eventually.be.equal(7.6);
+            client = new Client(config);
+            await client.connect(config.auth.credentials);
+            const feature = client.getFeature(ViessmannFeature.EXTERNAL_TEMPERATURE);
+            const temperature = feature.getProperty('value').value;
+            return expect(temperature).to.be.equal(7.8);
         });
 
         it('should fetch the current boiler temperature upon request', async () => {
@@ -260,9 +261,9 @@ describe('viessmann api client', () => {
                 .get(dataPath('heating.boiler.sensors.temperature.main'))
                 .reply(200, responseBody('heating.boiler.sensors.temperature.main'));
 
-            _client = new Client(config);
-            await _client.connect(config.auth.credentials);
-            const temperature = _client.getValue(ViessmannFeature.BOILER_TEMPERATURE);
+            client = new Client(config);
+            await client.connect(config.auth.credentials);
+            const temperature = client.getValue(ViessmannFeature.BOILER_TEMPERATURE);
             return expect(temperature).to.eventually.be.equal(36);
         });
 
@@ -274,11 +275,11 @@ describe('viessmann api client', () => {
 
             // wrap into promise to assert eventually below
             let observed: Promise<number> = new Promise(async (resolve, reject) => {
-                _client = new Client(config);
-                await _client.connect(config.auth.credentials);
-                _client.observe(ViessmannFeature.EXTERNAL_TEMPERATURE, (value) => {
+                client = new Client(config);
+                await client.connect(config.auth.credentials);
+                client.observe(ViessmannFeature.EXTERNAL_TEMPERATURE, (value) => {
                     resolve(value);
-                    _client.clearObservers();
+                    client.clearObservers();
                 });
 
                 clock.tick(60000);
@@ -314,11 +315,17 @@ function setupData(config: ViessmannClientConfig, token?: string) {
     return nock(config.api.host)
         .matchHeader('authorization', 'Bearer ' + (token ? token : accessToken))
         .get('/general-management/installations')
-        .reply(200, responseBody('installations'));
+        .reply(200, responseBody('installations'))
+        .get(featuresPath())
+        .reply(200, responseBody('features'));
 }
 
 function dataPath(feature: string): string {
-    return '/operational-data/installations/99999/gateways/123456/devices/0/features/' + feature;
+    return featuresPath() + '/' + feature;
+}
+
+function featuresPath(): string {
+    return '/operational-data/installations/99999/gateways/123456/devices/0/features';
 }
 
 function responseBody(name: string): string {
