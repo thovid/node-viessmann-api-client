@@ -8,8 +8,29 @@ export interface MetaInformation {
     uri: string;
     deviceId: string;
 }
-export declare function getMetaInformation(entity: Entity): MetaInformation | null;
-export declare function isFeature(entity: Entity): boolean;
-export declare function isFeatureWithComponents(entity: Entity): boolean;
-export declare function hasComponents(entity: Entity): boolean;
-export declare function getFeatureName(entity: Entity): string | null;
+export interface Property {
+    name: string;
+    type: string;
+    value: any;
+}
+export declare class SimpleProperty implements Property {
+    readonly name: string;
+    readonly type: string;
+    readonly value: any;
+    constructor(name: string, type: string, value: any);
+}
+export declare class ComplexProperty implements Property {
+    readonly name: string;
+    readonly customType: string;
+    readonly value: Object;
+    readonly type: string;
+    constructor(name: string, customType: string, value: Object);
+}
+export declare class Feature {
+    readonly meta: MetaInformation;
+    readonly entity: Entity;
+    private readonly properties;
+    static createFeatures(entity: Entity, enabledOnly?: boolean): Map<string, Feature>;
+    constructor(meta: MetaInformation, entity: Entity);
+    getProperties(): Property[];
+}

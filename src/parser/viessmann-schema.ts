@@ -10,7 +10,57 @@ export interface MetaInformation {
     deviceId: string;
 };
 
-export function getMetaInformation(entity: Entity): MetaInformation | null {
+export interface Property {
+    name: string;
+    type: string;
+    value: any;
+};
+
+export class SimpleProperty implements Property {
+    constructor(public readonly name: string, public readonly type: string, public readonly value: any) { }
+}
+
+export class ComplexProperty implements Property {
+    public readonly type: string;
+    constructor(public readonly name: string, public readonly customType: string, public readonly value: Object) {
+        this.type = 'object';
+    }
+}
+
+export class Feature {
+    private readonly properties: Property[];
+
+    public static createFeatures(entity: Entity, enabledOnly: boolean = true): Map<string, Feature> {
+        const result: Map<string, Feature> = new Map();
+        selectLeafFeaturesOf(entity)
+            .map(e => {
+                const meta = getMetaInformation(e);
+                return meta !== null ? new Feature(meta, e) : null;
+            }).filter(f => {
+                return (f !== null && (!enabledOnly || f.meta.isEnabled));
+            })
+            .forEach(f => result.set(f.meta.feature, f));
+        return result;
+    }
+
+    constructor(public readonly meta: MetaInformation, public readonly entity: Entity) {
+        const raw = entity.properties;
+        let properties = [];
+        if ('object' === typeof raw) {
+            properties = Object
+                .keys(raw)
+                .map(key => constructProperty(key, raw[key]))
+                .filter(p => p !== null);
+        }
+        this.properties = properties;
+    }
+
+    public getProperties(): Property[] {
+        return this.properties;
+    }
+}
+
+function getMetaInformation(entity: Entity): MetaInformation | null {
     if (!isFeature(entity)) {
         return null;
     }
@@ -28,26 +78,13 @@ export function getMetaInformation(entity: Entity): MetaInformation | null {
     return result ? result : null;
 }
 
-export function selectLeafFeaturesOf(entity: Entity): Entity[] {
+function selectLeafFeaturesOf(entity: Entity): Entity[] {
     const grandChildren = entity.entities.map(e => selectLeafFeaturesOf(e));
     const leafs = flatten(grandChildren, []);
     if (isLeaf(entity)) {
         leafs.push(entity);
     }
     return leafs;
-}
-
-export function getFeatureName(entity: Entity): string | null {
-    if (!isFeature(entity)) {
-        return null;
-    }
-
-    const index = entity.class.indexOf('feature');
-    if (entity.class.length < 2 || index < 0) {
-        return null;
-    }
-    const tmpClasses = entity.class.slice(0, index).concat(entity.class.slice(index + 1));
-    return tmpClasses[0];
 }
 
 function isFeature(entity: Entity): boolean {
@@ -63,6 +100,23 @@ function hasComponents(entity: Entity): boolean {
         .filter(e => e.properties !== undefined
             && e.properties.components !== undefined
             && Array.isArray(e.properties.components)).length > 0;
+}
+
+const simpleTypes = ['string', 'number', 'boolean'];
+
+function constructProperty(name: string, raw: any): Property | null {
+    if (raw === undefined || raw === null || 'object' !== typeof raw) {
+        return null;
+    }
+    const type = raw['type'];
+    const value = raw['value'];
+    if (type === undefined || value === undefined) {
+        return null;
+    }
+    if (simpleTypes.indexOf(type) > -1) {
+        return new SimpleProperty(name, type, value);
+    } 
+    return new ComplexProperty(name, type, value as Object);
 }
 
 function flatten<P>(arr: any[], result: P[] = []): P[] {

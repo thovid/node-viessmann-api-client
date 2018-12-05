@@ -66,30 +66,6 @@ class Entity {
     hasClass(aClass) {
         return this.class.indexOf(aClass) > -1;
     }
-    childrenWithClass(aClass, recursive = false) {
-        const grandChildren = recursive ?
-            this.entities
-                .map(e => e.childrenWithClass(aClass, true))
-            : [];
-        const children = this.entities
-            .filter(e => e.hasClass(aClass));
-        return Entity.flatten(grandChildren, children);
-    }
-    static flatten(arr, result = []) {
-        for (let i = 0, length = arr.length; i < length; i++) {
-            const value = arr[i];
-            if (value !== undefined) {
-                if (Array.isArray(value)) {
-                    this.flatten(value, result);
-                }
-                else {
-                    result.push(value);
-                }
-            }
-        }
-        return result;
-    }
-    ;
 }
 exports.Entity = Entity;
 //# sourceMappingURL=siren.js.map

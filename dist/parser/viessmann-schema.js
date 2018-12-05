@@ -1,6 +1,55 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 ;
+;
+class SimpleProperty {
+    constructor(name, type, value) {
+        this.name = name;
+        this.type = type;
+        this.value = value;
+    }
+}
+exports.SimpleProperty = SimpleProperty;
+class ComplexProperty {
+    constructor(name, customType, value) {
+        this.name = name;
+        this.customType = customType;
+        this.value = value;
+        this.type = 'object';
+    }
+}
+exports.ComplexProperty = ComplexProperty;
+class Feature {
+    constructor(meta, entity) {
+        this.meta = meta;
+        this.entity = entity;
+        const raw = entity.properties;
+        let properties = [];
+        if ('object' === typeof raw) {
+            properties = Object
+                .keys(raw)
+                .map(key => constructProperty(key, raw[key]))
+                .filter(p => p !== null);
+        }
+        this.properties = properties;
+    }
+    static createFeatures(entity, enabledOnly = true) {
+        const result = new Map();
+        selectLeafFeaturesOf(entity)
+            .map(e => {
+            const meta = getMetaInformation(e);
+            return meta !== null ? new Feature(meta, e) : null;
+        }).filter(f => {
+            return (f !== null && (!enabledOnly || f.meta.isEnabled));
+        })
+            .forEach(f => result.set(f.meta.feature, f));
+        return result;
+    }
+    getProperties() {
+        return this.properties;
+    }
+}
+exports.Feature = Feature;
 function getMetaInformation(entity) {
     if (!isFeature(entity)) {
         return null;
@@ -17,32 +66,54 @@ function getMetaInformation(entity) {
         && m.deviceId !== undefined)[0];
     return result ? result : null;
 }
-exports.getMetaInformation = getMetaInformation;
+function selectLeafFeaturesOf(entity) {
+    const grandChildren = entity.entities.map(e => selectLeafFeaturesOf(e));
+    const leafs = flatten(grandChildren, []);
+    if (isLeaf(entity)) {
+        leafs.push(entity);
+    }
+    return leafs;
+}
 function isFeature(entity) {
     return entity.hasClass('feature');
 }
-exports.isFeature = isFeature;
-function isFeatureWithComponents(entity) {
-    return isFeature(entity) && hasComponents(entity);
+function isLeaf(entity) {
+    return isFeature(entity) && !hasComponents(entity);
 }
-exports.isFeatureWithComponents = isFeatureWithComponents;
 function hasComponents(entity) {
     return entity.entities
         .filter(e => e.properties !== undefined
         && e.properties.components !== undefined
         && Array.isArray(e.properties.components)).length > 0;
 }
-exports.hasComponents = hasComponents;
-function getFeatureName(entity) {
-    if (!isFeature(entity)) {
+const simpleTypes = ['string', 'number', 'boolean'];
+function constructProperty(name, raw) {
+    if (raw === undefined || raw === null || 'object' !== typeof raw) {
         return null;
     }
-    const index = entity.class.indexOf('feature');
-    if (entity.class.length < 2 || index < 0) {
+    const type = raw['type'];
+    const value = raw['value'];
+    if (type === undefined || value === undefined) {
         return null;
     }
-    const tmpClasses = entity.class.slice(0, index).concat(entity.class.slice(index + 1));
-    return tmpClasses[0];
+    if (simpleTypes.indexOf(type) > -1) {
+        return new SimpleProperty(name, type, value);
+    }
+    return new ComplexProperty(name, type, value);
 }
-exports.getFeatureName = getFeatureName;
+function flatten(arr, result = []) {
+    for (let i = 0, length = arr.length; i < length; i++) {
+        const value = arr[i];
+        if (value !== undefined) {
+            if (Array.isArray(value)) {
+                flatten(value, result);
+            }
+            else {
+                result.push(value);
+            }
+        }
+    }
+    return result;
+}
+;
 //# sourceMappingURL=viessmann-schema.js.map
