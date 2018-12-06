@@ -1,8 +1,8 @@
-import {log, LoggerFunction, setCustomLogger} from './logger';
-import {createOAuthClient, Credentials, ViessmannOAuthClient, ViessmannOAuthConfig} from './oauth-client';
-import {Entity} from './parser/siren';
-import {Feature, Property, SirenFeature} from './parser/viessmann-schema';
-import {Scheduler} from './scheduler';
+import { log, LoggerFunction, setCustomLogger } from './logger';
+import { Credentials, OAuthClient, ViessmannOAuthConfig } from './oauth-client';
+import { Entity } from './parser/siren';
+import { Feature, Property, SirenFeature } from './parser/viessmann-schema';
+import { Scheduler } from './scheduler';
 
 export interface ViessmannClientConfig {
     auth: ViessmannOAuthConfig;
@@ -25,15 +25,16 @@ export type FeatureObserver = (f: Feature, p: Property) => void;
 export class Client {
 
     private scheduler: Scheduler;
-    private oauth: ViessmannOAuthClient;
+    private oauth: OAuthClient;
     private installation: ViessmannInstallation;
     private features: Map<string, Feature>;
 
     private observers: FeatureObserver[] = [];
     private connected: boolean = false;
 
-    constructor(private readonly config: ViessmannClientConfig) {
+    constructor(private readonly config: ViessmannClientConfig, oauth?: OAuthClient) {
         setCustomLogger(config.logger);
+        this.oauth = oauth !== undefined ? oauth : new OAuthClient(config.auth);
         this.scheduler = new Scheduler(60, () => {
             this
                 .fetchFeatures()
@@ -46,9 +47,9 @@ export class Client {
     }
 
     public async connect(credentials: Credentials): Promise<Client> {
-        return createOAuthClient(this.config.auth, credentials)
-            .then(oauth => {
-                this.oauth = oauth;
+        return this.oauth
+            .connect(credentials)
+            .then(() => {
                 return this.initInstallation();
             }).then(() => this.fetchFeatures())
             .then(() => {

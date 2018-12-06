@@ -1,6 +1,6 @@
 import * as request from 'request-promise-native';
 import * as simpleOAuth from 'simple-oauth2';
-import {log} from './logger';
+import { log } from './logger';
 
 export interface ViessmannOAuthConfig {
     host: string;
@@ -29,10 +29,22 @@ export class AuthenticationFailed extends Error {
     }
 }
 
-export class ViessmannOAuthClient {
+export class OAuthClient {
+    private token: simpleOAuth.AccessToken;
 
-    constructor(private readonly config: ViessmannOAuthConfig,
-        private token: simpleOAuth.AccessToken) {
+    constructor(private config: ViessmannOAuthConfig) { }
+
+    public async connect(credentials: Credentials): Promise<OAuthClient> {
+        log('ViessmannOAuthClient: initializing client', 'debug');
+        return this
+            .getInitialToken(credentials)
+            .then((token) => {
+                if (this.config.onRefresh) {
+                    this.config.onRefresh(token.token.refresh_token);
+                }
+                this.token = token;
+                return this;
+            });
     }
 
     public async authenticatedGet(uri: string): Promise<any> {
@@ -83,26 +95,6 @@ export class ViessmannOAuthClient {
         }).catch((err) => {
             throw new AuthenticationFailed(`could not refresh access token due to ${err}`);
         });
-    }
-}
-
-export async function createOAuthClient(config: ViessmannOAuthConfig, credentials: Credentials): Promise<ViessmannOAuthClient> {
-    return new Initializer(config).initialize(credentials);
-}
-
-class Initializer {
-    constructor(private readonly config: ViessmannOAuthConfig) {}
-
-    public async initialize(credentials: UserCredentials | TokenCredentials): Promise<ViessmannOAuthClient> {
-        log('ViessmannOAuthClient: initializing client', 'debug');
-        return this
-            .getInitialToken(credentials)
-            .then((token) => {
-                if (this.config.onRefresh) {
-                    this.config.onRefresh(token.token.refresh_token);
-                }
-                return new ViessmannOAuthClient(this.config, token);
-            });
     }
 
     private async getInitialToken(credentials: UserCredentials | TokenCredentials): Promise<simpleOAuth.AccessToken> {
@@ -179,7 +171,7 @@ class Initializer {
         log(`ViessmannOAuthClient: requesting initial access token using refreshToken=${refreshToken}`, 'debug');
         const credentials = this.createCredentials();
         const oauth2 = simpleOAuth.create(credentials);
-        const initialToken = oauth2.accessToken.create({refresh_token: refreshToken});
+        const initialToken = oauth2.accessToken.create({ refresh_token: refreshToken });
         return initialToken.refresh();
     }
 

@@ -1,4 +1,6 @@
-import {Client, ViessmannClientConfig} from './viessmann-api-client';
+import { OAuthClient } from './oauth-client';
+import { Client, ViessmannClientConfig } from './viessmann-api-client';
+
 export {
     Client,
     ViessmannClientConfig,
@@ -29,5 +31,5 @@ export {
 } from './logger';
 
 export default function(config: ViessmannClientConfig): Client {
-    return new Client(config);
+    return new Client(config, new OAuthClient(config.auth));
 }
