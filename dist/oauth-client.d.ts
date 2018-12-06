@@ -1,11 +1,11 @@
-import * as simpleOAuth from "simple-oauth2";
+import * as simpleOAuth from 'simple-oauth2';
 export interface ViessmannOAuthConfig {
-    credentials: UserCredentials | TokenCredentials;
     host: string;
     authorize: string;
     token: string;
     onRefresh?: OnRefresh;
 }
+export declare type Credentials = UserCredentials | TokenCredentials;
 export interface UserCredentials {
     user: string;
     password: string;
@@ -27,4 +27,4 @@ export declare class ViessmannOAuthClient {
     private getToken;
     private refreshedToken;
 }
-export declare function createOAuthClient(config: ViessmannOAuthConfig): Promise<ViessmannOAuthClient>;
+export declare function createOAuthClient(config: ViessmannOAuthConfig, credentials: Credentials): Promise<ViessmannOAuthClient>;

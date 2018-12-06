@@ -1,22 +1,35 @@
+import { OAuthClient } from './oauth-client';
+import { Client, ViessmannClientConfig } from './viessmann-api-client';
+
 export {
-    ViessmannClient,
+    Client,
     ViessmannClientConfig,
     ViessmannAPIURLs,
     ViessmannInstallation,
     FeatureObserver,
-    ViessmannFeature,
-    initializeClient
 } from './viessmann-api-client';
 
 export {
     ViessmannOAuthConfig,
     UserCredentials,
     TokenCredentials,
+    Credentials,
     OnRefresh,
-    AuthenticationFailed
+    AuthenticationFailed,
 } from './oauth-client';
 
 export {
+    Feature,
+    MetaInformation,
+    Property,
+    ComplexProperty,
+    SimpleProperty,
+} from './parser/viessmann-schema';
+
+export {
     LoggerFunction,
-    setCustomLogger
 } from './logger';
+
+export default function(config: ViessmannClientConfig): Client {
+    return new Client(config, new OAuthClient(config.auth));
+}

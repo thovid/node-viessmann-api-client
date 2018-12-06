@@ -9,84 +9,91 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = require("./logger");
-const scheduler_1 = require("./scheduler");
-const sirenParser = require('siren-parser');
 const oauth_client_1 = require("./oauth-client");
-var ViessmannFeature;
-(function (ViessmannFeature) {
-    ViessmannFeature["EXTERNAL_TEMPERATURE"] = "heating.sensors.temperature.outside";
-    ViessmannFeature["BOILER_TEMPERATURE"] = "heating.boiler.sensors.temperature.main";
-})(ViessmannFeature = exports.ViessmannFeature || (exports.ViessmannFeature = {}));
-class ViessmannClient {
-    constructor(oauth, config, installation) {
-        this.oauth = oauth;
+const siren_1 = require("./parser/siren");
+const viessmann_schema_1 = require("./parser/viessmann-schema");
+const scheduler_1 = require("./scheduler");
+class Client {
+    constructor(config) {
         this.config = config;
-        this.installation = installation;
-        this.observers = new Map();
-        logger_1.log(`ViessmannClient: initialized with installation=${JSON.stringify(installation)}`, 'info');
+        this.observers = [];
+        this.connected = false;
+        logger_1.setCustomLogger(config.logger);
         this.scheduler = new scheduler_1.Scheduler(60, () => {
-            this.observers.forEach((obs, feature) => {
-                this.getValue(feature)
-                    .then(res => obs(res))
-                    .catch((err) => logger_1.log(`ViessmannClient: Error [${err}] during update of observer for [${feature}]`, 'error'));
+            this
+                .fetchFeatures()
+                .then(features => Array.from(features.values()))
+                .then(features => features
+                .forEach(f => f.properties
+                .forEach(p => this.observers
+                .forEach(o => o(f, p)))));
+        });
+    }
+    connect(credentials) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return oauth_client_1.createOAuthClient(this.config.auth, credentials)
+                .then(oauth => {
+                this.oauth = oauth;
+                return this.initInstallation();
+            }).then(() => this.fetchFeatures())
+                .then(() => {
+                logger_1.log(`ViessmannClient: initialized with installation=${JSON.stringify(this.installation)}`, 'info');
+                this.connected = true;
+                return this;
             });
         });
     }
-    clearObservers() {
-        this.observers.clear();
-        this.scheduler.stop();
+    isConnected() {
+        return this.connected;
     }
     getInstallation() {
         return this.installation;
     }
-    getValue(feature) {
-        return __awaiter(this, void 0, void 0, function* () {
-            logger_1.log(`ViessmannClient: getting property ${feature}`, 'debug');
-            const basePath = this.basePath();
-            return this.oauth
-                .authenticatedGet(basePath + feature)
-                .then((response) => sirenParser(response))
-                .then((entity) => entity.properties['value']['value']);
-        });
+    getFeature(name) {
+        return this.features.get(name);
     }
-    observe(feature, observer) {
-        this.observers.set(feature, observer);
+    observe(observer) {
+        this.observers.push(observer);
         this.scheduler.start();
+    }
+    clearObservers() {
+        this.observers = [];
+        this.scheduler.stop();
+    }
+    fetchFeatures() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.oauth
+                .authenticatedGet(this.basePath())
+                .then((response) => new siren_1.Entity(response))
+                .then((entity) => viessmann_schema_1.SirenFeature.createFeatures(entity, true))
+                .then((features) => this.features = features);
+        });
     }
     basePath() {
         return this.config.api.host
             + '/operational-data/installations/' + this.installation.installationId
             + '/gateways/' + this.installation.gatewayId
             + '/devices/' + this.installation.deviceId
-            + '/features/';
+            + '/features';
+    }
+    initInstallation() {
+        return __awaiter(this, void 0, void 0, function* () {
+            logger_1.log('ViessmannClient: requesting installation details during initialization', 'debug');
+            return this.oauth.authenticatedGet(this.config.api.host + '/general-management/installations')
+                .then((body) => new siren_1.Entity(body))
+                .then((entity) => {
+                const installation = entity.entities[0];
+                const installationId = installation.properties._id;
+                const modelDevice = installation.entities[0];
+                const gatewayId = modelDevice.properties.serial;
+                this.installation = {
+                    installationId: installationId,
+                    gatewayId: gatewayId,
+                    deviceId: '0',
+                };
+            });
+        });
     }
 }
-exports.ViessmannClient = ViessmannClient;
-function initializeClient(config) {
-    return __awaiter(this, void 0, void 0, function* () {
-        return oauth_client_1.createOAuthClient(config.auth)
-            .then((authClient) => initInstallation(authClient, config));
-    });
-}
-exports.initializeClient = initializeClient;
-function initInstallation(authClient, config) {
-    return __awaiter(this, void 0, void 0, function* () {
-        logger_1.log('ViessmannClient: requesting installation details during initialization', 'debug');
-        return authClient.authenticatedGet(config.api.host + '/general-management/installations')
-            .then((body) => sirenParser(body))
-            .then((entity) => {
-            const installation = entity.entities[0];
-            const installationId = installation.properties['_id'];
-            const modelDevice = installation.entities[0];
-            const gatewayId = modelDevice.properties['serial'];
-            const result = {
-                installationId: installationId,
-                gatewayId: gatewayId,
-                deviceId: '0'
-            };
-            return new ViessmannClient(authClient, config, result);
-        });
-    });
-}
-;
+exports.Client = Client;
 //# sourceMappingURL=viessmann-api-client.js.map

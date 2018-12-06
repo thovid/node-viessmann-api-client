@@ -1,7 +1,10 @@
-import { ViessmannOAuthConfig, ViessmannOAuthClient } from './oauth-client';
+import { LoggerFunction } from './logger';
+import { Credentials, ViessmannOAuthConfig } from './oauth-client';
+import { Feature, Property } from './parser/viessmann-schema';
 export interface ViessmannClientConfig {
     auth: ViessmannOAuthConfig;
     api: ViessmannAPIURLs;
+    logger?: LoggerFunction;
 }
 export interface ViessmannAPIURLs {
     host: string;
@@ -11,22 +14,23 @@ export interface ViessmannInstallation {
     gatewayId: string;
     deviceId: string;
 }
-export declare type FeatureObserver = (any: any) => void;
-export declare enum ViessmannFeature {
-    EXTERNAL_TEMPERATURE = "heating.sensors.temperature.outside",
-    BOILER_TEMPERATURE = "heating.boiler.sensors.temperature.main"
-}
-export declare class ViessmannClient {
-    private readonly oauth;
+export declare type FeatureObserver = (f: Feature, p: Property) => void;
+export declare class Client {
     private readonly config;
-    private readonly installation;
-    private observers;
     private scheduler;
-    constructor(oauth: ViessmannOAuthClient, config: ViessmannClientConfig, installation: ViessmannInstallation);
-    clearObservers(): void;
+    private oauth;
+    private installation;
+    private features;
+    private observers;
+    private connected;
+    constructor(config: ViessmannClientConfig);
+    connect(credentials: Credentials): Promise<Client>;
+    isConnected(): boolean;
     getInstallation(): ViessmannInstallation;
-    getValue(feature: ViessmannFeature): Promise<any>;
-    observe(feature: ViessmannFeature, observer: FeatureObserver): void;
+    getFeature(name: string): Feature | null;
+    observe(observer: FeatureObserver): void;
+    clearObservers(): void;
+    private fetchFeatures;
     private basePath;
+    private initInstallation;
 }
-export declare function initializeClient(config: ViessmannClientConfig): Promise<ViessmannClient>;
