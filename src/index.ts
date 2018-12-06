@@ -1,10 +1,10 @@
-import { Client, ViessmannClientConfig } from './viessmann-api-client';
+import {Client, ViessmannClientConfig} from './viessmann-api-client';
 export {
     Client,
     ViessmannClientConfig,
     ViessmannAPIURLs,
     ViessmannInstallation,
-    FeatureObserver
+    FeatureObserver,
 } from './viessmann-api-client';
 
 export {
@@ -13,7 +13,7 @@ export {
     TokenCredentials,
     Credentials,
     OnRefresh,
-    AuthenticationFailed
+    AuthenticationFailed,
 } from './oauth-client';
 
 export {
@@ -21,13 +21,13 @@ export {
     MetaInformation,
     Property,
     ComplexProperty,
-    SimpleProperty
+    SimpleProperty,
 } from './parser/viessmann-schema';
 
 export {
-    LoggerFunction
+    LoggerFunction,
 } from './logger';
 
-export default function (config: ViessmannClientConfig): Client {
+export default function(config: ViessmannClientConfig): Client {
     return new Client(config);
-};
+}

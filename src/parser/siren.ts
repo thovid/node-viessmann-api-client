@@ -2,7 +2,7 @@
 export class Link {
     constructor(link: any) {
         if (link.rel && Array.isArray(link.rel)) {
-            this.rel = (<any[]>link.rel).filter(l => 'string' === typeof l);
+            this.rel = (link.rel as any[]).filter(l => 'string' === typeof l);
         } else {
             this.rel = [];
         }
@@ -30,13 +30,13 @@ export class Entity {
 
     constructor(entity: any) {
         if (entity.rel && Array.isArray(entity.rel)) {
-            this.rel = (<any[]>entity.rel)
+            this.rel = (entity.rel as any[])
                 .filter(r => 'string' === typeof r);
         } else {
             this.rel = [];
         }
         if (entity.links && Array.isArray(entity.links)) {
-            this.links = (<any[]>entity.links)
+            this.links = (entity.links as any[])
                 .filter(l => 'object' === typeof l)
                 .map(link => new Link(link));
         } else {
@@ -50,14 +50,14 @@ export class Entity {
         }
 
         if (entity.class && Array.isArray(entity.class)) {
-            this.class = (<any[]>entity.class)
+            this.class = (entity.class as any[])
                 .filter(c => 'string' === typeof c);
         } else {
             this.class = [];
         }
 
         if (entity.entities && Array.isArray(entity.entities)) {
-            this.entities = (<any[]>entity.entities)
+            this.entities = (entity.entities as any[])
                 .filter(e => 'object' === typeof e)
                 .map(e => new Entity(e));
         } else {
@@ -69,7 +69,7 @@ export class Entity {
         } else {
             this.href = undefined;
         }
-    };
+    }
 
     public hasClass(aClass: string): boolean {
         return this.class.indexOf(aClass) > -1;

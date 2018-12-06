@@ -8,13 +8,13 @@ export interface MetaInformation {
     feature: string;
     uri: string;
     deviceId: string;
-};
+}
 
 export interface Property {
     name: string;
     type: string;
     value: any;
-};
+}
 
 export class SimpleProperty implements Property {
     constructor(public readonly name: string, public readonly type: string, public readonly value: any) { }
@@ -22,7 +22,7 @@ export class SimpleProperty implements Property {
 
 export class ComplexProperty implements Property {
     public readonly type: string;
-    constructor(public readonly name: string, public readonly customType: string, public readonly value: Object) {
+    constructor(public readonly name: string, public readonly customType: string, public readonly value: object) {
         this.type = 'object';
     }
 }
@@ -30,7 +30,7 @@ export class ComplexProperty implements Property {
 export interface Feature {
     properties: Property[];
     meta: MetaInformation;
-    getProperty(name: string) : Property | null;
+    getProperty(name: string): Property | null;
 }
 
 export class SirenFeature implements Feature {
@@ -61,7 +61,7 @@ export class SirenFeature implements Feature {
         this.properties = properties;
     }
 
-    public getProperty(name: string) : Property | null {
+    public getProperty(name: string): Property | null {
         const result = this.properties.find(p => name === p.name);
         return result || null;
     }
@@ -115,15 +115,16 @@ function constructProperty(name: string, raw: any): Property | null {
     if (raw === undefined || raw === null || 'object' !== typeof raw) {
         return null;
     }
-    const type = raw['type'];
-    const value = raw['value'];
+    const type = raw.type;
+    const value = raw.value;
     if (type === undefined || value === undefined) {
         return null;
     }
     if (simpleTypes.indexOf(type) > -1) {
         return new SimpleProperty(name, type, value);
-    } 
-    return new ComplexProperty(name, type, value as Object);
+    }
+
+    return new ComplexProperty(name, type, value as object);
 }
 
 function flatten<P>(arr: any[], result: P[] = []): P[] {
@@ -138,4 +139,4 @@ function flatten<P>(arr: any[], result: P[] = []): P[] {
         }
     }
     return result;
-};
+}

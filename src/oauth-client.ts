@@ -1,6 +1,6 @@
-import * as request from "request-promise-native";
-import * as simpleOAuth from "simple-oauth2";
-import { log } from "./logger";
+import * as request from 'request-promise-native';
+import * as simpleOAuth from 'simple-oauth2';
+import {log} from './logger';
 
 export interface ViessmannOAuthConfig {
     host: string;
@@ -20,7 +20,7 @@ export interface TokenCredentials {
     refreshToken: string;
 }
 
-export type OnRefresh = (string) => void
+export type OnRefresh = (string) => void;
 
 export class AuthenticationFailed extends Error {
     constructor(public readonly message: string) {
@@ -46,11 +46,11 @@ export class ViessmannOAuthClient {
                 return {
                     method: 'GET',
                     auth: {
-                        bearer: accessToken
+                        bearer: accessToken,
                     },
                     uri: uri,
                     resolveWithFullResponse: true,
-                    simple: false
+                    simple: false,
                 };
             }).then(options => request(options))
             .then((response) => {
@@ -70,18 +70,18 @@ export class ViessmannOAuthClient {
             log('ViessmannOAtuhClient: refreshing token', 'debug');
             return this.refreshedToken();
         }
-        return this.token.token['access_token'];
+        return this.token.token.access_token;
     }
 
     private async refreshedToken(): Promise<string> {
         return this.token.refresh().then((refreshed) => {
             this.token = refreshed;
             if (this.config.onRefresh) {
-                this.config.onRefresh(this.token.token['refresh_token']);
+                this.config.onRefresh(this.token.token.refresh_token);
             }
-            return this.token.token['access_token'];
+            return this.token.token.access_token;
         }).catch((err) => {
-            throw new AuthenticationFailed(`could not refresh access token due to ${err}`)
+            throw new AuthenticationFailed(`could not refresh access token due to ${err}`);
         });
     }
 }
@@ -91,7 +91,7 @@ export async function createOAuthClient(config: ViessmannOAuthConfig, credential
 }
 
 class Initializer {
-    constructor(private readonly config: ViessmannOAuthConfig) { };
+    constructor(private readonly config: ViessmannOAuthConfig) {}
 
     public async initialize(credentials: UserCredentials | TokenCredentials): Promise<ViessmannOAuthClient> {
         log('ViessmannOAuthClient: initializing client', 'debug');
@@ -99,7 +99,7 @@ class Initializer {
             .getInitialToken(credentials)
             .then((token) => {
                 if (this.config.onRefresh) {
-                    this.config.onRefresh(token.token['refresh_token']);
+                    this.config.onRefresh(token.token.refresh_token);
                 }
                 return new ViessmannOAuthClient(this.config, token);
             });
@@ -115,7 +115,7 @@ class Initializer {
     }
 
     private isUserCredentials(credentials: UserCredentials | TokenCredentials): credentials is UserCredentials {
-        return (<UserCredentials>credentials).user !== undefined;
+        return (credentials as UserCredentials).user !== undefined;
     }
 
     private async getAuthorzationCode(user: string, password: string): Promise<string> {
@@ -127,14 +127,14 @@ class Initializer {
             },
             auth: {
                 user: user,
-                pass: password
+                pass: password,
             },
             resolveWithFullResponse: true,
-            simple: false
+            simple: false,
         };
 
         return request(options)
-            .then((response) => { return this.extractAuthCode(response); });
+            .then((response) => this.extractAuthCode(response));
     }
 
     private authUrl(): string {
@@ -149,7 +149,7 @@ class Initializer {
     private extractAuthCode(response: any): string {
         const statusCode = response && response.statusCode ? response.statusCode : -1;
         if (statusCode === 302) {
-            let code = /code=(.*)/.exec(response.headers['location']);
+            const code = /code=(.*)/.exec(response.headers.location);
             if (code && code[1]) {
                 return code[1];
             }
@@ -164,15 +164,14 @@ class Initializer {
         const tokenConfig = {
             code: authCode,
             redirect_uri: CALLBACK_URL,
-            scope: SCOPE
+            scope: SCOPE,
         };
-
 
         return oauth2.authorizationCode.getToken(tokenConfig)
             .then((response) => {
                 return oauth2.accessToken.create(response);
             }).catch((err) => {
-                throw new AuthenticationFailed(`could not retrieve access token due to ${err}`)
+                throw new AuthenticationFailed(`could not retrieve access token due to ${err}`);
             });
     }
 
@@ -180,7 +179,7 @@ class Initializer {
         log(`ViessmannOAuthClient: requesting initial access token using refreshToken=${refreshToken}`, 'debug');
         const credentials = this.createCredentials();
         const oauth2 = simpleOAuth.create(credentials);
-        const initialToken = oauth2.accessToken.create({ 'refresh_token': refreshToken });
+        const initialToken = oauth2.accessToken.create({refresh_token: refreshToken});
         return initialToken.refresh();
     }
 
@@ -188,12 +187,12 @@ class Initializer {
         return {
             client: {
                 id: CLIENT_ID,
-                secret: SECRET
+                secret: SECRET,
             },
             auth: {
                 tokenHost: this.config.host,
-                tokenPath: this.config.token
-            }
+                tokenPath: this.config.token,
+            },
         };
     }
 }

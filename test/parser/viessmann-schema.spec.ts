@@ -1,10 +1,12 @@
-import { expect } from 'chai';
+// tslint:disable:no-unused-expression
+import {expect} from 'chai';
 import * as chai from 'chai';
 import 'mocha';
-import { Entity } from '../../src/parser/siren';
+import {Entity} from '../../src/parser/siren';
 import * as viessmann from '../../src/parser/viessmann-schema';
 
-var chaiSubset = require('chai-subset');
+// tslint:disable-next-line:no-var-requires
+const chaiSubset = require('chai-subset');
 chai.use(chaiSubset);
 
 describe('schema', () => {
@@ -20,13 +22,13 @@ describe('schema', () => {
                 gatewayId: '123456',
                 feature: 'heating.boiler.sensors.temperature.main',
                 uri: '/v1/gateways/123456/devices/0/features/heating.boiler.sensors.temperature.main',
-                deviceId: '0'
+                deviceId: '0',
             });
         });
 
         it('should not give meta information for non-feature entity', () => {
             const entity = new Entity({
-                class: ['some class']
+                class: ['some class'],
             });
             expect(getMetaInformationOf(entity)).to.be.null;
         });
@@ -36,9 +38,9 @@ describe('schema', () => {
                 class: ['feature', 'some-feature'],
                 entities: [
                     {
-                        rel: ['some-rel']
-                    }
-                ]
+                        rel: ['some-rel'],
+                    },
+                ],
             });
             expect(getMetaInformationOf(entity)).to.be.null;
         });
@@ -51,10 +53,10 @@ describe('schema', () => {
                         rel: ['http://schema.viessmann.com/link-relations#feature-meta-information'],
                         properties: {
                             apiVersion: 1,
-                            isEnabled: true
-                        }
-                    }
-                ]
+                            isEnabled: true,
+                        },
+                    },
+                ],
             });
             expect(getMetaInformationOf(entity)).to.be.null;
         });
@@ -87,9 +89,9 @@ describe('schema', () => {
                 properties: {
                     active: {
                         type: 'boolean',
-                        value: true
-                    }
-                }
+                        value: true,
+                    },
+                },
             });
             const feature = new viessmann.SirenFeature(defaultMetaInformation, entity);
 
@@ -107,10 +109,10 @@ describe('schema', () => {
                         type: 'Complex',
                         value: {
                             attr1: 'some attr',
-                            attr2: 'some other attr'
-                        }
-                    }
-                }
+                            attr2: 'some other attr',
+                        },
+                    },
+                },
             });
             const feature = new viessmann.SirenFeature(defaultMetaInformation, entity);
 
@@ -119,9 +121,9 @@ describe('schema', () => {
             expect(properties[0]).to.have.property('name', 'something');
             expect(properties[0]).to.have.property('type', 'object');
             expect(properties[0]).to.have.property('customType', 'Complex');
-            expect(properties[0]['value']).to.be.deep.equal({
+            expect(properties[0].value).to.be.deep.equal({
                 attr1: 'some attr',
-                attr2: 'some other attr'
+                attr2: 'some other attr',
             });
         });
     });
@@ -135,7 +137,7 @@ function getMetaInformationOf(entity: Entity): viessmann.MetaInformation {
         return Array.from(features.values())[0].meta;
     }
     return null;
-};
+}
 
 function selectLeafEntitiesOf(entity: Entity, onlyEnabled: boolean = false): Entity[] {
     const features = viessmann.SirenFeature.createFeatures(entity, onlyEnabled);
@@ -143,7 +145,7 @@ function selectLeafEntitiesOf(entity: Entity, onlyEnabled: boolean = false): Ent
         return Array.from(features.values()).map(f => f.entity);
     }
     return [];
-};
+}
 
 function aComplexEntity(enabled: boolean): Entity {
     return new Entity(
@@ -158,11 +160,11 @@ function aComplexEntity(enabled: boolean): Entity {
                             rel: ['component'],
                             properties: {
                                 components: [
-                                    'time'
-                                ]
-                            }
-                        }
-                    ]
+                                    'time',
+                                ],
+                            },
+                        },
+                    ],
                 }, {
                     rel: ['leaf'],
                     class: ['feature', 'leaf'],
@@ -175,10 +177,10 @@ function aComplexEntity(enabled: boolean): Entity {
                             gatewayId: '123456',
                             feature: 'leaf',
                             uri: '/some/uri/leaf',
-                            deviceId: '0'
-                        }
-                    }]
-                }
-            ]
+                            deviceId: '0',
+                        },
+                    }],
+                },
+            ],
         });
 }

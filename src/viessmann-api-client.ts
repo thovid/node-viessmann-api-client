@@ -1,9 +1,8 @@
-import { log, LoggerFunction, setCustomLogger } from './logger';
-import { Scheduler } from './scheduler';
-import { Entity } from './parser/siren';
-import { Feature, SirenFeature } from './parser/viessmann-schema';
-import { ViessmannOAuthConfig, createOAuthClient, ViessmannOAuthClient, Credentials } from './oauth-client';
-
+import {log, LoggerFunction, setCustomLogger} from './logger';
+import {createOAuthClient, Credentials, ViessmannOAuthClient, ViessmannOAuthConfig} from './oauth-client';
+import {Entity} from './parser/siren';
+import {Feature, Property, SirenFeature} from './parser/viessmann-schema';
+import {Scheduler} from './scheduler';
 
 export interface ViessmannClientConfig {
     auth: ViessmannOAuthConfig;
@@ -21,7 +20,7 @@ export interface ViessmannInstallation {
     deviceId: string;
 }
 
-export type FeatureObserver = (Feature, Property) => void;
+export type FeatureObserver = (f: Feature, p: Property) => void;
 
 export class Client {
 
@@ -104,15 +103,15 @@ export class Client {
             .then((body) => new Entity(body))
             .then((entity) => {
                 const installation: Entity = entity.entities[0];
-                const installationId: string = installation.properties['_id'];
+                const installationId: string = installation.properties._id;
                 const modelDevice: Entity = installation.entities[0];
-                const gatewayId: string = modelDevice.properties['serial'];
+                const gatewayId: string = modelDevice.properties.serial;
 
                 this.installation = {
                     installationId: installationId,
                     gatewayId: gatewayId,
-                    deviceId: '0'
-                }
+                    deviceId: '0',
+                };
             });
-    };
+    }
 }
