@@ -4,7 +4,7 @@
   "description": "a node js api client for the viessmann heating api",
   "scripts": {
     "build": "tsc",
-    "test": "nyc mocha 'test/**/*.spec.ts'",
+    "test": "nyc mocha \"test/**/*.spec.ts\"",
     "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "lint:ts": "tslint",
     "lint": "npm run lint:ts \"src/**/*.ts\" \"test/**/*.ts\"" 
