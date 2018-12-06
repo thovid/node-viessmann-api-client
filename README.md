@@ -35,7 +35,7 @@ const propertyValue = feature.getProperty('property-name').value;
 
 3. subscribe to updates
 ```typescript
-let client: ViessmannClient = ...;
+let client: Client = ...;
 const observer = (feature: Feature, property: Property) => { /* do something */};
 client.observe(observer);
 ```
