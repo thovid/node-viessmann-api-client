@@ -35,7 +35,7 @@ export class OAuthClient {
     constructor(private config: ViessmannOAuthConfig) { }
 
     public async connect(credentials: Credentials): Promise<OAuthClient> {
-        log('ViessmannOAuthClient: initializing client', 'debug');
+        log('OAuthClient: initializing client', 'debug');
         return this
             .getInitialToken(credentials)
             .then((token) => {
@@ -48,7 +48,7 @@ export class OAuthClient {
     }
 
     public async authenticatedGet(uri: string): Promise<any> {
-        log(`ViessmannOAuthClient: GET ${uri}`, 'debug');
+        log(`OAuthClient: GET ${uri}`, 'debug');
         return this.authenticatedGetWithRetry(uri, false);
     }
 
@@ -111,7 +111,7 @@ export class OAuthClient {
     }
 
     private async getAuthorzationCode(user: string, password: string): Promise<string> {
-        log('ViessmannOAuthClient: requesting authorization code', 'debug');
+        log('OAuthClient: requesting authorization code', 'debug');
         const options = {
             method: 'POST',
             uri: this.authUrl(),
@@ -152,7 +152,7 @@ export class OAuthClient {
     private async getTokenFromAuthCode(authCode: string): Promise<simpleOAuth.AccessToken> {
         const credentials = this.createCredentials();
         const oauth2 = simpleOAuth.create(credentials);
-        log(`ViessmannOAuthClient: requesting initial access token using authCode=${authCode}`, 'debug');
+        log(`OAuthClient: requesting initial access token using authCode=${authCode}`, 'debug');
         const tokenConfig = {
             code: authCode,
             redirect_uri: CALLBACK_URL,
@@ -168,7 +168,7 @@ export class OAuthClient {
     }
 
     private async getTokenFromRefreshToken(refreshToken: string): Promise<simpleOAuth.AccessToken> {
-        log(`ViessmannOAuthClient: requesting initial access token using refreshToken=${refreshToken}`, 'debug');
+        log(`OAuthClient: requesting initial access token using refreshToken=${refreshToken}`, 'debug');
         const credentials = this.createCredentials();
         const oauth2 = simpleOAuth.create(credentials);
         const initialToken = oauth2.accessToken.create({ refresh_token: refreshToken });
