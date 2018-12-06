@@ -12,5 +12,4 @@ function default_1(config) {
     return new viessmann_api_client_1.Client(config);
 }
 exports.default = default_1;
-;
 //# sourceMappingURL=index.js.map

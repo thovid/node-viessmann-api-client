@@ -22,9 +22,9 @@ export declare class SimpleProperty implements Property {
 export declare class ComplexProperty implements Property {
     readonly name: string;
     readonly customType: string;
-    readonly value: Object;
+    readonly value: object;
     readonly type: string;
-    constructor(name: string, customType: string, value: Object);
+    constructor(name: string, customType: string, value: object);
 }
 export interface Feature {
     properties: Property[];

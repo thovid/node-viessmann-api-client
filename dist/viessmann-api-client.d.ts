@@ -1,6 +1,6 @@
 import { LoggerFunction } from './logger';
-import { Feature } from './parser/viessmann-schema';
-import { ViessmannOAuthConfig, Credentials } from './oauth-client';
+import { Credentials, ViessmannOAuthConfig } from './oauth-client';
+import { Feature, Property } from './parser/viessmann-schema';
 export interface ViessmannClientConfig {
     auth: ViessmannOAuthConfig;
     api: ViessmannAPIURLs;
@@ -14,7 +14,7 @@ export interface ViessmannInstallation {
     gatewayId: string;
     deviceId: string;
 }
-export declare type FeatureObserver = (Feature: any, Property: any) => void;
+export declare type FeatureObserver = (f: Feature, p: Property) => void;
 export declare class Client {
     private readonly config;
     private scheduler;

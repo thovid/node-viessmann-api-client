@@ -12,10 +12,6 @@ Inspired by https://github.com/thetrueavatar and his project https://github.com/
 ```typescript
 let config: ViessmannClientConfig = {
     auth: {
-        credentials: {
-            user: 'your username',
-            password: 'your password'
-        },
         host: 'https://iam.viessmann.com',
         token: '/idp/v1/token',
         authorize: '/idp/v1/authorize'
@@ -25,15 +21,23 @@ let config: ViessmannClientConfig = {
     }
 };
 ```
-2. initialize the client and request some feature
+2. connect the client and request some feature
 ```typescript
-initializeClient(config).then((client) => client.getValue(ViessmannFeature.EXTERNAL_TEMPERATURE))
-    .then((temp) => console.log(`external temperature = ${temp}`))
+const credentials = {
+    user: 'your username',
+    password: 'your password'
+};
+const client = await new Client(config).connect(credentials);
+const feature = client.getFeature('some.feature.name');
+// access properties of feature:
+const propertyValue = feature.getProperty('property-name').value;
 ```
-3. subscribe to updates of a feature
+
+3. subscribe to updates
 ```typescript
 let client: ViessmannClient = ...;
-client.observe(ViessmannFeature.BOILER_TEMPERATURE, (value) => doSomething(value));
+const observer = (feature: Feature, property: Property) => { /* do something */};
+client.observe(observer);
 ```
 
 ## Authentication
@@ -47,29 +51,22 @@ let notifiedToken: string;
 config.auth.onRefresh = (rt: string) => { notifiedToken = rt; };
 ```
 ### Refresh token:
-To authenticate using a refersh token, provide the refresh token during initialization:
+To authenticate using a refersh token, provide the refresh token as credentials:
 ```typescript
 let refreshToken: string = ...;
+let client = ...;
 
-const auth: ViessmannOAuthConfig = {
-            credentials: {
-                refreshToken: refreshToken
-            },
-            host: 'https://iam.mockedapi.com',
-            authorize: '/idp/v1/authorize',
-            token: '/idp/v1/token'
-        };
-const config: ViessmannClientConfig = {
- auth: auth,
-    api: {
-        host: 'https://api.viessmann-platform.io'
-    }
+const credentials = {
+    refreshToken: refreshToken
+};
+
+client.connect(credentials);
 ```
 ### Token refresh:
 The client will refresh the token proactively if it is expired and also will try to refresh the token if requesting a resource returns `401`. If it receives a new token & refresh token, the callback `onRefresh` is called with the new refresh token.
 
 ### Logging
-A custom log fuction can be provided by importing `customLogger` from `logger` to set a log function.
+A custom log fuction can be provided by setting the `logger` property of the config object.
 
 # Licence
 (c) 2018 by Thomas Vidic - see LICENCE for the licence under which this project is provided

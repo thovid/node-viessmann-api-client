@@ -1,7 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-;
-;
 class SimpleProperty {
     constructor(name, type, value) {
         this.name = name;
@@ -92,8 +90,8 @@ function constructProperty(name, raw) {
     if (raw === undefined || raw === null || 'object' !== typeof raw) {
         return null;
     }
-    const type = raw['type'];
-    const value = raw['value'];
+    const type = raw.type;
+    const value = raw.value;
     if (type === undefined || value === undefined) {
         return null;
     }
@@ -116,5 +114,4 @@ function flatten(arr, result = []) {
     }
     return result;
 }
-;
 //# sourceMappingURL=viessmann-schema.js.map

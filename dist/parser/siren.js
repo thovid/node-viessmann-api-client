@@ -62,7 +62,6 @@ class Entity {
             this.href = undefined;
         }
     }
-    ;
     hasClass(aClass) {
         return this.class.indexOf(aClass) > -1;
     }

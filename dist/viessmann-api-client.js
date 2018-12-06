@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger_1 = require("./logger");
-const scheduler_1 = require("./scheduler");
+const oauth_client_1 = require("./oauth-client");
 const siren_1 = require("./parser/siren");
 const viessmann_schema_1 = require("./parser/viessmann-schema");
-const oauth_client_1 = require("./oauth-client");
+const scheduler_1 = require("./scheduler");
 class Client {
     constructor(config) {
         this.config = config;
@@ -83,18 +83,17 @@ class Client {
                 .then((body) => new siren_1.Entity(body))
                 .then((entity) => {
                 const installation = entity.entities[0];
-                const installationId = installation.properties['_id'];
+                const installationId = installation.properties._id;
                 const modelDevice = installation.entities[0];
-                const gatewayId = modelDevice.properties['serial'];
+                const gatewayId = modelDevice.properties.serial;
                 this.installation = {
                     installationId: installationId,
                     gatewayId: gatewayId,
-                    deviceId: '0'
+                    deviceId: '0',
                 };
             });
         });
     }
-    ;
 }
 exports.Client = Client;
 //# sourceMappingURL=viessmann-api-client.js.map

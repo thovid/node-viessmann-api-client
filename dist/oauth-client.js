@@ -37,11 +37,11 @@ class ViessmannOAuthClient {
                 return {
                     method: 'GET',
                     auth: {
-                        bearer: accessToken
+                        bearer: accessToken,
                     },
                     uri: uri,
                     resolveWithFullResponse: true,
-                    simple: false
+                    simple: false,
                 };
             }).then(options => request(options))
                 .then((response) => {
@@ -63,7 +63,7 @@ class ViessmannOAuthClient {
                 logger_1.log('ViessmannOAtuhClient: refreshing token', 'debug');
                 return this.refreshedToken();
             }
-            return this.token.token['access_token'];
+            return this.token.token.access_token;
         });
     }
     refreshedToken() {
@@ -71,9 +71,9 @@ class ViessmannOAuthClient {
             return this.token.refresh().then((refreshed) => {
                 this.token = refreshed;
                 if (this.config.onRefresh) {
-                    this.config.onRefresh(this.token.token['refresh_token']);
+                    this.config.onRefresh(this.token.token.refresh_token);
                 }
-                return this.token.token['access_token'];
+                return this.token.token.access_token;
             }).catch((err) => {
                 throw new AuthenticationFailed(`could not refresh access token due to ${err}`);
             });
@@ -91,7 +91,6 @@ class Initializer {
     constructor(config) {
         this.config = config;
     }
-    ;
     initialize(credentials) {
         return __awaiter(this, void 0, void 0, function* () {
             logger_1.log('ViessmannOAuthClient: initializing client', 'debug');
@@ -99,7 +98,7 @@ class Initializer {
                 .getInitialToken(credentials)
                 .then((token) => {
                 if (this.config.onRefresh) {
-                    this.config.onRefresh(token.token['refresh_token']);
+                    this.config.onRefresh(token.token.refresh_token);
                 }
                 return new ViessmannOAuthClient(this.config, token);
             });
@@ -128,13 +127,13 @@ class Initializer {
                 form: {},
                 auth: {
                     user: user,
-                    pass: password
+                    pass: password,
                 },
                 resolveWithFullResponse: true,
-                simple: false
+                simple: false,
             };
             return request(options)
-                .then((response) => { return this.extractAuthCode(response); });
+                .then((response) => this.extractAuthCode(response));
         });
     }
     authUrl() {
@@ -148,7 +147,7 @@ class Initializer {
     extractAuthCode(response) {
         const statusCode = response && response.statusCode ? response.statusCode : -1;
         if (statusCode === 302) {
-            let code = /code=(.*)/.exec(response.headers['location']);
+            const code = /code=(.*)/.exec(response.headers.location);
             if (code && code[1]) {
                 return code[1];
             }
@@ -163,7 +162,7 @@ class Initializer {
             const tokenConfig = {
                 code: authCode,
                 redirect_uri: CALLBACK_URL,
-                scope: SCOPE
+                scope: SCOPE,
             };
             return oauth2.authorizationCode.getToken(tokenConfig)
                 .then((response) => {
@@ -178,7 +177,7 @@ class Initializer {
             logger_1.log(`ViessmannOAuthClient: requesting initial access token using refreshToken=${refreshToken}`, 'debug');
             const credentials = this.createCredentials();
             const oauth2 = simpleOAuth.create(credentials);
-            const initialToken = oauth2.accessToken.create({ 'refresh_token': refreshToken });
+            const initialToken = oauth2.accessToken.create({ refresh_token: refreshToken });
             return initialToken.refresh();
         });
     }
@@ -186,12 +185,12 @@ class Initializer {
         return {
             client: {
                 id: CLIENT_ID,
-                secret: SECRET
+                secret: SECRET,
             },
             auth: {
                 tokenHost: this.config.host,
-                tokenPath: this.config.token
-            }
+                tokenPath: this.config.token,
+            },
         };
     }
 }

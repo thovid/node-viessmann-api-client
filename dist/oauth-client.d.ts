@@ -1,4 +1,4 @@
-import * as simpleOAuth from "simple-oauth2";
+import * as simpleOAuth from 'simple-oauth2';
 export interface ViessmannOAuthConfig {
     host: string;
     authorize: string;
