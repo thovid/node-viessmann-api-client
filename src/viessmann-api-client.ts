@@ -39,6 +39,7 @@ export class Client {
         setCustomLogger(config.logger);
         this.oauth = oauth !== undefined ? oauth : new OAuthClient(config.auth);
         const pollInterval = config.pollInterval !== undefined ? config.pollInterval : 60000;
+        log(`ViessmannClient: initializing with pollIntervall ${pollInterval}`);
         this.scheduler = new Scheduler(pollInterval, async () => {
             log('ViessmannClient: polling for updates...');
             this.fetchFeatures()

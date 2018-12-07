@@ -22,6 +22,7 @@ class Client {
         logger_1.setCustomLogger(config.logger);
         this.oauth = oauth !== undefined ? oauth : new oauth_client_1.OAuthClient(config.auth);
         const pollInterval = config.pollInterval !== undefined ? config.pollInterval : 60000;
+        logger_1.log(`ViessmannClient: initializing with pollIntervall ${pollInterval}`);
         this.scheduler = new scheduler_1.Scheduler(pollInterval, () => __awaiter(this, void 0, void 0, function* () {
             logger_1.log('ViessmannClient: polling for updates...');
             this.fetchFeatures()

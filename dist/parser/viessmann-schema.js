@@ -85,7 +85,7 @@ function hasComponents(entity) {
         && e.properties.components !== undefined
         && Array.isArray(e.properties.components)).length > 0;
 }
-const simpleTypes = ['string', 'number', 'boolean'];
+const simpleTypes = ['string', 'number', 'boolean', 'array'];
 function constructProperty(name, raw) {
     if (raw === undefined || raw === null || 'object' !== typeof raw) {
         return null;

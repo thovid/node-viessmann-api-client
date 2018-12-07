@@ -109,7 +109,7 @@ function hasComponents(entity: Entity): boolean {
             && Array.isArray(e.properties.components)).length > 0;
 }
 
-const simpleTypes = ['string', 'number', 'boolean'];
+const simpleTypes = ['string', 'number', 'boolean', 'array'];
 
 function constructProperty(name: string, raw: any): Property | null {
     if (raw === undefined || raw === null || 'object' !== typeof raw) {
