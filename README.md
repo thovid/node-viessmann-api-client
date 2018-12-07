@@ -40,6 +40,13 @@ const observer = (feature: Feature, property: Property) => { /* do something */}
 client.observe(observer);
 ```
 
+4. monitor connection
+```
+let client: Client = ...;
+const connectionObserver = (connected: boolean) => { /* do something */};
+client.observeConnection(connectionObserver);
+```
+
 ## Authentication
 The Viessmann API uses OAuth2 for authentication. 
 ### Authorization code: 
