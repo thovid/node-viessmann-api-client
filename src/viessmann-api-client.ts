@@ -1,13 +1,14 @@
-import { log, LoggerFunction, setCustomLogger } from './logger';
-import { Credentials, OAuthClient, ViessmannOAuthConfig } from './oauth-client';
-import { Entity } from './parser/siren';
-import { Feature, Property, SirenFeature } from './parser/viessmann-schema';
-import { Scheduler } from './scheduler';
+import {log, LoggerFunction, setCustomLogger} from './logger';
+import {Credentials, OAuthClient, ViessmannOAuthConfig} from './oauth-client';
+import {Entity} from './parser/siren';
+import {Feature, Property, SirenFeature} from './parser/viessmann-schema';
+import {Scheduler} from './scheduler';
 
 export interface ViessmannClientConfig {
     auth: ViessmannOAuthConfig;
     api: ViessmannAPIURLs;
     logger?: LoggerFunction;
+    pollInterval?: number;
 }
 
 export interface ViessmannAPIURLs {
@@ -21,6 +22,7 @@ export interface ViessmannInstallation {
 }
 
 export type FeatureObserver = (f: Feature, p: Property) => void;
+export type ConnectionObserver = (connected: boolean) => void;
 
 export class Client {
 
@@ -30,19 +32,29 @@ export class Client {
     private features: Map<string, Feature>;
 
     private observers: FeatureObserver[] = [];
+    private connectionObservers: ConnectionObserver[] = [];
     private connected: boolean = false;
 
     constructor(private readonly config: ViessmannClientConfig, oauth?: OAuthClient) {
         setCustomLogger(config.logger);
         this.oauth = oauth !== undefined ? oauth : new OAuthClient(config.auth);
-        this.scheduler = new Scheduler(60, () => {
-            this
-                .fetchFeatures()
+        const pollInterval = config.pollInterval !== undefined ? config.pollInterval : 60000;
+        this.scheduler = new Scheduler(pollInterval, async () => {
+            log('ViessmannClient: polling for updates...');
+            this.fetchFeatures()
                 .then(features => Array.from(features.values()))
                 .then(features => features
-                    .forEach(f => f.properties
-                        .forEach(p => this.observers
-                            .forEach(o => o(f, p)))));
+                    .forEach((f: Feature) => f.properties
+                        .forEach((p: Property) => this.observers
+                            .forEach((o: FeatureObserver) => o(f, p)))))
+                .then(() => {
+                    this.setConnected(true);
+                })
+                .catch(err => {
+                    log('ViessmannClient: error fetching features');
+                    log(`ViessmannClient: Error: ${JSON.stringify(err)}`, 'debug');
+                    this.setConnected(false);
+                });
         });
     }
 
@@ -59,6 +71,11 @@ export class Client {
             });
     }
 
+    private setConnected(connected: boolean): void {
+        this.connected = connected;
+        this.connectionObservers.forEach(o => o(this.connected));
+    }
+
     public isConnected(): boolean {
         return this.connected;
     }
@@ -69,6 +86,11 @@ export class Client {
 
     public getFeature(name: string): Feature | null {
         return this.features.get(name);
+    }
+
+    public observeConnection(observer: ConnectionObserver): void {
+        this.connectionObservers.push(observer);
+        this.scheduler.start();
     }
 
     public observe(observer: FeatureObserver): void {

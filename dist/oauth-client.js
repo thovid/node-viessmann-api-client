@@ -19,14 +19,35 @@ class AuthenticationFailed extends Error {
     }
 }
 exports.AuthenticationFailed = AuthenticationFailed;
-class ViessmannOAuthClient {
-    constructor(config, token) {
+class RequestFailed extends Error {
+    constructor(status) {
+        super(`Request failed with status ${status}`);
+        this.status = status;
+        Object.setPrototypeOf(this, RequestFailed.prototype);
+    }
+}
+exports.RequestFailed = RequestFailed;
+class OAuthClient {
+    constructor(config) {
         this.config = config;
-        this.token = token;
+    }
+    connect(credentials) {
+        return __awaiter(this, void 0, void 0, function* () {
+            logger_1.log('OAuthClient: initializing client', 'debug');
+            return this
+                .getInitialToken(credentials)
+                .then((token) => {
+                if (this.config.onRefresh) {
+                    this.config.onRefresh(token.token.refresh_token);
+                }
+                this.token = token;
+                return this;
+            });
+        });
     }
     authenticatedGet(uri) {
         return __awaiter(this, void 0, void 0, function* () {
-            logger_1.log(`ViessmannOAuthClient: GET ${uri}`, 'debug');
+            logger_1.log(`OAuthClient: GET ${uri}`, 'debug');
             return this.authenticatedGetWithRetry(uri, false);
         });
     }
@@ -45,15 +66,19 @@ class ViessmannOAuthClient {
                 };
             }).then(options => request(options))
                 .then((response) => {
-                if (response.statusCode === 401) {
-                    if (isRetry) {
-                        throw new AuthenticationFailed(`could not GET resource from [${uri}] - status was [${response.statusCode}]`);
-                    }
-                    else {
-                        return this.authenticatedGetWithRetry(uri, true);
-                    }
+                switch (response.statusCode) {
+                    case 401:
+                        if (isRetry) {
+                            throw new AuthenticationFailed(`could not GET resource from [${uri}] - status was [${response.statusCode}]`);
+                        }
+                        else {
+                            return this.authenticatedGetWithRetry(uri, true);
+                        }
+                    case 200:
+                        return JSON.parse(response.body);
+                    default:
+                        throw new RequestFailed(response.statusCode);
                 }
-                return JSON.parse(response.body);
             });
         });
     }
@@ -79,31 +104,6 @@ class ViessmannOAuthClient {
             });
         });
     }
-}
-exports.ViessmannOAuthClient = ViessmannOAuthClient;
-function createOAuthClient(config, credentials) {
-    return __awaiter(this, void 0, void 0, function* () {
-        return new Initializer(config).initialize(credentials);
-    });
-}
-exports.createOAuthClient = createOAuthClient;
-class Initializer {
-    constructor(config) {
-        this.config = config;
-    }
-    initialize(credentials) {
-        return __awaiter(this, void 0, void 0, function* () {
-            logger_1.log('ViessmannOAuthClient: initializing client', 'debug');
-            return this
-                .getInitialToken(credentials)
-                .then((token) => {
-                if (this.config.onRefresh) {
-                    this.config.onRefresh(token.token.refresh_token);
-                }
-                return new ViessmannOAuthClient(this.config, token);
-            });
-        });
-    }
     getInitialToken(credentials) {
         return __awaiter(this, void 0, void 0, function* () {
             if (this.isUserCredentials(credentials)) {
@@ -120,7 +120,7 @@ class Initializer {
     }
     getAuthorzationCode(user, password) {
         return __awaiter(this, void 0, void 0, function* () {
-            logger_1.log('ViessmannOAuthClient: requesting authorization code', 'debug');
+            logger_1.log('OAuthClient: requesting authorization code', 'debug');
             const options = {
                 method: 'POST',
                 uri: this.authUrl(),
@@ -158,7 +158,7 @@ class Initializer {
         return __awaiter(this, void 0, void 0, function* () {
             const credentials = this.createCredentials();
             const oauth2 = simpleOAuth.create(credentials);
-            logger_1.log(`ViessmannOAuthClient: requesting initial access token using authCode=${authCode}`, 'debug');
+            logger_1.log(`OAuthClient: requesting initial access token using authCode=${authCode}`, 'debug');
             const tokenConfig = {
                 code: authCode,
                 redirect_uri: CALLBACK_URL,
@@ -174,7 +174,7 @@ class Initializer {
     }
     getTokenFromRefreshToken(refreshToken) {
         return __awaiter(this, void 0, void 0, function* () {
-            logger_1.log(`ViessmannOAuthClient: requesting initial access token using refreshToken=${refreshToken}`, 'debug');
+            logger_1.log(`OAuthClient: requesting initial access token using refreshToken=${refreshToken}`, 'debug');
             const credentials = this.createCredentials();
             const oauth2 = simpleOAuth.create(credentials);
             const initialToken = oauth2.accessToken.create({ refresh_token: refreshToken });
@@ -194,6 +194,7 @@ class Initializer {
         };
     }
 }
+exports.OAuthClient = OAuthClient;
 const CLIENT_ID = '79742319e39245de5f91d15ff4cac2a8';
 const SECRET = '8ad97aceb92c5892e102b093c7c083fa';
 const SCOPE = 'offline_access';

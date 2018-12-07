@@ -4,7 +4,6 @@ import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import 'mocha';
 import * as nock from 'nock';
-import * as sinon from 'sinon';
 
 import {AuthenticationFailed, Credentials, ViessmannOAuthConfig} from '../src/oauth-client';
 import {Feature, Property} from '../src/parser/viessmann-schema';
@@ -22,7 +21,25 @@ chai.use(chaiAsPromised);
 const refreshToken = 'refresh_token';
 const accessToken = 'access_token';
 
-describe('viessmann api client', () => {
+const auth: ViessmannOAuthConfig = {
+    host: 'https://iam.mockedapi.com',
+    authorize: '/idp/v1/authorize',
+    token: '/idp/v1/token',
+};
+
+const config: ViessmannClientConfig = {
+    auth: auth,
+    api: {
+        host: 'https://api.mockedapi.com',
+    },
+};
+
+const credentials = {
+    user: 'some@user.com',
+    password: 'secret',
+};
+
+describe('viessmann api client', async () => {
 
     let client: Client;
 
@@ -30,29 +47,17 @@ describe('viessmann api client', () => {
         nock.cleanAll();
     });
 
+    afterEach('stop polling', () => {
+        if (client) {
+            client.clearObservers();
+        }
+    });
+
     describe('initialized with user and password', () => {
-
-        const auth: ViessmannOAuthConfig = {
-            host: 'https://iam.mockedapi.com',
-            authorize: '/idp/v1/authorize',
-            token: '/idp/v1/token',
-        };
-
-        const config: ViessmannClientConfig = {
-            auth: auth,
-            api: {
-                host: 'https://api.mockedapi.com',
-            },
-        };
-
-        const credentials: Credentials = {
-            user: 'some@user.com',
-            password: 'secret',
-        };
 
         it('should request auth code and access token', async () => {
             const authScope = setupOAuth(auth);
-            setupData(config);
+            setupData();
 
             client = await new Client(config).connect(credentials);
             authScope.done();
@@ -71,20 +76,7 @@ describe('viessmann api client', () => {
 
     describe('initialized with refresh token', async () => {
 
-        const auth: ViessmannOAuthConfig = {
-            host: 'https://iam.mockedapi.com',
-            authorize: '/idp/v1/authorize',
-            token: '/idp/v1/token',
-        };
-
-        const config: ViessmannClientConfig = {
-            auth: auth,
-            api: {
-                host: 'https://api.mockedapi.com',
-            },
-        };
-
-        const credentials = {
+        const tokenCredentials = {
             refreshToken: refreshToken,
         };
 
@@ -97,27 +89,12 @@ describe('viessmann api client', () => {
                     token_type: 'Bearer',
                     expires_in: 3600,
                 });
-            setupData(config);
-            client = await new Client(config).connect(credentials);
+            setupData();
+            client = await new Client(config).connect(tokenCredentials);
         });
     });
 
     describe('that is initialized', async () => {
-        const config: ViessmannClientConfig = {
-            auth: {
-                host: 'https://iam.mockedapi.com',
-                authorize: '/idp/v1/authorize',
-                token: '/idp/v1/token',
-            },
-            api: {
-                host: 'https://api.mockedapi.com',
-            },
-        };
-
-        const credentials = {
-            user: 'some@user.com',
-            password: 'secret',
-        };
 
         it('should notify about initial refresh token', async () => {
             let notifiedToken: string;
@@ -126,7 +103,7 @@ describe('viessmann api client', () => {
             };
 
             setupOAuth(config.auth);
-            setupData(config);
+            setupData();
 
             client = await new Client(config).connect(credentials);
 
@@ -135,7 +112,7 @@ describe('viessmann api client', () => {
 
         it('should request installations', async () => {
             setupOAuth(config.auth);
-            const dataScope = setupData(config);
+            const dataScope = setupData();
 
             const expectedInstallation: ViessmannInstallation = {
                 installationId: '99999',
@@ -167,7 +144,7 @@ describe('viessmann api client', () => {
                     expires_in: 3600,
                 });
 
-            const dataScope = setupData(config, newAccessToken);
+            const dataScope = setupData(newAccessToken);
             client = await new Client(config).connect(credentials);
 
             expect(notifiedToken).to.be.equal(newRefreshToken);
@@ -230,23 +207,6 @@ describe('viessmann api client', () => {
     });
 
     describe('that failed to initialize', async () => {
-        const auth: ViessmannOAuthConfig = {
-            host: 'https://iam.mockedapi.com',
-            authorize: '/idp/v1/authorize',
-            token: '/idp/v1/token',
-        };
-
-        const config: ViessmannClientConfig = {
-            auth: auth,
-            api: {
-                host: 'https://api.mockedapi.com',
-            },
-        };
-
-        const credentials: Credentials = {
-            user: 'some@user.com',
-            password: 'secret',
-        };
 
         it('should report connection failure', async () => {
             setupOAuth(config.auth);
@@ -276,34 +236,15 @@ describe('viessmann api client', () => {
     });
 
     describe('requesting data', async () => {
-        const config: ViessmannClientConfig = {
-            auth: {
-                host: 'https://iam.mockedapi.com',
-                authorize: '/idp/v1/authorize',
-                token: '/idp/v1/token',
-            },
-            api: {
-                host: 'https://api.mockedapi.com',
-            },
-        };
-        const credentials = {
-            user: 'some@user.com',
-            password: 'secret',
-        };
 
-        let clock;
-        beforeEach('mock clock', () => {
-            clock = sinon.useFakeTimers();
-        });
+        let dataScope;
 
-        afterEach('reset mocked clock', () => {
-            clock.restore();
+        beforeEach('setup api mocks', () => {
+            setupOAuth(auth);
+            dataScope = setupData();
         });
 
         it('should fetch the current external temperature upon request', async () => {
-            setupOAuth(config.auth);
-            setupData(config);
-
             client = await new Client(config).connect(credentials);
             const temperature = client
                 .getFeature('heating.sensors.temperature.outside')
@@ -312,9 +253,6 @@ describe('viessmann api client', () => {
         });
 
         it('should fetch the current boiler temperature upon request', async () => {
-            setupOAuth(config.auth);
-            setupData(config);
-
             client = await new Client(config).connect(credentials);
             const temperature = client.
                 getFeature('heating.boiler.sensors.temperature.main')
@@ -323,26 +261,35 @@ describe('viessmann api client', () => {
         });
 
         it('should observe feature properties', async () => {
-            setupOAuth(config.auth);
-            setupData(config)
+            dataScope
                 .get(featuresPath())
                 .reply(200, responseBody('features'));
 
+            config.pollInterval = 10;
+            client = await new Client(config).connect(credentials);
             // wrap into promise to assert eventually below
-            const observed: Promise<number> = new Promise(async (resolve, reject) => {
-                client = await new Client(config).connect(credentials);
+            const observedTemperature: Promise<number> = new Promise(async (resolve, reject) => {
                 client.observe((feature: Feature, property: Property) => {
                     if ('heating.sensors.temperature.outside' === feature.meta.feature
                         && 'value' === property.name) {
                         resolve(property.value);
-                        client.clearObservers();
                     }
                 });
-
-                clock.tick(60000);
             });
+            return expect(observedTemperature).to.eventually.be.equal(7.8);
+        });
 
-            return expect(observed).to.eventually.be.equal(7.8);
+        it('should set connected to false if request failed', async () => {
+            dataScope
+                .get(featuresPath())
+                .reply(500);
+            client = await new Client(config).connect(credentials);
+            const observedConnection: Promise<boolean> = new Promise(async (resolve, rejected) => {
+                client.observeConnection((connected: boolean) => {
+                    resolve(connected);
+                });
+            });
+            return expect(observedConnection).to.eventually.be.false;
         });
     });
 });
@@ -368,7 +315,7 @@ function setupAuthCode(oauthConfig: ViessmannOAuthConfig, authCode: string) {
         });
 }
 
-function setupData(config: ViessmannClientConfig, token?: string) {
+function setupData(token?: string) {
     return nock(config.api.host)
         .matchHeader('authorization', 'Bearer ' + (token ? token : accessToken))
         .get('/general-management/installations')

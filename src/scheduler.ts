@@ -1,23 +1,25 @@
+import {log} from './logger';
 export type OnTick = () => void;
 export class Scheduler {
 
     private timer: NodeJS.Timeout = null;
-    private intervalInMs: number;
 
-    constructor(intervalInSeconds: number, private readonly onTick: OnTick) {
-        this.intervalInMs = 1000 * intervalInSeconds;
-    }
+    constructor(private readonly intervalInMs: number, private readonly onTick: OnTick) {}
 
     public start(): void {
+        log('Scheduler: starting...', 'debug');
         if (this.isStopped()) {
             this.timer = setInterval(() => this.onTick(), this.intervalInMs);
+            log('Scheduler: ...started', 'debug');
         }
     }
 
     public stop(): void {
+        log('Scheduler: stopping...', 'debug');
         if (!this.isStopped()) {
             clearInterval(this.timer);
             this.timer = null;
+            log('Scheduler: ...stopped', 'debug');
         }
     }
 

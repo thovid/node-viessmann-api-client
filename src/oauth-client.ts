@@ -1,6 +1,6 @@
 import * as request from 'request-promise-native';
 import * as simpleOAuth from 'simple-oauth2';
-import { log } from './logger';
+import {log} from './logger';
 
 export interface ViessmannOAuthConfig {
     host: string;
@@ -29,10 +29,17 @@ export class AuthenticationFailed extends Error {
     }
 }
 
+export class RequestFailed extends Error {
+    constructor(public readonly status: number) {
+        super(`Request failed with status ${status}`);
+        Object.setPrototypeOf(this, RequestFailed.prototype);
+    }
+}
+
 export class OAuthClient {
     private token: simpleOAuth.AccessToken;
 
-    constructor(private config: ViessmannOAuthConfig) { }
+    constructor(private config: ViessmannOAuthConfig) {}
 
     public async connect(credentials: Credentials): Promise<OAuthClient> {
         log('OAuthClient: initializing client', 'debug');
@@ -66,14 +73,18 @@ export class OAuthClient {
                 };
             }).then(options => request(options))
             .then((response) => {
-                if (response.statusCode === 401) {
-                    if (isRetry) {
-                        throw new AuthenticationFailed(`could not GET resource from [${uri}] - status was [${response.statusCode}]`);
-                    } else {
-                        return this.authenticatedGetWithRetry(uri, true);
-                    }
+                switch (response.statusCode) {
+                    case 401:
+                        if (isRetry) {
+                            throw new AuthenticationFailed(`could not GET resource from [${uri}] - status was [${response.statusCode}]`);
+                        } else {
+                            return this.authenticatedGetWithRetry(uri, true);
+                        }
+                    case 200:
+                        return JSON.parse(response.body);
+                    default:
+                        throw new RequestFailed(response.statusCode);
                 }
-                return JSON.parse(response.body);
             });
     }
 
@@ -171,7 +182,7 @@ export class OAuthClient {
         log(`OAuthClient: requesting initial access token using refreshToken=${refreshToken}`, 'debug');
         const credentials = this.createCredentials();
         const oauth2 = simpleOAuth.create(credentials);
-        const initialToken = oauth2.accessToken.create({ refresh_token: refreshToken });
+        const initialToken = oauth2.accessToken.create({refresh_token: refreshToken});
         return initialToken.refresh();
     }
 
