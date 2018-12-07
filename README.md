@@ -41,7 +41,7 @@ client.observe(observer);
 ```
 
 4. monitor connection
-```
+```typescript
 let client: Client = ...;
 const connectionObserver = (connected: boolean) => { /* do something */};
 client.observeConnection(connectionObserver);
