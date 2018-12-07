@@ -64,6 +64,12 @@ class Client {
     getInstallation() {
         return this.installation;
     }
+    getFeatures() {
+        if (this.features === undefined) {
+            return [];
+        }
+        return Array.from(this.features.values());
+    }
     getFeature(name) {
         return this.features.get(name);
     }

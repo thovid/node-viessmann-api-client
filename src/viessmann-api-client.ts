@@ -84,6 +84,13 @@ export class Client {
         return this.installation;
     }
 
+    public getFeatures(): Feature[] {
+        if (this.features === undefined) {
+            return [];
+        }
+        return Array.from(this.features.values());
+    }
+
     public getFeature(name: string): Feature | null {
         return this.features.get(name);
     }

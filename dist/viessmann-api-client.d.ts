@@ -31,6 +31,7 @@ export declare class Client {
     private setConnected;
     isConnected(): boolean;
     getInstallation(): ViessmannInstallation;
+    getFeatures(): Feature[];
     getFeature(name: string): Feature | null;
     observeConnection(observer: ConnectionObserver): void;
     observe(observer: FeatureObserver): void;
