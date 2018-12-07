@@ -7,6 +7,7 @@ export {
     ViessmannAPIURLs,
     ViessmannInstallation,
     FeatureObserver,
+    ConnectionObserver,
 } from './viessmann-api-client';
 
 export {
@@ -16,6 +17,7 @@ export {
     Credentials,
     OnRefresh,
     AuthenticationFailed,
+    RequestFailed,
 } from './oauth-client';
 
 export {
