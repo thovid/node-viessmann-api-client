@@ -2,34 +2,26 @@
   "name": "viessmann-api-client",
   "version": "1.0.0",
   "description": "a node js api client for the viessmann heating api",
-  "scripts": {
-    "build": "tsc",
-    "test": "nyc mocha \"test/**/*.spec.ts\"",
-    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
-    "lint:ts": "tslint",
-    "lint": "npm run lint:ts \"src/**/*.ts\" \"test/**/*.ts\"" 
-  },
-  "nyc": {
-    "extension": [
-      ".ts",
-      ".tsx"
-    ],
-    "exclude": [
-      "**/*.d.ts"
-    ],
-    "all": true
-  },
-  "keywords": [],
+  "keywords": [
+    "nodejs",
+    "viessmann",
+    "smarthome",
+    "heating"
+  ],
   "author": "Thomas Vidic",
   "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "readme": "README.md",
   "repository": {
     "type": "git",
     "url": "https://github.com/thovid/node-viessmann-api-client.git"
   },
   "bugs": {
     "url": "https://github.com/thovid/node-viessmann-api-client/issues"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "engines": {
+    "node": ">= 6.0.0"
   },
   "dependencies": {
     "@types/debug": "0.0.31",
@@ -56,5 +48,22 @@
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "typescript": "^3.2.1"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "nyc mocha \"test/**/*.spec.ts\"",
+    "report-coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "lint:ts": "tslint",
+    "lint": "npm run lint:ts \"src/**/*.ts\" \"test/**/*.ts\""
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "all": true
   }
 }

@@ -17,3 +17,4 @@ maintenance/
 .travis.yml
 .circleci/
 dts-bundle.json
+.codecov.yml
