@@ -41,7 +41,7 @@ export class Client {
         const pollInterval = config.pollInterval !== undefined ? config.pollInterval : 60000;
         log(`ViessmannClient: initializing with pollIntervall ${pollInterval}`);
         this.scheduler = new Scheduler(pollInterval, async () => {
-            log('ViessmannClient: polling for updates...');
+            log('ViessmannClient: polling for updates...', 'debug');
             this.fetchFeatures()
                 .then(features => Array.from(features.values()))
                 .then(features => features
