@@ -8,9 +8,9 @@ Viessmann hosts an API to access features of a central heating that is connected
 Inspired by https://github.com/thetrueavatar and his project https://github.com/thetrueavatar/Viessmann-Api, this is an early version of an API client written in typescript to be used in a nodejs app. 
 
 ## Changelog
-### 1.0.2: bugfixes
+### 1.0.2 (2018/12/10) 
 - fixed a bug preventing features that contain sub-features to be recognized, for example `heating.burner`
-### 1.0.1: inital publish
+### 1.0.1 (2018/12/08)
 - initial version
 
 ## Usage
