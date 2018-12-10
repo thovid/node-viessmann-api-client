@@ -7,6 +7,12 @@ A nodejs client for the viessmann heating api
 Viessmann hosts an API to access features of a central heating that is connected to the internet via a *Vitoconnect* device. The API is used by the Viessmann App.
 Inspired by https://github.com/thetrueavatar and his project https://github.com/thetrueavatar/Viessmann-Api, this is an early version of an API client written in typescript to be used in a nodejs app. 
 
+## Changelog
+### 1.0.2: bugfixes
+- fixed a bug preventing features that contain sub-features to be recognized, for example `heating.burner`
+### 1.0.1: inital publish
+- initial version
+
 ## Usage
 1. initialize configuration
 ```typescript

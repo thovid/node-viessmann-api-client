@@ -247,7 +247,7 @@ describe('viessmann api client', async () => {
         it('should should get all features', async () => {
             client = await new Client(config).connect(credentials);
             const features = client.getFeatures();
-            expect(features).to.have.length(39);
+            expect(features).to.have.length(41);
         });
 
         it('should fetch the current external temperature upon request', async () => {

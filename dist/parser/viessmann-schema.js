@@ -68,7 +68,7 @@ function getMetaInformation(entity) {
 function selectLeafFeaturesOf(entity) {
     const grandChildren = entity.entities.map(e => selectLeafFeaturesOf(e));
     const leafs = flatten(grandChildren, []);
-    if (isLeaf(entity)) {
+    if (isFeatureWithProperties(entity)) {
         leafs.push(entity);
     }
     return leafs;
@@ -76,14 +76,20 @@ function selectLeafFeaturesOf(entity) {
 function isFeature(entity) {
     return entity.hasClass('feature');
 }
-function isLeaf(entity) {
-    return isFeature(entity) && !hasComponents(entity);
+function isFeatureWithProperties(entity) {
+    return isFeature(entity) && hasProperties(entity);
 }
-function hasComponents(entity) {
-    return entity.entities
-        .filter(e => e.properties !== undefined
-        && e.properties.components !== undefined
-        && Array.isArray(e.properties.components)).length > 0;
+function hasProperties(entity) {
+    if (entity.properties === undefined
+        || 'object' !== typeof entity.properties
+        || Object.keys(entity.properties).length === 0) {
+        return false;
+    }
+    const propertyNames = Object.keys(entity.properties);
+    if (propertyNames.indexOf('components') > -1) {
+        return false;
+    }
+    return true;
 }
 const simpleTypes = ['string', 'number', 'boolean', 'array'];
 function constructProperty(name, raw) {

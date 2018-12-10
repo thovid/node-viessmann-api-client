@@ -1,4 +1,4 @@
-import { Entity } from './siren';
+import {Entity} from './siren';
 
 export interface MetaInformation {
     apiVersion: number;
@@ -17,7 +17,7 @@ export interface Property {
 }
 
 export class SimpleProperty implements Property {
-    constructor(public readonly name: string, public readonly type: string, public readonly value: any) { }
+    constructor(public readonly name: string, public readonly type: string, public readonly value: any) {}
 }
 
 export class ComplexProperty implements Property {
@@ -30,7 +30,7 @@ export class ComplexProperty implements Property {
 export interface Feature {
     properties: Property[];
     meta: MetaInformation;
-    getProperty(name: string): Property | null;
+    getProperty(name: string): Property | null;
 }
 
 export class SirenFeature implements Feature {
@@ -61,7 +61,7 @@ export class SirenFeature implements Feature {
         this.properties = properties;
     }
 
-    public getProperty(name: string): Property | null {
+    public getProperty(name: string): Property | null {
         const result = this.properties.find(p => name === p.name);
         return result || null;
     }
@@ -88,7 +88,7 @@ function getMetaInformation(entity: Entity): MetaInformation | null {
 function selectLeafFeaturesOf(entity: Entity): Entity[] {
     const grandChildren = entity.entities.map(e => selectLeafFeaturesOf(e));
     const leafs = flatten(grandChildren, []);
-    if (isLeaf(entity)) {
+    if (isFeatureWithProperties(entity)) {
         leafs.push(entity);
     }
     return leafs;
@@ -98,15 +98,21 @@ function isFeature(entity: Entity): boolean {
     return entity.hasClass('feature');
 }
 
-function isLeaf(entity: Entity): boolean {
-    return isFeature(entity) && !hasComponents(entity);
+function isFeatureWithProperties(entity: Entity): boolean {
+    return isFeature(entity) && hasProperties(entity);
 }
 
-function hasComponents(entity: Entity): boolean {
-    return entity.entities
-        .filter(e => e.properties !== undefined
-            && e.properties.components !== undefined
-            && Array.isArray(e.properties.components)).length > 0;
+function hasProperties(entity: Entity): boolean {
+    if (entity.properties === undefined
+        || 'object' !== typeof entity.properties
+        || Object.keys(entity.properties).length === 0) {
+        return false;
+    }
+    const propertyNames = Object.keys(entity.properties);
+    if (propertyNames.indexOf('components') > -1) {
+        return false;
+    }
+    return true;
 }
 
 const simpleTypes = ['string', 'number', 'boolean', 'array'];

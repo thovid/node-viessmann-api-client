@@ -168,6 +168,9 @@ function aComplexEntity(enabled: boolean): Entity {
                 }, {
                     rel: ['leaf'],
                     class: ['feature', 'leaf'],
+                    properties: {
+                        some: 'property',
+                    },
                     entities: [{
                         rel: ['http://schema.viessmann.com/link-relations#feature-meta-information'],
                         properties: {
