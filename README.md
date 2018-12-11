@@ -2,10 +2,12 @@
 
 # node-viessmann-api-client
 
-A nodejs client for the viessmann heating api
+A nodejs client for the viessmann heating api.
 
 Viessmann hosts an API to access features of a central heating that is connected to the internet via a *Vitoconnect* device. The API is used by the Viessmann App.
 Inspired by https://github.com/thetrueavatar and his project https://github.com/thetrueavatar/Viessmann-Api, this is an early version of an API client written in typescript to be used in a nodejs app. 
+
+Note that this is a private project, so use at your own risk! It is not supported or endorsed by Viessmann!
 
 ## Changelog
 ### 1.0.2 (2018/12/10) 
@@ -80,6 +82,13 @@ The client will refresh the token proactively if it is expired and also will try
 
 ### Logging
 A custom log fuction can be provided by setting the `logger` property of the config object.
+
+# Legal
+- Viessmann and Vitroconnect are registered Trademarks of the Viessmann Werke GmbH & Co. KG. 
+
+- This project is not offically supported or endorsed by the Viessmann Werke GmbH & Co. KG.
+
+- In case you have any questions, please contact me via github!
 
 # Licence
 (c) 2018 by Thomas Vidic - see LICENCE for the licence under which this project is provided
