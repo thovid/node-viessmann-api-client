@@ -62,7 +62,7 @@ describe('schema', () => {
         });
     });
 
-    describe('finding leafs', () => {
+    describe('finding features', () => {
         it('should select all leaf features', () => {
             const entity = aComplexEntity(false);
 
