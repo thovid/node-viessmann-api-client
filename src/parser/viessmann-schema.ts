@@ -49,7 +49,7 @@ export class SirenFeature implements Feature {
         return result;
     }
 
-    constructor(public readonly meta: MetaInformation, public readonly entity: Entity) {
+    constructor(public readonly meta: MetaInformation, entity: Entity) {
         const raw = entity.properties;
         let properties = [];
         if ('object' === typeof raw) {

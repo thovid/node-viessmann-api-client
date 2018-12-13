@@ -20,7 +20,6 @@ exports.ComplexProperty = ComplexProperty;
 class SirenFeature {
     constructor(meta, entity) {
         this.meta = meta;
-        this.entity = entity;
         const raw = entity.properties;
         let properties = [];
         if ('object' === typeof raw) {

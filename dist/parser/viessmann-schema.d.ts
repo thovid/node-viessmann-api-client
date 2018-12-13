@@ -33,7 +33,6 @@ export interface Feature {
 }
 export declare class SirenFeature implements Feature {
     readonly meta: MetaInformation;
-    readonly entity: Entity;
     readonly properties: Property[];
     static createFeatures(entity: Entity, enabledOnly?: boolean): Map<string, SirenFeature>;
     constructor(meta: MetaInformation, entity: Entity);
