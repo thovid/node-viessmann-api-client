@@ -24,7 +24,7 @@ class Client {
         const pollInterval = config.pollInterval !== undefined ? config.pollInterval : 60000;
         logger_1.log(`ViessmannClient: initializing with pollIntervall ${pollInterval}`);
         this.scheduler = new scheduler_1.Scheduler(pollInterval, () => __awaiter(this, void 0, void 0, function* () {
-            logger_1.log('ViessmannClient: polling for updates...');
+            logger_1.log('ViessmannClient: polling for updates...', 'debug');
             this.fetchFeatures()
                 .then(features => Array.from(features.values()))
                 .then(features => features
@@ -35,7 +35,8 @@ class Client {
                 this.setConnected(true);
             })
                 .catch(err => {
-                logger_1.log('ViessmannClient: error fetching features');
+                const message = err.message || 'unknown error';
+                logger_1.log(`ViessmannClient: error fetching features: ${message}`);
                 logger_1.log(`ViessmannClient: Error: ${JSON.stringify(err)}`, 'debug');
                 this.setConnected(false);
             });
@@ -50,14 +51,14 @@ class Client {
             }).then(() => this.fetchFeatures())
                 .then(() => {
                 logger_1.log(`ViessmannClient: initialized with installation=${JSON.stringify(this.installation)}`, 'info');
-                this.connected = true;
+                this.setConnected(true);
                 return this;
             });
         });
     }
     setConnected(connected) {
         this.connected = connected;
-        this.connectionObservers.forEach(o => o(this.connected));
+        this.connectionObservers.forEach(o => o(connected));
     }
     isConnected() {
         return this.connected;
@@ -84,6 +85,7 @@ class Client {
     }
     clearObservers() {
         this.observers = [];
+        this.connectionObservers = [];
         this.scheduler.stop();
     }
     fetchFeatures() {

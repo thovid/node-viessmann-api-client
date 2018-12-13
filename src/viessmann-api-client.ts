@@ -52,7 +52,8 @@ export class Client {
                     this.setConnected(true);
                 })
                 .catch(err => {
-                    log('ViessmannClient: error fetching features');
+                    const message = err.message || 'unknown error';
+                    log(`ViessmannClient: error fetching features: ${message}`);
                     log(`ViessmannClient: Error: ${JSON.stringify(err)}`, 'debug');
                     this.setConnected(false);
                 });
@@ -67,14 +68,14 @@ export class Client {
             }).then(() => this.fetchFeatures())
             .then(() => {
                 log(`ViessmannClient: initialized with installation=${JSON.stringify(this.installation)}`, 'info');
-                this.connected = true;
+                this.setConnected(true);
                 return this;
             });
     }
 
     private setConnected(connected: boolean): void {
         this.connected = connected;
-        this.connectionObservers.forEach(o => o(this.connected));
+        this.connectionObservers.forEach(o => o(connected));
     }
 
     public isConnected(): boolean {
@@ -108,6 +109,7 @@ export class Client {
 
     public clearObservers(): void {
         this.observers = [];
+        this.connectionObservers = [];
         this.scheduler.stop();
     }
 
