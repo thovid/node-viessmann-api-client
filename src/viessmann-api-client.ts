@@ -1,3 +1,5 @@
+import Optional from 'typescript-optional';
+
 import {log, LoggerFunction, setCustomLogger} from './logger';
 import {Credentials, OAuthClient, ViessmannOAuthConfig} from './oauth-client';
 import {Entity} from './parser/siren';
@@ -28,8 +30,8 @@ export class Client {
     private scheduler: Scheduler;
     private oauth: OAuthClient;
     private installation: ViessmannInstallation;
-    private features: Map<string, Feature> = new Map<string, Feature>();
 
+    private features: Map<string, Feature> = new Map<string, Feature>();
     private observers: FeatureObserver[] = [];
     private connectionObservers: ConnectionObserver[] = [];
     private connected: boolean = false;
@@ -87,21 +89,21 @@ export class Client {
         return Array.from(this.features.values());
     }
 
-    public getFeature(name: string): Feature | null {
-        return this.features.get(name);
+    public getFeature(name: string): Optional<Feature> {
+        return Optional.ofNullable(this.features.get(name));
     }
 
     public async executeAction(featureName: string, actionName: string, payload?: any): Promise<void> {
-        const feature = this.getFeature(featureName);
-        if (feature) {
-            const action = feature.getAction(actionName);
-            if (action) {
-                return this.oauth.authenticated(action.method, action.href, payload)
-                    .then(() => this.fetchFeature(featureName))
-                    .then(f => this.updateObservers(f));
-            }
-        }
-        return null;
+        log(`ViessmannClient: executing action ${featureName}/${actionName}`, 'info');
+        return this.getFeature(featureName)
+            .flatMap(feature => feature.getAction(actionName))
+            .flatMap(action => action.validated(payload))
+            .map(action => this.oauth.authenticated(action.method, action.href, payload)
+                .then((response) => log(`ViessmannClient: action ${featureName}/${actionName} - received response ${JSON.stringify(response)}`, 'debug'))
+                .then(() => this.fetchFeature(featureName))
+                .then(fetchedFeature => fetchedFeature.ifPresent(f => this.updateObservers(f)))
+                .catch(err => log(`ViessmannClient: failed to execute action ${featureName}/${actionName} due to ${JSON.stringify(err)}`)))
+            .orElse(null);
     }
 
     public observeConnection(observer: ConnectionObserver): void {
@@ -128,7 +130,7 @@ export class Client {
             .then((features) => this.features = features);
     }
 
-    private async fetchFeature(name: string): Promise<Feature> {
+    private async fetchFeature(name: string): Promise<Optional<Feature>> {
         return this.oauth.authenticatedGet(this.basePath() + '/' + name)
             .then(body => SirenFeature.of(new Entity(body)));
     }

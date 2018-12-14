@@ -1,3 +1,4 @@
+import Optional from 'typescript-optional';
 import { LoggerFunction } from './logger';
 import { Credentials, OAuthClient, ViessmannOAuthConfig } from './oauth-client';
 import { Feature, Property } from './parser/viessmann-schema';
@@ -32,7 +33,7 @@ export declare class Client {
     isConnected(): boolean;
     getInstallation(): ViessmannInstallation;
     getFeatures(): Feature[];
-    getFeature(name: string): Feature | null;
+    getFeature(name: string): Optional<Feature>;
     executeAction(featureName: string, actionName: string, payload?: any): Promise<void>;
     observeConnection(observer: ConnectionObserver): void;
     observe(observer: FeatureObserver): void;

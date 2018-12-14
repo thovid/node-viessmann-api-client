@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const typescript_optional_1 = require("typescript-optional");
 const logger_1 = require("./logger");
 const oauth_client_1 = require("./oauth-client");
 const siren_1 = require("./parser/siren");
@@ -69,20 +70,20 @@ class Client {
         return Array.from(this.features.values());
     }
     getFeature(name) {
-        return this.features.get(name);
+        return typescript_optional_1.default.ofNullable(this.features.get(name));
     }
     executeAction(featureName, actionName, payload) {
         return __awaiter(this, void 0, void 0, function* () {
-            const feature = this.getFeature(featureName);
-            if (feature) {
-                const action = feature.getAction(actionName);
-                if (action) {
-                    return this.oauth.authenticated(action.method, action.href, payload)
-                        .then(() => this.fetchFeature(featureName))
-                        .then(f => this.updateObservers(f));
-                }
-            }
-            return null;
+            logger_1.log(`ViessmannClient: executing action ${featureName}/${actionName}`, 'info');
+            return this.getFeature(featureName)
+                .flatMap(feature => feature.getAction(actionName))
+                .flatMap(action => action.validated(payload))
+                .map(action => this.oauth.authenticated(action.method, action.href, payload)
+                .then((response) => logger_1.log(`ViessmannClient: action ${featureName}/${actionName} - received response ${JSON.stringify(response)}`, 'debug'))
+                .then(() => this.fetchFeature(featureName))
+                .then(fetchedFeature => fetchedFeature.ifPresent(f => this.updateObservers(f)))
+                .catch(err => logger_1.log(`ViessmannClient: failed to execute action ${featureName}/${actionName} due to ${JSON.stringify(err)}`)))
+                .orElse(null);
         });
     }
     observeConnection(observer) {

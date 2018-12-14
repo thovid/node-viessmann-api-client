@@ -30,7 +30,8 @@
     "@types/simple-oauth2": "^1.5.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
-    "simple-oauth2": "^1.5.0"
+    "simple-oauth2": "^1.5.0",
+    "typescript-optional": "^1.8.0"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",

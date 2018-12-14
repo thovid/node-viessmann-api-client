@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const typescript_optional_1 = require("typescript-optional");
+const logger_1 = require("../logger");
 const siren_1 = require("./siren");
 class SimpleProperty {
     constructor(name, type, value) {
@@ -22,6 +24,31 @@ class FeatureAction extends siren_1.Action {
     constructor(action) {
         super(action);
     }
+    validated(payload) {
+        const validationErrors = [];
+        this.fields.forEach(field => {
+            this.validateField(field, payload).ifPresent(error => validationErrors.push(error));
+        });
+        if (validationErrors.length !== 0) {
+            logger_1.log(`FeatureAction[${this.name}]: validation failed: ${JSON.stringify(validationErrors)}`, 'warn');
+            return typescript_optional_1.default.empty();
+        }
+        return typescript_optional_1.default.of(this);
+    }
+    validateField(field, payload) {
+        logger_1.log(`FeatureAction[${this.name}]: validating field ${field.name}`, 'debug');
+        if (payload === undefined) {
+            return typescript_optional_1.default.of(`Field[${field.name}]: no payload`);
+        }
+        const value = payload[field.name];
+        if (value === undefined && field.required) {
+            return typescript_optional_1.default.of(`Field[${field.name}]: required but not found`);
+        }
+        if (value !== undefined && field.type !== typeof value) {
+            return typescript_optional_1.default.of(`Field[${field.name}]: required type ${field.type} but was ${typeof value}`);
+        }
+        return typescript_optional_1.default.empty();
+    }
 }
 exports.FeatureAction = FeatureAction;
 class SirenFeature {
@@ -33,24 +60,22 @@ class SirenFeature {
             properties = Object
                 .keys(raw)
                 .map(key => constructProperty(key, raw[key]))
-                .filter(p => p !== null);
+                .filter(p => p.isPresent)
+                .map(p => p.get());
         }
         this.properties = properties;
         this.actions = entity.actions.map(a => new FeatureAction(a));
     }
     static of(entity) {
         const meta = getMetaInformation(entity);
-        if (meta === null) {
-            return null;
-        }
-        return new SirenFeature(meta, entity);
+        return meta.map(m => new SirenFeature(m, entity));
     }
     static createFeatures(entity, enabledOnly = true) {
         const result = new Map();
         selectLeafFeaturesOf(entity)
             .map(e => {
             const meta = getMetaInformation(e);
-            return meta !== null ? new SirenFeature(meta, e) : null;
+            return meta.map(m => new SirenFeature(m, e)).orElse(null);
         }).filter(f => {
             return (f !== null && (!enabledOnly || f.meta.isEnabled));
         })
@@ -59,17 +84,17 @@ class SirenFeature {
     }
     getProperty(name) {
         const result = this.properties.find(p => name === p.name);
-        return result || null;
+        return typescript_optional_1.default.ofNullable(result);
     }
     getAction(name) {
         const result = this.actions.find(a => name === a.name);
-        return result || null;
+        return typescript_optional_1.default.ofNullable(result);
     }
 }
 exports.SirenFeature = SirenFeature;
 function getMetaInformation(entity) {
     if (!isFeature(entity)) {
-        return null;
+        return typescript_optional_1.default.empty();
     }
     const result = entity.entities
         .filter(e => e.rel.indexOf('http://schema.viessmann.com/link-relations#feature-meta-information') > -1)
@@ -81,7 +106,7 @@ function getMetaInformation(entity) {
         && m.feature !== undefined
         && m.uri !== undefined
         && m.deviceId !== undefined)[0];
-    return result ? result : null;
+    return typescript_optional_1.default.ofNullable(result);
 }
 function selectLeafFeaturesOf(entity) {
     const grandChildren = entity.entities.map(e => selectLeafFeaturesOf(e));
@@ -112,17 +137,17 @@ function hasProperties(entity) {
 const simpleTypes = ['string', 'number', 'boolean', 'array'];
 function constructProperty(name, raw) {
     if (raw === undefined || raw === null || 'object' !== typeof raw) {
-        return null;
+        return typescript_optional_1.default.empty();
     }
     const type = raw.type;
     const value = raw.value;
     if (type === undefined || value === undefined) {
-        return null;
+        return typescript_optional_1.default.empty();
     }
     if (simpleTypes.indexOf(type) > -1) {
-        return new SimpleProperty(name, type, value);
+        return typescript_optional_1.default.of(new SimpleProperty(name, type, value));
     }
-    return new ComplexProperty(name, type, value);
+    return typescript_optional_1.default.of(new ComplexProperty(name, type, value));
 }
 function flatten(arr, result = []) {
     for (let i = 0, length = arr.length; i < length; i++) {

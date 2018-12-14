@@ -52,7 +52,7 @@ class OAuthClient {
     }
     authenticated(method, uri, payload) {
         return __awaiter(this, void 0, void 0, function* () {
-            logger_1.log(`OAuthClient: ${method} ${uri}`, 'debug');
+            logger_1.log(`OAuthClient: ${method} ${uri} - payload ${JSON.stringify(payload)}`, 'debug');
             return this.authenticatedWithRetry(method, uri, payload, false);
         });
     }
@@ -80,7 +80,7 @@ class OAuthClient {
                         else {
                             return this.authenticatedWithRetry(method, uri, payload, true);
                         }
-                    case 200: // FIXME
+                    case 200: // FIXME should be 2xx
                         if (response.body) {
                             return JSON.parse(response.body);
                         }

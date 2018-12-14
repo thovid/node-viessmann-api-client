@@ -1,3 +1,4 @@
+import Optional from 'typescript-optional';
 import { Action, Entity } from './siren';
 export interface MetaInformation {
     apiVersion: number;
@@ -28,20 +29,22 @@ export declare class ComplexProperty implements Property {
 }
 export declare class FeatureAction extends Action {
     constructor(action: Action);
+    validated(payload?: any): Optional<FeatureAction>;
+    private validateField;
 }
 export interface Feature {
     properties: Property[];
     meta: MetaInformation;
-    getProperty(name: string): Property | null;
-    getAction(name: string): FeatureAction | null;
+    getProperty(name: string): Optional<Property>;
+    getAction(name: string): Optional<FeatureAction>;
 }
 export declare class SirenFeature implements Feature {
     readonly meta: MetaInformation;
     readonly properties: Property[];
     readonly actions: FeatureAction[];
-    static of(entity: Entity): Feature;
+    static of(entity: Entity): Optional<Feature>;
     static createFeatures(entity: Entity, enabledOnly?: boolean): Map<string, SirenFeature>;
     constructor(meta: MetaInformation, entity: Entity);
-    getProperty(name: string): Property | null;
-    getAction(name: string): FeatureAction | null;
+    getProperty(name: string): Optional<Property>;
+    getAction(name: string): Optional<FeatureAction>;
 }

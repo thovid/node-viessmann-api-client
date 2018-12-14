@@ -59,7 +59,7 @@ export class OAuthClient {
     }
 
     public async authenticated(method: string, uri: string, payload: any): Promise<any> {
-        log(`OAuthClient: ${method} ${uri}`, 'debug');
+        log(`OAuthClient: ${method} ${uri} - payload ${JSON.stringify(payload)}`, 'debug');
         return this.authenticatedWithRetry(method, uri, payload, false);
     }
 
@@ -85,7 +85,7 @@ export class OAuthClient {
                         } else {
                             return this.authenticatedWithRetry(method, uri, payload, true);
                         }
-                    case 200: // FIXME
+                    case 200: // FIXME should be 2xx
                         if (response.body) {
                             return JSON.parse(response.body);
                         } else return {};
