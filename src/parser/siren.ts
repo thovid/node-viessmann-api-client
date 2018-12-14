@@ -10,7 +10,9 @@ export class Link {
     public readonly href?: string;
 }
 
-export type Properties = any;
+export interface Properties {
+    [key: string]: any;
+}
 
 export class Action {
     public readonly method: string;
@@ -33,6 +35,7 @@ export interface Field {
     type: string;
     name: string;
     required: boolean;
+    [key: string]: any;
 }
 
 export class Entity {
@@ -55,7 +58,7 @@ export class Entity {
                 .filter(l => 'object' === typeof l)
                 .map(link => new Link(link));
         }
-        this.properties = (entity.properties as object) || {};
+        this.properties = (entity.properties as Properties) || {};
 
         if (Array.isArray(entity.class)) {
             this.class = entity.class

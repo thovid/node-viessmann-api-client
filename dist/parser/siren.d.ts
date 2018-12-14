@@ -3,7 +3,9 @@ export declare class Link {
     readonly rel: string[];
     readonly href?: string;
 }
-export declare type Properties = any;
+export interface Properties {
+    [key: string]: any;
+}
 export declare class Action {
     readonly method: string;
     readonly name: string;
@@ -17,6 +19,7 @@ export interface Field {
     type: string;
     name: string;
     required: boolean;
+    [key: string]: any;
 }
 export declare class Entity {
     readonly rel: string[];

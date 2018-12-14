@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const siren_1 = require("./siren");
 class SimpleProperty {
     constructor(name, type, value) {
         this.name = name;
@@ -17,6 +18,12 @@ class ComplexProperty {
     }
 }
 exports.ComplexProperty = ComplexProperty;
+class FeatureAction extends siren_1.Action {
+    constructor(action) {
+        super(action);
+    }
+}
+exports.FeatureAction = FeatureAction;
 class SirenFeature {
     constructor(meta, entity) {
         this.meta = meta;
@@ -29,6 +36,14 @@ class SirenFeature {
                 .filter(p => p !== null);
         }
         this.properties = properties;
+        this.actions = entity.actions.map(a => new FeatureAction(a));
+    }
+    static of(entity) {
+        const meta = getMetaInformation(entity);
+        if (meta === null) {
+            return null;
+        }
+        return new SirenFeature(meta, entity);
     }
     static createFeatures(entity, enabledOnly = true) {
         const result = new Map();
@@ -44,6 +59,10 @@ class SirenFeature {
     }
     getProperty(name) {
         const result = this.properties.find(p => name === p.name);
+        return result || null;
+    }
+    getAction(name) {
+        const result = this.actions.find(a => name === a.name);
         return result || null;
     }
 }

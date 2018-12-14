@@ -4,7 +4,7 @@
             "rel": [
                 "self"
             ],
-            "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+            "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
         },
         {
             "rel": [
@@ -26,13 +26,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -72,7 +72,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-boiler",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler"
                 },
                 {
                     "rel": [
@@ -81,7 +81,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-burner",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.burner"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.burner"
                 },
                 {
                     "rel": [
@@ -90,7 +90,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-circuits",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits"
                 },
                 {
                     "rel": [
@@ -99,7 +99,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-device",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.device"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.device"
                 },
                 {
                     "rel": [
@@ -108,7 +108,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhw",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw"
                 },
                 {
                     "rel": [
@@ -117,7 +117,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-errors",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.errors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.errors"
                 },
                 {
                     "rel": [
@@ -126,7 +126,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-gas",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas"
                 },
                 {
                     "rel": [
@@ -135,7 +135,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-sensors",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.sensors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.sensors"
                 },
                 {
                     "rel": [
@@ -144,7 +144,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-service",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.service"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.service"
                 },
                 {
                     "rel": [
@@ -180,13 +180,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -226,7 +226,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-sensors",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler.sensors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler.sensors"
                 },
                 {
                     "rel": [
@@ -235,7 +235,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-serial",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler.serial"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler.serial"
                 },
                 {
                     "rel": [
@@ -264,13 +264,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler.sensors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler.sensors"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -317,13 +317,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler.serial"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler.serial"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -375,13 +375,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler.sensors.temperature.main"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.boiler.sensors.temperature.main"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -437,13 +437,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.burner"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.burner"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -488,7 +488,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-automatic",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.burner.automatic"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.burner.automatic"
                 },
                 {
                     "rel": [
@@ -516,13 +516,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.burner.automatic"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.burner.automatic"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -578,13 +578,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.burner.current.power"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.burner.current.power"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -636,13 +636,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -689,7 +689,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-0",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0"
                 },
                 {
                     "rel": [
@@ -698,7 +698,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-1",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1"
                 },
                 {
                     "rel": [
@@ -707,7 +707,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-2",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2"
                 },
                 {
                     "rel": [
@@ -737,13 +737,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -788,7 +788,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-circulation",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.circulation"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.circulation"
                 },
                 {
                     "rel": [
@@ -797,7 +797,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhw",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.dhw"
                 },
                 {
                     "rel": [
@@ -806,7 +806,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-frostprotection",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.frostprotection"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.frostprotection"
                 },
                 {
                     "rel": [
@@ -815,7 +815,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-heating",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating"
                 },
                 {
                     "rel": [
@@ -824,7 +824,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-operating",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating"
                 },
                 {
                     "rel": [
@@ -833,7 +833,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-sensors",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors"
                 },
                 {
                     "rel": [
@@ -866,13 +866,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -912,7 +912,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-circulation",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.circulation"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.circulation"
                 },
                 {
                     "rel": [
@@ -921,7 +921,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhw",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.dhw"
                 },
                 {
                     "rel": [
@@ -930,7 +930,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-frostprotection",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.frostprotection"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.frostprotection"
                 },
                 {
                     "rel": [
@@ -939,7 +939,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-heating",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.heating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.heating"
                 },
                 {
                     "rel": [
@@ -948,7 +948,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-operating",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating"
                 },
                 {
                     "rel": [
@@ -957,7 +957,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-sensors",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors"
                 },
                 {
                     "rel": [
@@ -990,13 +990,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1036,7 +1036,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-circulation",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.circulation"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.circulation"
                 },
                 {
                     "rel": [
@@ -1045,7 +1045,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhw",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.dhw"
                 },
                 {
                     "rel": [
@@ -1054,7 +1054,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-frostprotection",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.frostprotection"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.frostprotection"
                 },
                 {
                     "rel": [
@@ -1063,7 +1063,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-heating",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.heating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.heating"
                 },
                 {
                     "rel": [
@@ -1072,7 +1072,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-operating",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating"
                 },
                 {
                     "rel": [
@@ -1081,7 +1081,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-sensors",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors"
                 },
                 {
                     "rel": [
@@ -1114,13 +1114,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.circulation"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.circulation"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1160,7 +1160,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-schedule",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.circulation.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.circulation.schedule"
                 },
                 {
                     "rel": [
@@ -1188,13 +1188,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.circulation"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.circulation"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1234,7 +1234,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-schedule",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.circulation.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.circulation.schedule"
                 },
                 {
                     "rel": [
@@ -1262,13 +1262,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.circulation"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.circulation"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1308,7 +1308,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-schedule",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.circulation.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.circulation.schedule"
                 },
                 {
                     "rel": [
@@ -1336,13 +1336,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.circulation.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.circulation.schedule"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1446,7 +1446,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.circulation.schedule/setSchedule",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.circulation.schedule/setSchedule",
                     "name": "setSchedule",
                     "title": "setSchedule",
                     "fields": [
@@ -1477,13 +1477,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.circulation.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.circulation.schedule"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1530,13 +1530,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.circulation.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.circulation.schedule"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1583,13 +1583,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.dhw"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1629,7 +1629,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-schedule",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.dhw.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.dhw.schedule"
                 },
                 {
                     "rel": [
@@ -1657,13 +1657,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.dhw"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1703,7 +1703,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-schedule",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.dhw.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.dhw.schedule"
                 },
                 {
                     "rel": [
@@ -1731,13 +1731,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.dhw"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1777,7 +1777,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-schedule",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.dhw.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.dhw.schedule"
                 },
                 {
                     "rel": [
@@ -1805,13 +1805,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.dhw.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.dhw.schedule"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1858,13 +1858,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.dhw.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.dhw.schedule"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1911,13 +1911,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.dhw.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.dhw.schedule"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -1964,13 +1964,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.frostprotection"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.frostprotection"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2022,13 +2022,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.frostprotection"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.frostprotection"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2075,13 +2075,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.frostprotection"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.frostprotection"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2128,13 +2128,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2174,7 +2174,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-curve",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.curve"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.curve"
                 },
                 {
                     "rel": [
@@ -2183,7 +2183,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-schedule",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.schedule"
                 },
                 {
                     "rel": [
@@ -2212,13 +2212,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.heating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.heating"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2258,7 +2258,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-curve",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.heating.curve"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.heating.curve"
                 },
                 {
                     "rel": [
@@ -2267,7 +2267,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-schedule",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.heating.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.heating.schedule"
                 },
                 {
                     "rel": [
@@ -2296,13 +2296,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.heating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.heating"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2342,7 +2342,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-curve",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.heating.curve"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.heating.curve"
                 },
                 {
                     "rel": [
@@ -2351,7 +2351,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-schedule",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.heating.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.heating.schedule"
                 },
                 {
                     "rel": [
@@ -2380,13 +2380,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.curve"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.curve"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2433,7 +2433,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.curve/setCurve",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.curve/setCurve",
                     "name": "setCurve",
                     "title": "setCurve",
                     "fields": [
@@ -2469,13 +2469,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.heating.curve"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.heating.curve"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2522,13 +2522,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.heating.curve"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.heating.curve"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2575,13 +2575,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.schedule"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2685,7 +2685,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.schedule/setSchedule",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.schedule/setSchedule",
                     "name": "setSchedule",
                     "title": "setSchedule",
                     "fields": [
@@ -2716,13 +2716,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.heating.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.heating.schedule"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2769,13 +2769,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.heating.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.heating.schedule"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2822,13 +2822,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2868,7 +2868,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-modes",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes"
                 },
                 {
                     "rel": [
@@ -2877,7 +2877,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-programs",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs"
                 },
                 {
                     "rel": [
@@ -2906,13 +2906,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -2952,7 +2952,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-modes",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes"
                 },
                 {
                     "rel": [
@@ -2961,7 +2961,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-programs",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs"
                 },
                 {
                     "rel": [
@@ -2990,13 +2990,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3036,7 +3036,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-modes",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes"
                 },
                 {
                     "rel": [
@@ -3045,7 +3045,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-programs",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs"
                 },
                 {
                     "rel": [
@@ -3074,13 +3074,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3120,7 +3120,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-active",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.active"
                 },
                 {
                     "rel": [
@@ -3129,7 +3129,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhw",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.dhw"
                 },
                 {
                     "rel": [
@@ -3138,7 +3138,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhwAndHeating",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.dhwAndHeating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.dhwAndHeating"
                 },
                 {
                     "rel": [
@@ -3147,7 +3147,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-forcedNormal",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.forcedNormal"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.forcedNormal"
                 },
                 {
                     "rel": [
@@ -3156,7 +3156,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-forcedReduced",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.forcedReduced"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.forcedReduced"
                 },
                 {
                     "rel": [
@@ -3165,7 +3165,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-standby",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.standby"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.standby"
                 },
                 {
                     "rel": [
@@ -3198,13 +3198,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3244,7 +3244,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-active",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.active"
                 },
                 {
                     "rel": [
@@ -3253,7 +3253,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhw",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.dhw"
                 },
                 {
                     "rel": [
@@ -3262,7 +3262,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhwAndHeating",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.dhwAndHeating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.dhwAndHeating"
                 },
                 {
                     "rel": [
@@ -3271,7 +3271,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-forcedNormal",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.forcedNormal"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.forcedNormal"
                 },
                 {
                     "rel": [
@@ -3280,7 +3280,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-forcedReduced",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.forcedReduced"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.forcedReduced"
                 },
                 {
                     "rel": [
@@ -3289,7 +3289,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-standby",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.standby"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.standby"
                 },
                 {
                     "rel": [
@@ -3322,13 +3322,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3368,7 +3368,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-active",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.active"
                 },
                 {
                     "rel": [
@@ -3377,7 +3377,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhw",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.dhw"
                 },
                 {
                     "rel": [
@@ -3386,7 +3386,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhwAndHeating",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.dhwAndHeating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.dhwAndHeating"
                 },
                 {
                     "rel": [
@@ -3395,7 +3395,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-forcedNormal",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.forcedNormal"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.forcedNormal"
                 },
                 {
                     "rel": [
@@ -3404,7 +3404,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-forcedReduced",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.forcedReduced"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.forcedReduced"
                 },
                 {
                     "rel": [
@@ -3413,7 +3413,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-standby",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.standby"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.standby"
                 },
                 {
                     "rel": [
@@ -3446,13 +3446,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.active"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3495,7 +3495,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.active/setMode",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.active/setMode",
                     "name": "setMode",
                     "title": "setMode",
                     "fields": [
@@ -3527,13 +3527,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.active"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3580,13 +3580,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.active"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3633,13 +3633,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.dhw"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3691,13 +3691,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.dhw"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3744,13 +3744,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.dhw"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3797,13 +3797,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.dhwAndHeating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.dhwAndHeating"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3855,13 +3855,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.dhwAndHeating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.dhwAndHeating"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3908,13 +3908,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.dhwAndHeating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.dhwAndHeating"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -3961,13 +3961,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.forcedNormal"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.forcedNormal"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4019,13 +4019,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.forcedNormal"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.forcedNormal"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4072,13 +4072,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.forcedNormal"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.forcedNormal"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4125,13 +4125,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.forcedReduced"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.forcedReduced"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4183,13 +4183,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.forcedReduced"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.forcedReduced"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4236,13 +4236,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.forcedReduced"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.forcedReduced"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4289,13 +4289,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.standby"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.standby"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4347,13 +4347,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.standby"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.modes.standby"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4400,13 +4400,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.standby"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.modes.standby"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4453,13 +4453,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4499,7 +4499,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-active",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.active"
                 },
                 {
                     "rel": [
@@ -4508,7 +4508,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-comfort",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort"
                 },
                 {
                     "rel": [
@@ -4517,7 +4517,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-eco",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.eco"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.eco"
                 },
                 {
                     "rel": [
@@ -4526,7 +4526,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-external",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.external"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.external"
                 },
                 {
                     "rel": [
@@ -4535,7 +4535,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-holiday",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.holiday"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.holiday"
                 },
                 {
                     "rel": [
@@ -4544,7 +4544,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-normal",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.normal"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.normal"
                 },
                 {
                     "rel": [
@@ -4553,7 +4553,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-reduced",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.reduced"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.reduced"
                 },
                 {
                     "rel": [
@@ -4562,7 +4562,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-standby",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.standby"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.standby"
                 },
                 {
                     "rel": [
@@ -4597,13 +4597,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4643,7 +4643,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-active",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.active"
                 },
                 {
                     "rel": [
@@ -4652,7 +4652,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-comfort",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.comfort"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.comfort"
                 },
                 {
                     "rel": [
@@ -4661,7 +4661,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-eco",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.eco"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.eco"
                 },
                 {
                     "rel": [
@@ -4670,7 +4670,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-external",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.external"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.external"
                 },
                 {
                     "rel": [
@@ -4679,7 +4679,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-holiday",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.holiday"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.holiday"
                 },
                 {
                     "rel": [
@@ -4688,7 +4688,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-normal",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.normal"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.normal"
                 },
                 {
                     "rel": [
@@ -4697,7 +4697,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-reduced",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.reduced"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.reduced"
                 },
                 {
                     "rel": [
@@ -4706,7 +4706,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-standby",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.standby"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.standby"
                 },
                 {
                     "rel": [
@@ -4741,13 +4741,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4787,7 +4787,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-active",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.active"
                 },
                 {
                     "rel": [
@@ -4796,7 +4796,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-comfort",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.comfort"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.comfort"
                 },
                 {
                     "rel": [
@@ -4805,7 +4805,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-eco",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.eco"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.eco"
                 },
                 {
                     "rel": [
@@ -4814,7 +4814,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-external",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.external"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.external"
                 },
                 {
                     "rel": [
@@ -4823,7 +4823,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-holiday",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.holiday"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.holiday"
                 },
                 {
                     "rel": [
@@ -4832,7 +4832,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-normal",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.normal"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.normal"
                 },
                 {
                     "rel": [
@@ -4841,7 +4841,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-reduced",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.reduced"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.reduced"
                 },
                 {
                     "rel": [
@@ -4850,7 +4850,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-standby",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.standby"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.standby"
                 },
                 {
                     "rel": [
@@ -4885,13 +4885,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.active"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4943,13 +4943,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.active"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -4996,13 +4996,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.active"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5049,13 +5049,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5102,7 +5102,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/setTemperature",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/setTemperature",
                     "name": "setTemperature",
                     "title": "setTemperature",
                     "fields": [
@@ -5120,7 +5120,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/activate",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/activate",
                     "name": "activate",
                     "title": "activate",
                     "fields": [],
@@ -5129,7 +5129,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/deactivate",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/deactivate",
                     "name": "deactivate",
                     "title": "deactivate",
                     "fields": [],
@@ -5148,13 +5148,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.comfort"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.comfort"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5201,13 +5201,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.comfort"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.comfort"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5254,13 +5254,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.eco"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.eco"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5307,7 +5307,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.eco/activate",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.eco/activate",
                     "name": "activate",
                     "title": "activate",
                     "fields": [
@@ -5325,7 +5325,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.eco/deactivate",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.eco/deactivate",
                     "name": "deactivate",
                     "title": "deactivate",
                     "fields": [],
@@ -5344,13 +5344,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.eco"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.eco"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5397,13 +5397,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.eco"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.eco"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5450,13 +5450,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.external"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.external"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5512,13 +5512,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.external"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.external"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5565,13 +5565,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.external"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.external"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5618,13 +5618,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.holiday"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.holiday"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5675,7 +5675,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.holiday/schedule",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.holiday/schedule",
                     "name": "schedule",
                     "title": "schedule",
                     "fields": [
@@ -5695,7 +5695,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.holiday/unschedule",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.holiday/unschedule",
                     "name": "unschedule",
                     "title": "unschedule",
                     "fields": [],
@@ -5714,13 +5714,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.holiday"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.holiday"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5767,13 +5767,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.holiday"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.holiday"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5820,13 +5820,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.normal"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.normal"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5873,7 +5873,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.normal/setTemperature",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.normal/setTemperature",
                     "name": "setTemperature",
                     "title": "setTemperature",
                     "fields": [
@@ -5901,13 +5901,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.normal"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.normal"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -5954,13 +5954,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.normal"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.normal"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6007,13 +6007,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.reduced"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.reduced"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6060,7 +6060,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.reduced/setTemperature",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.reduced/setTemperature",
                     "name": "setTemperature",
                     "title": "setTemperature",
                     "fields": [
@@ -6088,13 +6088,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.reduced"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.reduced"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6141,13 +6141,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.reduced"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.reduced"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6194,13 +6194,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.standby"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.standby"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6252,13 +6252,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.standby"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.operating.programs.standby"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6305,13 +6305,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.standby"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.operating.programs.standby"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6358,13 +6358,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6404,7 +6404,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-temperature",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors.temperature"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors.temperature"
                 },
                 {
                     "rel": [
@@ -6432,13 +6432,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6478,7 +6478,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-temperature",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors.temperature"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors.temperature"
                 },
                 {
                     "rel": [
@@ -6506,13 +6506,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6552,7 +6552,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-temperature",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors.temperature"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors.temperature"
                 },
                 {
                     "rel": [
@@ -6580,13 +6580,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors.temperature"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors.temperature"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6626,7 +6626,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-room",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors.temperature.room"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors.temperature.room"
                 },
                 {
                     "rel": [
@@ -6635,7 +6635,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-supply",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors.temperature.supply"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors.temperature.supply"
                 },
                 {
                     "rel": [
@@ -6664,13 +6664,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors.temperature"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors.temperature"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6710,7 +6710,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-room",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors.temperature.room"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors.temperature.room"
                 },
                 {
                     "rel": [
@@ -6719,7 +6719,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-supply",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors.temperature.supply"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors.temperature.supply"
                 },
                 {
                     "rel": [
@@ -6748,13 +6748,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors.temperature"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors.temperature"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6794,7 +6794,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-room",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors.temperature.room"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors.temperature.room"
                 },
                 {
                     "rel": [
@@ -6803,7 +6803,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-supply",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors.temperature.supply"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors.temperature.supply"
                 },
                 {
                     "rel": [
@@ -6832,13 +6832,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors.temperature.room"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors.temperature.room"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6890,13 +6890,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors.temperature.room"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors.temperature.room"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6943,13 +6943,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors.temperature.room"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors.temperature.room"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -6996,13 +6996,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors.temperature.supply"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.sensors.temperature.supply"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7058,13 +7058,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors.temperature.supply"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.1.sensors.temperature.supply"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7111,13 +7111,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors.temperature.supply"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.2.sensors.temperature.supply"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7164,13 +7164,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.configuration.multiFamilyHouse"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.configuration.multiFamilyHouse"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7222,13 +7222,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.controller.serial"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.controller.serial"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7280,13 +7280,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.device"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.device"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7326,7 +7326,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-time",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.device.time"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.device.time"
                 },
                 {
                     "rel": [
@@ -7354,13 +7354,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.device.time"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.device.time"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7400,7 +7400,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-offset",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.device.time.offset"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.device.time.offset"
                 },
                 {
                     "rel": [
@@ -7428,13 +7428,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.device.time.offset"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.device.time.offset"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7486,13 +7486,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7537,7 +7537,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-oneTimeCharge",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.oneTimeCharge"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.oneTimeCharge"
                 },
                 {
                     "rel": [
@@ -7546,7 +7546,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-sensors",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.sensors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.sensors"
                 },
                 {
                     "rel": [
@@ -7555,7 +7555,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-temperature",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.temperature"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.temperature"
                 },
                 {
                     "rel": [
@@ -7564,7 +7564,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-schedule",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.schedule"
                 },
                 {
                     "rel": [
@@ -7595,13 +7595,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.oneTimeCharge"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.oneTimeCharge"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7644,7 +7644,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.oneTimeCharge/activate",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.oneTimeCharge/activate",
                     "name": "activate",
                     "title": "activate",
                     "fields": [],
@@ -7653,7 +7653,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.oneTimeCharge/deactivate",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.oneTimeCharge/deactivate",
                     "name": "deactivate",
                     "title": "deactivate",
                     "fields": [],
@@ -7672,13 +7672,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.sensors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.sensors"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7725,13 +7725,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.sensors.temperature.hotWaterStorage"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.sensors.temperature.hotWaterStorage"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7787,13 +7787,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.temperature"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.temperature"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7836,7 +7836,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.temperature/setTargetTemperature",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.temperature/setTargetTemperature",
                     "name": "setTargetTemperature",
                     "title": "setTargetTemperature",
                     "fields": [
@@ -7864,13 +7864,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.schedule"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.schedule"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -7974,7 +7974,7 @@
                 {
                     "method": "POST",
                     "isExecutable": true,
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.schedule/setSchedule",
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.schedule/setSchedule",
                     "name": "setSchedule",
                     "title": "setSchedule",
                     "fields": [
@@ -8005,13 +8005,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.errors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.errors"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -8051,7 +8051,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-active",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.errors.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.errors.active"
                 },
                 {
                     "rel": [
@@ -8060,7 +8060,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-history",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.errors.history"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.errors.history"
                 },
                 {
                     "rel": [
@@ -8089,13 +8089,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.errors.active"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.errors.active"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -8147,13 +8147,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.errors.history"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.errors.history"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -8205,13 +8205,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -8251,7 +8251,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-consumption",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas.consumption"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas.consumption"
                 },
                 {
                     "rel": [
@@ -8279,13 +8279,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas.consumption"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas.consumption"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -8325,7 +8325,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-dhw",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas.consumption.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas.consumption.dhw"
                 },
                 {
                     "rel": [
@@ -8334,7 +8334,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-heating",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas.consumption.heating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas.consumption.heating"
                 },
                 {
                     "rel": [
@@ -8363,13 +8363,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas.consumption.dhw"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas.consumption.dhw"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -8510,13 +8510,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas.consumption.heating"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.gas.consumption.heating"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -8657,13 +8657,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.sensors"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.sensors"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -8703,7 +8703,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-temperature",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.sensors.temperature"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.sensors.temperature"
                 },
                 {
                     "rel": [
@@ -8731,13 +8731,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.sensors.temperature"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.sensors.temperature"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -8777,7 +8777,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-outside",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.sensors.temperature.outside"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.sensors.temperature.outside"
                 },
                 {
                     "rel": [
@@ -8805,13 +8805,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.sensors.temperature.outside"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.sensors.temperature.outside"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -8875,13 +8875,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.service.timeBased"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.service.timeBased"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -8945,13 +8945,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.service.burnerBased"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.service.burnerBased"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -8998,13 +8998,13 @@
                     "rel": [
                         "self"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.service"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.service"
                 },
                 {
                     "rel": [
                         "up"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
                 },
                 {
                     "rel": [
@@ -9044,7 +9044,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-timeBased",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.service.timeBased"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.service.timeBased"
                 },
                 {
                     "rel": [
@@ -9053,7 +9053,7 @@
                         "https://wiki.viessmann.com/display/VPL/Relations#Relations-burnerBased",
                         "https://wiki.viessmann.com/display/VPL/Amounts#Amounts-unique"
                     ],
-                    "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.service.burnerBased"
+                    "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.service.burnerBased"
                 },
                 {
                     "rel": [

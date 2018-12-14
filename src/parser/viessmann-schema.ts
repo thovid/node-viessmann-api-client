@@ -1,4 +1,4 @@
-import {Entity} from './siren';
+import {Action, Entity} from './siren';
 
 export interface MetaInformation {
     apiVersion: number;
@@ -27,14 +27,31 @@ export class ComplexProperty implements Property {
     }
 }
 
+export class FeatureAction extends Action {
+
+    constructor(action: Action) {
+        super(action);
+    }
+}
+
 export interface Feature {
     properties: Property[];
     meta: MetaInformation;
     getProperty(name: string): Property | null;
+    getAction(name: string): FeatureAction | null;
 }
 
 export class SirenFeature implements Feature {
     public readonly properties: Property[];
+    public readonly actions: FeatureAction[];
+
+    public static of(entity: Entity): Feature {
+        const meta = getMetaInformation(entity);
+        if (meta === null) {
+            return null;
+        }
+        return new SirenFeature(meta, entity);
+    }
 
     public static createFeatures(entity: Entity, enabledOnly: boolean = true): Map<string, SirenFeature> {
         const result: Map<string, SirenFeature> = new Map();
@@ -59,10 +76,17 @@ export class SirenFeature implements Feature {
                 .filter(p => p !== null);
         }
         this.properties = properties;
+
+        this.actions = entity.actions.map(a => new FeatureAction(a));
     }
 
     public getProperty(name: string): Property | null {
         const result = this.properties.find(p => name === p.name);
+        return result || null;
+    }
+
+    public getAction(name: string): FeatureAction | null {
+        const result = this.actions.find(a => name === a.name);
         return result || null;
     }
 }

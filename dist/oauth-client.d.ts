@@ -27,7 +27,8 @@ export declare class OAuthClient {
     constructor(config: ViessmannOAuthConfig);
     connect(credentials: Credentials): Promise<OAuthClient>;
     authenticatedGet(uri: string): Promise<any>;
-    private authenticatedGetWithRetry;
+    authenticated(method: string, uri: string, payload: any): Promise<any>;
+    private authenticatedWithRetry;
     private getToken;
     private refreshedToken;
     private getInitialToken;

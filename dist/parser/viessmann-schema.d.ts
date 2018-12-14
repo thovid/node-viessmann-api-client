@@ -1,4 +1,4 @@
-import { Entity } from './siren';
+import { Action, Entity } from './siren';
 export interface MetaInformation {
     apiVersion: number;
     isEnabled: boolean;
@@ -26,15 +26,22 @@ export declare class ComplexProperty implements Property {
     readonly type: string;
     constructor(name: string, customType: string, value: object);
 }
+export declare class FeatureAction extends Action {
+    constructor(action: Action);
+}
 export interface Feature {
     properties: Property[];
     meta: MetaInformation;
     getProperty(name: string): Property | null;
+    getAction(name: string): FeatureAction | null;
 }
 export declare class SirenFeature implements Feature {
     readonly meta: MetaInformation;
     readonly properties: Property[];
+    readonly actions: FeatureAction[];
+    static of(entity: Entity): Feature;
     static createFeatures(entity: Entity, enabledOnly?: boolean): Map<string, SirenFeature>;
     constructor(meta: MetaInformation, entity: Entity);
     getProperty(name: string): Property | null;
+    getAction(name: string): FeatureAction | null;
 }

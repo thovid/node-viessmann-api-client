@@ -103,7 +103,7 @@ describe('parsing actions', () => {
         expect(action.isExecutable).to.be.true;
         expect(action.name).to.be.equal('activate');
         expect(action.type).to.be.equal('application/json');
-        expect(action.href).to.be.equal('https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/activate');
+        expect(action.href).to.be.equal('https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/activate');
         expect(action.fields).to.have.length(0);
     });
 
@@ -112,7 +112,7 @@ describe('parsing actions', () => {
         expect(action.method).to.be.equal('POST');
         expect(action.isExecutable).to.be.true;
         expect(action.name).to.be.equal('setTemperature');
-        expect(action.href).to.be.equal('https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/setTemperature');
+        expect(action.href).to.be.equal('https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/setTemperature');
         expect(action.type).to.be.equal('application/json');
         expect(action.fields).to.have.length(1);
     });

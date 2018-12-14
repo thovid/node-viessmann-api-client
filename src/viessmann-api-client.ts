@@ -25,11 +25,10 @@ export type FeatureObserver = (f: Feature, p: Property) => void;
 export type ConnectionObserver = (connected: boolean) => void;
 
 export class Client {
-
     private scheduler: Scheduler;
     private oauth: OAuthClient;
     private installation: ViessmannInstallation;
-    private features: Map<string, Feature>;
+    private features: Map<string, Feature> = new Map<string, Feature>();
 
     private observers: FeatureObserver[] = [];
     private connectionObservers: ConnectionObserver[] = [];
@@ -45,9 +44,7 @@ export class Client {
             this.fetchFeatures()
                 .then(features => Array.from(features.values()))
                 .then(features => features
-                    .forEach((f: Feature) => f.properties
-                        .forEach((p: Property) => this.observers
-                            .forEach((o: FeatureObserver) => o(f, p)))))
+                    .forEach((f: Feature) => this.updateObservers(f)))
                 .then(() => {
                     this.setConnected(true);
                 })
@@ -87,14 +84,24 @@ export class Client {
     }
 
     public getFeatures(): Feature[] {
-        if (this.features === undefined) {
-            return [];
-        }
         return Array.from(this.features.values());
     }
 
     public getFeature(name: string): Feature | null {
         return this.features.get(name);
+    }
+
+    public async executeAction(featureName: string, actionName: string, payload?: any): Promise<void> {
+        const feature = this.getFeature(featureName);
+        if (feature) {
+            const action = feature.getAction(actionName);
+            if (action) {
+                return this.oauth.authenticated(action.method, action.href, payload)
+                    .then(() => this.fetchFeature(featureName))
+                    .then(f => this.updateObservers(f));
+            }
+        }
+        return null;
     }
 
     public observeConnection(observer: ConnectionObserver): void {
@@ -119,7 +126,17 @@ export class Client {
             .then((response) => new Entity(response))
             .then((entity) => SirenFeature.createFeatures(entity, true))
             .then((features) => this.features = features);
+    }
 
+    private async fetchFeature(name: string): Promise<Feature> {
+        return this.oauth.authenticatedGet(this.basePath() + '/' + name)
+            .then(body => SirenFeature.of(new Entity(body)));
+    }
+
+    private async updateObservers(feature: Feature): Promise<void> {
+        feature.properties
+            .forEach((p: Property) => this.observers
+                .forEach((o: FeatureObserver) => o(feature, p)));
     }
 
     private basePath(): string {

@@ -16,6 +16,7 @@ const scheduler_1 = require("./scheduler");
 class Client {
     constructor(config, oauth) {
         this.config = config;
+        this.features = new Map();
         this.observers = [];
         this.connectionObservers = [];
         this.connected = false;
@@ -28,9 +29,7 @@ class Client {
             this.fetchFeatures()
                 .then(features => Array.from(features.values()))
                 .then(features => features
-                .forEach((f) => f.properties
-                .forEach((p) => this.observers
-                .forEach((o) => o(f, p)))))
+                .forEach((f) => this.updateObservers(f)))
                 .then(() => {
                 this.setConnected(true);
             })
@@ -67,13 +66,24 @@ class Client {
         return this.installation;
     }
     getFeatures() {
-        if (this.features === undefined) {
-            return [];
-        }
         return Array.from(this.features.values());
     }
     getFeature(name) {
         return this.features.get(name);
+    }
+    executeAction(featureName, actionName, payload) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const feature = this.getFeature(featureName);
+            if (feature) {
+                const action = feature.getAction(actionName);
+                if (action) {
+                    return this.oauth.authenticated(action.method, action.href, payload)
+                        .then(() => this.fetchFeature(featureName))
+                        .then(f => this.updateObservers(f));
+                }
+            }
+            return null;
+        });
     }
     observeConnection(observer) {
         this.connectionObservers.push(observer);
@@ -95,6 +105,19 @@ class Client {
                 .then((response) => new siren_1.Entity(response))
                 .then((entity) => viessmann_schema_1.SirenFeature.createFeatures(entity, true))
                 .then((features) => this.features = features);
+        });
+    }
+    fetchFeature(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.oauth.authenticatedGet(this.basePath() + '/' + name)
+                .then(body => viessmann_schema_1.SirenFeature.of(new siren_1.Entity(body)));
+        });
+    }
+    updateObservers(feature) {
+        return __awaiter(this, void 0, void 0, function* () {
+            feature.properties
+                .forEach((p) => this.observers
+                .forEach((o) => o(feature, p)));
         });
     }
     basePath() {

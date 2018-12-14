@@ -9,13 +9,13 @@
             "rel": [
                 "self"
             ],
-            "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort"
+            "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort"
         },
         {
             "rel": [
                 "up"
             ],
-            "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features"
+            "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features"
         },
         {
             "rel": [
@@ -62,7 +62,7 @@
         {
             "method": "POST",
             "isExecutable": true,
-            "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/setTemperature",
+            "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/setTemperature",
             "name": "setTemperature",
             "title": "setTemperature",
             "fields": [
@@ -80,7 +80,7 @@
         {
             "method": "POST",
             "isExecutable": true,
-            "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/activate",
+            "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/activate",
             "name": "activate",
             "title": "activate",
             "fields": [],
@@ -89,7 +89,7 @@
         {
             "method": "POST",
             "isExecutable": true,
-            "href": "https://api.viessmann-platform.io/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/deactivate",
+            "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/deactivate",
             "name": "deactivate",
             "title": "deactivate",
             "fields": [],

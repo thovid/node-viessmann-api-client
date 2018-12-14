@@ -33,10 +33,13 @@ export declare class Client {
     getInstallation(): ViessmannInstallation;
     getFeatures(): Feature[];
     getFeature(name: string): Feature | null;
+    executeAction(featureName: string, actionName: string, payload?: any): Promise<void>;
     observeConnection(observer: ConnectionObserver): void;
     observe(observer: FeatureObserver): void;
     clearObservers(): void;
     private fetchFeatures;
+    private fetchFeature;
+    private updateObservers;
     private basePath;
     private initInstallation;
 }

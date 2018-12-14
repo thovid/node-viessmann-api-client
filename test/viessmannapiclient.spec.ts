@@ -298,6 +298,38 @@ describe('viessmann api client', async () => {
             return expect(observedConnection).to.eventually.be.false;
         });
     });
+
+    describe('changing data', async () => {
+        let dataScope: nock.Scope;
+
+        beforeEach('setup api mocks', () => {
+            setupOAuth(auth);
+            dataScope = setupData();
+        });
+
+        it('should POST correctly for action without fields and fetch feature state', async () => {
+            dataScope
+                .post('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/deactivate')
+                .reply(200)
+                .get('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort')
+                .reply(200, responseBody('heating.circuits.0.operating.programs.comfort'));
+            client = await new Client(config).connect(credentials);
+            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'deactivate');
+            dataScope.done();
+        });
+
+        it('should POST correctly for action with simple field and fetch feature state', async () => {
+            dataScope
+                .post('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/setTemperature',
+                    {targetTemperature: 22})
+                .reply(200)
+                .get('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort')
+                .reply(200, responseBody('heating.circuits.0.operating.programs.comfort'));
+            client = await new Client(config).connect(credentials);
+            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+            dataScope.done();
+        });
+    });
 });
 
 function setupOAuth(oauthConfig: ViessmannOAuthConfig, expiresIn?: number) {

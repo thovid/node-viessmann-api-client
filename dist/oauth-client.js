@@ -47,35 +47,45 @@ class OAuthClient {
     }
     authenticatedGet(uri) {
         return __awaiter(this, void 0, void 0, function* () {
-            logger_1.log(`OAuthClient: GET ${uri}`, 'debug');
-            return this.authenticatedGetWithRetry(uri, false);
+            return this.authenticated('GET', uri, undefined);
         });
     }
-    authenticatedGetWithRetry(uri, isRetry) {
+    authenticated(method, uri, payload) {
+        return __awaiter(this, void 0, void 0, function* () {
+            logger_1.log(`OAuthClient: ${method} ${uri}`, 'debug');
+            return this.authenticatedWithRetry(method, uri, payload, false);
+        });
+    }
+    authenticatedWithRetry(method, uri, payload, isRetry) {
         return __awaiter(this, void 0, void 0, function* () {
             return (isRetry ? this.refreshedToken() : this.getToken())
                 .then(accessToken => {
                 return {
-                    method: 'GET',
+                    method: method,
                     auth: {
                         bearer: accessToken,
                     },
                     uri: uri,
                     resolveWithFullResponse: true,
                     simple: false,
+                    json: payload,
                 };
             }).then(options => request(options))
                 .then((response) => {
                 switch (response.statusCode) {
                     case 401:
                         if (isRetry) {
-                            throw new AuthenticationFailed(`could not GET resource from [${uri}] - status was [${response.statusCode}]`);
+                            throw new AuthenticationFailed(`could not ${method} resource from/to [${uri}] - status was [${response.statusCode}]`);
                         }
                         else {
-                            return this.authenticatedGetWithRetry(uri, true);
+                            return this.authenticatedWithRetry(method, uri, payload, true);
                         }
-                    case 200:
-                        return JSON.parse(response.body);
+                    case 200: // FIXME
+                        if (response.body) {
+                            return JSON.parse(response.body);
+                        }
+                        else
+                            return {};
                     default:
                         throw new RequestFailed(response.statusCode);
                 }
