@@ -34,6 +34,7 @@ export declare class FeatureAction extends Action {
 }
 export interface Feature {
     properties: Property[];
+    actions: FeatureAction[];
     meta: MetaInformation;
     getProperty(name: string): Optional<Property>;
     getAction(name: string): Optional<FeatureAction>;

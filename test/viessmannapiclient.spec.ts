@@ -363,7 +363,7 @@ describe('viessmann api client', async () => {
             dataScope.done();
         });
 
-        it('should validate the action payload', async () => {
+        it('should validate the action payload and not call action if validation failed', async () => {
             client = await new Client(config).connect(credentials);
             await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {});
             await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature');

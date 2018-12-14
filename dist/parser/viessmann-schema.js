@@ -25,6 +25,10 @@ class FeatureAction extends siren_1.Action {
         super(action);
     }
     validated(payload) {
+        if (!this.isExecutable) {
+            logger_1.log(`FeatureAction[${this.name}] is not executable`);
+            return typescript_optional_1.default.empty();
+        }
         const validationErrors = [];
         this.fields.forEach(field => {
             this.validateField(field, payload).ifPresent(error => validationErrors.push(error));

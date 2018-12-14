@@ -10,6 +10,7 @@ exports.RequestFailed = oauth_client_2.RequestFailed;
 var viessmann_schema_1 = require("./parser/viessmann-schema");
 exports.ComplexProperty = viessmann_schema_1.ComplexProperty;
 exports.SimpleProperty = viessmann_schema_1.SimpleProperty;
+exports.FeatureAction = viessmann_schema_1.FeatureAction;
 function default_1(config) {
     return new viessmann_api_client_1.Client(config, new oauth_client_1.OAuthClient(config.auth));
 }

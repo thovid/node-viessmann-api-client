@@ -72,22 +72,24 @@ class OAuthClient {
                 };
             }).then(options => request(options))
                 .then((response) => {
-                switch (response.statusCode) {
-                    case 401:
-                        if (isRetry) {
-                            throw new AuthenticationFailed(`could not ${method} resource from/to [${uri}] - status was [${response.statusCode}]`);
-                        }
-                        else {
-                            return this.authenticatedWithRetry(method, uri, payload, true);
-                        }
-                    case 200: // FIXME should be 2xx
-                        if (response.body) {
-                            return JSON.parse(response.body);
-                        }
-                        else
-                            return {};
-                    default:
-                        throw new RequestFailed(response.statusCode);
+                const status = response.statusCode;
+                if (status === 401) {
+                    if (isRetry) {
+                        throw new AuthenticationFailed(`could not ${method} resource from/to [${uri}] - status was [${response.statusCode}]`);
+                    }
+                    else {
+                        return this.authenticatedWithRetry(method, uri, payload, true);
+                    }
+                }
+                else if (199 < status && status < 300) {
+                    if (response.body) {
+                        return JSON.parse(response.body);
+                    }
+                    else
+                        return {};
+                }
+                else {
+                    throw new RequestFailed(response.statusCode);
                 }
             });
         });

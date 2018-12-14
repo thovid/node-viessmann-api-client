@@ -36,6 +36,11 @@ export class FeatureAction extends Action {
     }
 
     public validated(payload?: any): Optional<FeatureAction> {
+        if (!this.isExecutable) {
+            log(`FeatureAction[${this.name}] is not executable`);
+            return Optional.empty();
+        }
+
         const validationErrors: string[] = [];
         this.fields.forEach(field => {
             this.validateField(field, payload).ifPresent(error => validationErrors.push(error));
@@ -65,6 +70,7 @@ export class FeatureAction extends Action {
 
 export interface Feature {
     properties: Property[];
+    actions: FeatureAction[];
     meta: MetaInformation;
     getProperty(name: string): Optional<Property>;
     getAction(name: string): Optional<FeatureAction>;
