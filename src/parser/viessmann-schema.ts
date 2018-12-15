@@ -37,7 +37,12 @@ export class FeatureAction extends Action {
 
     public validated(payload?: any): Optional<FeatureAction> {
         if (!this.isExecutable) {
-            log(`FeatureAction[${this.name}] is not executable`);
+            log(`FeatureAction[${this.name}]: not executable`, 'warn');
+            return Optional.empty();
+        }
+
+        if (payload === undefined) {
+            log(`FeatureAction[${this.name}]: no payload`, 'warn');
             return Optional.empty();
         }
 
@@ -54,9 +59,6 @@ export class FeatureAction extends Action {
 
     private validateField(field: Field, payload?: any): Optional<string> {
         log(`FeatureAction[${this.name}]: validating field ${field.name}`, 'debug');
-        if (payload === undefined) {
-            return Optional.of(`Field[${field.name}]: no payload`);
-        }
         const value = payload[field.name];
         if (value === undefined && field.required) {
             return Optional.of(`Field[${field.name}]: required but not found`);

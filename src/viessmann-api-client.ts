@@ -46,7 +46,7 @@ export class Client {
             this.fetchFeatures()
                 .then(features => Array.from(features.values()))
                 .then(features => features
-                    .forEach((f: Feature) => this.updateObservers(f)))
+                    .forEach(f => this.updateObservers(f)))
                 .then(() => {
                     this.setConnected(true);
                 })

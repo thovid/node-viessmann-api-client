@@ -20,7 +20,7 @@ export interface TokenCredentials {
     refreshToken: string;
 }
 
-export type OnRefresh = (string) => void;
+export type OnRefresh = (token: string) => void;
 
 export class AuthenticationFailed extends Error {
     constructor(public readonly message: string) {

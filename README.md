@@ -10,7 +10,7 @@ Inspired by https://github.com/thetrueavatar and his project https://github.com/
 Note that this is a private project, so use at your own risk! It is not supported or endorsed by Viessmann!
 
 ## Changelog
-### 2.0.0 (2018/12/14)
+### 2.0.0 (2018/12/15)
 - added experimental implementation to execute actions
 - changed some functions to return `Optional<T>` instead of `T | null`
 ### 1.0.2 (2018/12/10) 

@@ -332,12 +332,12 @@ describe('viessmann api client', async () => {
 
         it('should POST correctly for action without fields and fetch feature state', async () => {
             dataScope
-                .post('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/deactivate')
+                .post('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/deactivate', {})
                 .reply(200)
                 .get('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort')
                 .reply(200, responseBody('heating.circuits.0.operating.programs.comfort'));
             client = await new Client(config).connect(credentials);
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'deactivate');
+            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'deactivate', {});
             dataScope.done();
         });
 

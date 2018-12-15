@@ -30,7 +30,7 @@ class Client {
             this.fetchFeatures()
                 .then(features => Array.from(features.values()))
                 .then(features => features
-                .forEach((f) => this.updateObservers(f)))
+                .forEach(f => this.updateObservers(f)))
                 .then(() => {
                 this.setConnected(true);
             })

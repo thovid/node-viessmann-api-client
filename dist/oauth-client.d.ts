@@ -12,7 +12,7 @@ export interface UserCredentials {
 export interface TokenCredentials {
     refreshToken: string;
 }
-export declare type OnRefresh = (string: any) => void;
+export declare type OnRefresh = (token: string) => void;
 export declare class AuthenticationFailed extends Error {
     readonly message: string;
     constructor(message: string);

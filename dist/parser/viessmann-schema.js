@@ -26,7 +26,11 @@ class FeatureAction extends siren_1.Action {
     }
     validated(payload) {
         if (!this.isExecutable) {
-            logger_1.log(`FeatureAction[${this.name}] is not executable`);
+            logger_1.log(`FeatureAction[${this.name}]: not executable`, 'warn');
+            return typescript_optional_1.default.empty();
+        }
+        if (payload === undefined) {
+            logger_1.log(`FeatureAction[${this.name}]: no payload`, 'warn');
             return typescript_optional_1.default.empty();
         }
         const validationErrors = [];
@@ -41,9 +45,6 @@ class FeatureAction extends siren_1.Action {
     }
     validateField(field, payload) {
         logger_1.log(`FeatureAction[${this.name}]: validating field ${field.name}`, 'debug');
-        if (payload === undefined) {
-            return typescript_optional_1.default.of(`Field[${field.name}]: no payload`);
-        }
         const value = payload[field.name];
         if (value === undefined && field.required) {
             return typescript_optional_1.default.of(`Field[${field.name}]: required but not found`);
