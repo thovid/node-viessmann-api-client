@@ -62,24 +62,24 @@ describe('schema', () => {
         });
     });
 
-    describe('finding leafs', () => {
+    describe('finding features', () => {
         it('should select all leaf features', () => {
             const entity = aComplexEntity(false);
 
-            const foundRels = selectLeafEntitiesOf(entity)
-                .map(e => e.rel[0]);
-            expect(foundRels).to.be.deep.equal(['leaf']);
+            const foundFeatures = selectLeafEntitiesOf(entity)
+                .map(f => f.meta.feature);
+            expect(foundFeatures).to.be.deep.equal(['leaf']);
         });
 
         it('should select enabled leaf features if requested', () => {
             const enabledEntity = aComplexEntity(true);
             const disabledEntity = aComplexEntity(false);
-            const foundEnabledRels = selectLeafEntitiesOf(enabledEntity, true)
-                .map(e => e.rel[0]);
-            const foundDisabledRels = selectLeafEntitiesOf(disabledEntity, true)
-                .map(e => e.rel[0]);
-            expect(foundEnabledRels).to.be.deep.equal(['leaf']);
-            expect(foundDisabledRels).to.be.empty;
+            const foundEnabledFeatures = selectLeafEntitiesOf(enabledEntity, true)
+                .map(f => f.meta.feature);
+            const foundDisabledFeatures = selectLeafEntitiesOf(disabledEntity, true)
+                .map(f => f.meta.feature);
+            expect(foundEnabledFeatures).to.be.deep.equal(['leaf']);
+            expect(foundDisabledFeatures).to.be.empty;
         });
     });
 
@@ -139,10 +139,10 @@ function getMetaInformationOf(entity: Entity): viessmann.MetaInformation {
     return null;
 }
 
-function selectLeafEntitiesOf(entity: Entity, onlyEnabled: boolean = false): Entity[] {
+function selectLeafEntitiesOf(entity: Entity, onlyEnabled: boolean = false): viessmann.SirenFeature[] {
     const features = viessmann.SirenFeature.createFeatures(entity, onlyEnabled);
     if (features.size > 0) {
-        return Array.from(features.values()).map(f => f.entity);
+        return Array.from(features.values());
     }
     return [];
 }

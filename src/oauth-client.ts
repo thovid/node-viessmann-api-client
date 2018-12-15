@@ -20,7 +20,7 @@ export interface TokenCredentials {
     refreshToken: string;
 }
 
-export type OnRefresh = (string) => void;
+export type OnRefresh = (token: string) => void;
 
 export class AuthenticationFailed extends Error {
     constructor(public readonly message: string) {
@@ -55,35 +55,42 @@ export class OAuthClient {
     }
 
     public async authenticatedGet(uri: string): Promise<any> {
-        log(`OAuthClient: GET ${uri}`, 'debug');
-        return this.authenticatedGetWithRetry(uri, false);
+        return this.authenticated('GET', uri, undefined);
     }
 
-    private async authenticatedGetWithRetry(uri: string, isRetry: boolean): Promise<any> {
+    public async authenticated(method: string, uri: string, payload: any): Promise<any> {
+        log(`OAuthClient: ${method} ${uri} - payload ${JSON.stringify(payload)}`, 'debug');
+        return this.authenticatedWithRetry(method, uri, payload, false);
+    }
+
+    private async authenticatedWithRetry(method: string, uri: string, payload: any, isRetry: boolean): Promise<any> {
         return (isRetry ? this.refreshedToken() : this.getToken())
             .then(accessToken => {
                 return {
-                    method: 'GET',
+                    method: method,
                     auth: {
                         bearer: accessToken,
                     },
                     uri: uri,
                     resolveWithFullResponse: true,
                     simple: false,
+                    json: payload,
                 };
             }).then(options => request(options))
             .then((response) => {
-                switch (response.statusCode) {
-                    case 401:
-                        if (isRetry) {
-                            throw new AuthenticationFailed(`could not GET resource from [${uri}] - status was [${response.statusCode}]`);
-                        } else {
-                            return this.authenticatedGetWithRetry(uri, true);
-                        }
-                    case 200:
+                const status = response.statusCode;
+                if (status === 401) {
+                    if (isRetry) {
+                        throw new AuthenticationFailed(`could not ${method} resource from/to [${uri}] - status was [${response.statusCode}]`);
+                    } else {
+                        return this.authenticatedWithRetry(method, uri, payload, true);
+                    }
+                } else if (199 < status && status < 300) {
+                    if (response.body) {
                         return JSON.parse(response.body);
-                    default:
-                        throw new RequestFailed(response.statusCode);
+                    } else return {};
+                } else {
+                    throw new RequestFailed(response.statusCode);
                 }
             });
     }

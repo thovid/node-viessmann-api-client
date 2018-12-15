@@ -175,6 +175,27 @@ describe('viessmann api client', async () => {
             await new Client(config).connect(credentials);
         });
 
+        it('should fail if refreshed access token still is rejected', async () => {
+            const newAccessToken = 'new_access_token';
+            setupOAuth(config.auth)
+                .post(config.auth.token, new RegExp('grant_type=refresh_token&refresh_token=' + refreshToken))
+                .reply(200, {
+                    access_token: newAccessToken,
+                    refresh_token: refreshToken,
+                    token_type: 'Bearer',
+                    expires_in: 3600,
+                });
+            nock(config.api.host)
+                .get('/general-management/installations')
+                .matchHeader('authorization', 'Bearer ' + accessToken)
+                .reply(401, 'some error in body')
+                .get('/general-management/installations')
+                .matchHeader('authorization', 'Bearer ' + newAccessToken)
+                .reply(401, responseBody('installations'));
+
+            return expect(new Client(config).connect(credentials)).to.eventually.be.rejectedWith(AuthenticationFailed);
+        });
+
         it('should report error of access token could not be retrieved', async () => {
             setupAuthCode(config.auth, 'irrelevant')
                 .post(config.auth.token, new RegExp('.*'))
@@ -254,7 +275,8 @@ describe('viessmann api client', async () => {
             client = await new Client(config).connect(credentials);
             const temperature = client
                 .getFeature('heating.sensors.temperature.outside')
-                .getProperty('value').value;
+                .flatMap(f => f.getProperty('value'))
+                .get().value;
             return expect(temperature).to.be.equal(7.8);
         });
 
@@ -262,7 +284,8 @@ describe('viessmann api client', async () => {
             client = await new Client(config).connect(credentials);
             const temperature = client.
                 getFeature('heating.boiler.sensors.temperature.main')
-                .getProperty('value').value;
+                .flatMap(f => f.getProperty('value'))
+                .get().value;
             return expect(temperature).to.be.equal(36);
         });
 
@@ -296,6 +319,56 @@ describe('viessmann api client', async () => {
                 });
             });
             return expect(observedConnection).to.eventually.be.false;
+        });
+    });
+
+    describe('changing data', async () => {
+        let dataScope: nock.Scope;
+
+        beforeEach('setup api mocks', () => {
+            setupOAuth(auth);
+            dataScope = setupData();
+        });
+
+        it('should POST correctly for action without fields and fetch feature state', async () => {
+            dataScope
+                .post('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/deactivate', {})
+                .reply(200)
+                .get('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort')
+                .reply(200, responseBody('heating.circuits.0.operating.programs.comfort'));
+            client = await new Client(config).connect(credentials);
+            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'deactivate', {});
+            dataScope.done();
+        });
+
+        it('should POST correctly for action with simple field and fetch feature state', async () => {
+            dataScope
+                .post('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/setTemperature',
+                    {targetTemperature: 22})
+                .reply(200)
+                .get('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort')
+                .reply(200, responseBody('heating.circuits.0.operating.programs.comfort'));
+            client = await new Client(config).connect(credentials);
+            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+            dataScope.done();
+        });
+
+        it('should not fail on errors during action execution', async () => {
+            dataScope
+                .post('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/setTemperature',
+                    {targetTemperature: 22})
+                .reply(400);
+            client = await new Client(config).connect(credentials);
+            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+            dataScope.done();
+        });
+
+        it('should validate the action payload and not call action if validation failed', async () => {
+            client = await new Client(config).connect(credentials);
+            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {});
+            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature');
+            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 'hello'});
+            dataScope.done();
         });
     });
 });

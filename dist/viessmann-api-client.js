@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const typescript_optional_1 = require("typescript-optional");
 const logger_1 = require("./logger");
 const oauth_client_1 = require("./oauth-client");
 const siren_1 = require("./parser/siren");
@@ -16,6 +17,7 @@ const scheduler_1 = require("./scheduler");
 class Client {
     constructor(config, oauth) {
         this.config = config;
+        this.features = new Map();
         this.observers = [];
         this.connectionObservers = [];
         this.connected = false;
@@ -28,9 +30,7 @@ class Client {
             this.fetchFeatures()
                 .then(features => Array.from(features.values()))
                 .then(features => features
-                .forEach((f) => f.properties
-                .forEach((p) => this.observers
-                .forEach((o) => o(f, p)))))
+                .forEach(f => this.updateObservers(f)))
                 .then(() => {
                 this.setConnected(true);
             })
@@ -67,13 +67,24 @@ class Client {
         return this.installation;
     }
     getFeatures() {
-        if (this.features === undefined) {
-            return [];
-        }
         return Array.from(this.features.values());
     }
     getFeature(name) {
-        return this.features.get(name);
+        return typescript_optional_1.default.ofNullable(this.features.get(name));
+    }
+    executeAction(featureName, actionName, payload) {
+        return __awaiter(this, void 0, void 0, function* () {
+            logger_1.log(`ViessmannClient: executing action ${featureName}/${actionName}`, 'info');
+            return this.getFeature(featureName)
+                .flatMap(feature => feature.getAction(actionName))
+                .flatMap(action => action.validated(payload))
+                .map(action => this.oauth.authenticated(action.method, action.href, payload)
+                .then((response) => logger_1.log(`ViessmannClient: action ${featureName}/${actionName} - received response ${JSON.stringify(response)}`, 'debug'))
+                .then(() => this.fetchFeature(featureName))
+                .then(fetchedFeature => fetchedFeature.ifPresent(f => this.updateObservers(f)))
+                .catch(err => logger_1.log(`ViessmannClient: failed to execute action ${featureName}/${actionName} due to ${JSON.stringify(err)}`)))
+                .orElse(null);
+        });
     }
     observeConnection(observer) {
         this.connectionObservers.push(observer);
@@ -95,6 +106,19 @@ class Client {
                 .then((response) => new siren_1.Entity(response))
                 .then((entity) => viessmann_schema_1.SirenFeature.createFeatures(entity, true))
                 .then((features) => this.features = features);
+        });
+    }
+    fetchFeature(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.oauth.authenticatedGet(this.basePath() + '/' + name)
+                .then(body => viessmann_schema_1.SirenFeature.of(new siren_1.Entity(body)));
+        });
+    }
+    updateObservers(feature) {
+        return __awaiter(this, void 0, void 0, function* () {
+            feature.properties
+                .forEach((p) => this.observers
+                .forEach((o) => o(feature, p)));
         });
     }
     basePath() {

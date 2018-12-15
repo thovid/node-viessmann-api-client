@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/thovid/node-viessmann-api-client.svg?branch=master)](https://travis-ci.org/thovid/node-viessmann-api-client) [![codecov](https://codecov.io/gh/thovid/node-viessmann-api-client/branch/master/graph/badge.svg)](https://codecov.io/gh/thovid/node-viessmann-api-client)
+[![npm version](https://badge.fury.io/js/viessmann-api-client.svg)](https://badge.fury.io/js/viessmann-api-client)
 
 # node-viessmann-api-client
 
@@ -10,6 +11,9 @@ Inspired by https://github.com/thetrueavatar and his project https://github.com/
 Note that this is a private project, so use at your own risk! It is not supported or endorsed by Viessmann!
 
 ## Changelog
+### 2.0.0 (2018/12/15)
+- added experimental implementation to execute actions
+- changed some functions to return `Optional<T>` instead of `T | null`
 ### 1.0.2 (2018/12/10) 
 - fixed a bug preventing features that contain sub-features to be recognized, for example `heating.burner`
 ### 1.0.1 (2018/12/08)
@@ -36,24 +40,33 @@ const credentials = {
     password: 'your password'
 };
 const client = await new Client(config).connect(credentials);
-const feature = client.getFeature('some.feature.name');
+const feature:Optional<Feature> = client.getFeature('heating.circuits.0.operating.programs.comfort');
 // access properties of feature:
-const propertyValue = feature.getProperty('property-name').value;
+const propertyValue:Optional<number> = feature
+    .map(f => f.getProperty('temperature'))
+    .map(p => p.value);
 ```
 
 3. subscribe to updates
 ```typescript
 let client: Client = ...;
-const observer = (feature: Feature, property: Property) => { /* do something */};
+const observer = (feature: Feature, property: Property) => { /* do something */ };
 client.observe(observer);
 ```
 
 4. monitor connection
 ```typescript
 let client: Client = ...;
-const connectionObserver = (connected: boolean) => { /* do something */};
+const connectionObserver = (connected: boolean) => { /* do something */ };
 client.observeConnection(connectionObserver);
 ```
+5. execute an action on a feature
+```typescript
+await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+```
+will execute the `setTemperature` action on the given feature using the given payload. The payload is (rudimentarily) validated against the field definition specified for this action.
+
+*Note:* Currently, only actions with basic fields (number, boolean, string) can be executed. So, setting a new schedule, for example for heating or warm water, is not possible at the moment.
 
 ## Authentication
 The Viessmann API uses OAuth2 for authentication. 

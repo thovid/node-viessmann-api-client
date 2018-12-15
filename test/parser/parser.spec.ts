@@ -1,13 +1,12 @@
 // tslint:disable:no-unused-expression
-import { expect } from 'chai';
+import {expect} from 'chai';
 import 'mocha';
 
-import { Entity } from '../../src/parser/siren';
+import {Entity} from '../../src/parser/siren';
 
 describe('parser', () => {
     describe('parsing simple response', () => {
-        const response = require('../data/testresponse.heating.boiler.sensors.temperature.main');
-        const entity = new Entity(response);
+        const entity = entityFromFile('heating.boiler.sensors.temperature.main');
 
         it('should correctly parse rel', () => {
             expect(entity.rel).to.have.length(3);
@@ -90,3 +89,35 @@ describe('entity', () => {
         expect(entity.hasClass('not me')).to.be.false;
     });
 });
+
+describe('parsing actions', () => {
+    const entity = entityFromFile('heating.circuits.0.operating.programs.comfort');
+
+    it('should parse all actions of an entity', () => {
+        expect(entity.actions).to.have.length(3);
+    });
+
+    it('should parse an action without fields', () => {
+        const action = entity.actions[1];
+        expect(action.method).to.be.equal('POST');
+        expect(action.isExecutable).to.be.true;
+        expect(action.name).to.be.equal('activate');
+        expect(action.type).to.be.equal('application/json');
+        expect(action.href).to.be.equal('https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/activate');
+        expect(action.fields).to.have.length(0);
+    });
+
+    it('should parse an action with a single field', () => {
+        const action = entity.actions[0];
+        expect(action.method).to.be.equal('POST');
+        expect(action.isExecutable).to.be.true;
+        expect(action.name).to.be.equal('setTemperature');
+        expect(action.href).to.be.equal('https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/setTemperature');
+        expect(action.type).to.be.equal('application/json');
+        expect(action.fields).to.have.length(1);
+    });
+});
+
+function entityFromFile(featureName: string): Entity {
+    return new Entity(require('../data/testresponse.' + featureName + '.json'));
+}

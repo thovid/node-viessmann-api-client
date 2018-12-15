@@ -1,73 +1,80 @@
-
 export class Link {
     constructor(link: any) {
-        if (link.rel && Array.isArray(link.rel)) {
-            this.rel = (link.rel as any[]).filter(l => 'string' === typeof l);
-        } else {
-            this.rel = [];
+        if (Array.isArray(link.rel)) {
+            this.rel = link.rel.filter(l => 'string' === typeof l);
         }
 
-        if (link.href && 'string' === typeof link.href) {
-            this.href = link.href;
-        } else {
-            this.href = undefined;
-        }
+        this.href = (link.href as string);
     }
-    public readonly rel: string[];
+    public readonly rel: string[] = [];
     public readonly href?: string;
 }
 
-export type Properties = any;
+export interface Properties {
+    [key: string]: any;
+}
+
+export class Action {
+    public readonly method: string;
+    public readonly name: string;
+    public readonly isExecutable: boolean;
+    public readonly type: string;
+    public readonly href: string;
+    public readonly fields: Field[] = [];
+    constructor(action: any) {
+        this.method = (action.method as string) || '';
+        this.isExecutable = (action.isExecutable as boolean) || false;
+        this.name = (action.name as string) || '';
+        this.type = (action.type as string) || '';
+        this.href = (action.href as string) || '';
+        this.fields = (action.fields as Field[]) || [];
+    }
+}
+
+export interface Field {
+    type: string;
+    name: string;
+    required: boolean;
+    [key: string]: any;
+}
 
 export class Entity {
 
-    public readonly rel: string[];
-    public readonly links: Link[];
-    public readonly properties: Properties;
-    public readonly entities: Entity[];
-    public readonly class: string[];
-    public readonly href?: string;
+    public readonly rel: string[] = [];
+    public readonly links: Link[] = [];
+    public readonly properties: Properties = {};
+    public readonly entities: Entity[] = [];
+    public readonly actions: Action[] = [];
+    public readonly class: string[] = [];
+    public readonly href?: string = undefined;
 
     constructor(entity: any) {
-        if (entity.rel && Array.isArray(entity.rel)) {
-            this.rel = (entity.rel as any[])
+        if (Array.isArray(entity.rel)) {
+            this.rel = entity.rel
                 .filter(r => 'string' === typeof r);
-        } else {
-            this.rel = [];
         }
-        if (entity.links && Array.isArray(entity.links)) {
-            this.links = (entity.links as any[])
+        if (Array.isArray(entity.links)) {
+            this.links = entity.links
                 .filter(l => 'object' === typeof l)
                 .map(link => new Link(link));
-        } else {
-            this.links = [];
         }
+        this.properties = (entity.properties as Properties) || {};
 
-        if (entity.properties && 'object' === typeof entity.properties) {
-            this.properties = entity.properties;
-        } else {
-            this.properties = {};
-        }
-
-        if (entity.class && Array.isArray(entity.class)) {
-            this.class = (entity.class as any[])
+        if (Array.isArray(entity.class)) {
+            this.class = entity.class
                 .filter(c => 'string' === typeof c);
-        } else {
-            this.class = [];
         }
-
-        if (entity.entities && Array.isArray(entity.entities)) {
-            this.entities = (entity.entities as any[])
+        if (Array.isArray(entity.entities)) {
+            this.entities = entity.entities
                 .filter(e => 'object' === typeof e)
                 .map(e => new Entity(e));
-        } else {
-            this.entities = [];
         }
+        this.href = entity.href as string;
 
-        if (entity.href && 'string' === typeof entity.href) {
-            this.href = entity.href;
-        } else {
-            this.href = undefined;
+        if (Array.isArray(entity.actions)) {
+            this.actions = entity.actions
+                .filter(a => 'object' === typeof a)
+                .map(a => new Action(a));
         }
     }
 

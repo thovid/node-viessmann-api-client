@@ -1,4 +1,6 @@
-import {Entity} from './siren';
+import Optional from 'typescript-optional';
+import {log} from '../logger';
+import {Action, Entity, Field} from './siren';
 
 export interface MetaInformation {
     apiVersion: number;
@@ -27,21 +29,70 @@ export class ComplexProperty implements Property {
     }
 }
 
+export class FeatureAction extends Action {
+
+    constructor(action: Action) {
+        super(action);
+    }
+
+    public validated(payload?: any): Optional<FeatureAction> {
+        if (!this.isExecutable) {
+            log(`FeatureAction[${this.name}]: not executable`, 'warn');
+            return Optional.empty();
+        }
+
+        if (payload === undefined) {
+            log(`FeatureAction[${this.name}]: no payload`, 'warn');
+            return Optional.empty();
+        }
+
+        const validationErrors: string[] = [];
+        this.fields.forEach(field => {
+            this.validateField(field, payload).ifPresent(error => validationErrors.push(error));
+        });
+        if (validationErrors.length !== 0) {
+            log(`FeatureAction[${this.name}]: validation failed: ${JSON.stringify(validationErrors)}`, 'warn');
+            return Optional.empty();
+        }
+        return Optional.of(this);
+    }
+
+    private validateField(field: Field, payload?: any): Optional<string> {
+        log(`FeatureAction[${this.name}]: validating field ${field.name}`, 'debug');
+        const value = payload[field.name];
+        if (value === undefined && field.required) {
+            return Optional.of(`Field[${field.name}]: required but not found`);
+        }
+        if (value !== undefined && field.type !== typeof value) {
+            return Optional.of(`Field[${field.name}]: required type ${field.type} but was ${typeof value}`);
+        }
+        return Optional.empty();
+    }
+}
+
 export interface Feature {
     properties: Property[];
+    actions: FeatureAction[];
     meta: MetaInformation;
-    getProperty(name: string): Property | null;
+    getProperty(name: string): Optional<Property>;
+    getAction(name: string): Optional<FeatureAction>;
 }
 
 export class SirenFeature implements Feature {
     public readonly properties: Property[];
+    public readonly actions: FeatureAction[];
+
+    public static of(entity: Entity): Optional<Feature> {
+        const meta = getMetaInformation(entity);
+        return meta.map(m => new SirenFeature(m, entity));
+    }
 
     public static createFeatures(entity: Entity, enabledOnly: boolean = true): Map<string, SirenFeature> {
         const result: Map<string, SirenFeature> = new Map();
         selectLeafFeaturesOf(entity)
             .map(e => {
                 const meta = getMetaInformation(e);
-                return meta !== null ? new SirenFeature(meta, e) : null;
+                return meta.map(m => new SirenFeature(m, e)).orElse(null);
             }).filter(f => {
                 return (f !== null && (!enabledOnly || f.meta.isEnabled));
             })
@@ -49,27 +100,35 @@ export class SirenFeature implements Feature {
         return result;
     }
 
-    constructor(public readonly meta: MetaInformation, public readonly entity: Entity) {
+    constructor(public readonly meta: MetaInformation, entity: Entity) {
         const raw = entity.properties;
         let properties = [];
         if ('object' === typeof raw) {
             properties = Object
                 .keys(raw)
                 .map(key => constructProperty(key, raw[key]))
-                .filter(p => p !== null);
+                .filter(p => p.isPresent)
+                .map(p => p.get());
         }
         this.properties = properties;
+
+        this.actions = entity.actions.map(a => new FeatureAction(a));
     }
 
-    public getProperty(name: string): Property | null {
+    public getProperty(name: string): Optional<Property> {
         const result = this.properties.find(p => name === p.name);
-        return result || null;
+        return Optional.ofNullable(result);
+    }
+
+    public getAction(name: string): Optional<FeatureAction> {
+        const result = this.actions.find(a => name === a.name);
+        return Optional.ofNullable(result);
     }
 }
 
-function getMetaInformation(entity: Entity): MetaInformation | null {
+function getMetaInformation(entity: Entity): Optional<MetaInformation> {
     if (!isFeature(entity)) {
-        return null;
+        return Optional.empty();
     }
     const result = entity.entities
         .filter(e => e.rel.indexOf('http://schema.viessmann.com/link-relations#feature-meta-information') > -1)
@@ -82,7 +141,7 @@ function getMetaInformation(entity: Entity): MetaInformation | null {
             && m.uri !== undefined
             && m.deviceId !== undefined)[0];
 
-    return result ? result : null;
+    return Optional.ofNullable(result);
 }
 
 function selectLeafFeaturesOf(entity: Entity): Entity[] {
@@ -117,20 +176,20 @@ function hasProperties(entity: Entity): boolean {
 
 const simpleTypes = ['string', 'number', 'boolean', 'array'];
 
-function constructProperty(name: string, raw: any): Property | null {
+function constructProperty(name: string, raw: any): Optional<Property> {
     if (raw === undefined || raw === null || 'object' !== typeof raw) {
-        return null;
+        return Optional.empty();
     }
     const type = raw.type;
     const value = raw.value;
     if (type === undefined || value === undefined) {
-        return null;
+        return Optional.empty();
     }
     if (simpleTypes.indexOf(type) > -1) {
-        return new SimpleProperty(name, type, value);
+        return Optional.of(new SimpleProperty(name, type, value));
     }
 
-    return new ComplexProperty(name, type, value as object);
+    return Optional.of(new ComplexProperty(name, type, value as object));
 }
 
 function flatten<P>(arr: any[], result: P[] = []): P[] {

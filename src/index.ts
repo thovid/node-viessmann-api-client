@@ -26,6 +26,7 @@ export {
     Property,
     ComplexProperty,
     SimpleProperty,
+    FeatureAction,
 } from './parser/viessmann-schema';
 
 export {

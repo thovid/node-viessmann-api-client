@@ -14,6 +14,7 @@ Array.from(features.values())
         return {
             name: f.meta.feature,
             properties: f.properties,
+            actions: f.actions,
         };
     })
     .forEach(f => console.log(JSON.stringify(f)));

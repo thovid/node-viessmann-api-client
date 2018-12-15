@@ -1,6 +1,6 @@
 {
   "name": "viessmann-api-client",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "a node js api client for the viessmann heating api",
   "keywords": [
     "nodejs",
@@ -30,7 +30,8 @@
     "@types/simple-oauth2": "^1.5.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
-    "simple-oauth2": "^1.5.0"
+    "simple-oauth2": "^1.5.0",
+    "typescript-optional": "^1.8.0"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
