@@ -276,6 +276,7 @@ describe('viessmann api client', async () => {
             const temperature = client
                 .getFeature('heating.sensors.temperature.outside')
                 .flatMap(f => f.getProperty('value'))
+                .toRight()
                 .get().value;
             return expect(temperature).to.be.equal(7.8);
         });
@@ -285,6 +286,7 @@ describe('viessmann api client', async () => {
             const temperature = client.
                 getFeature('heating.boiler.sensors.temperature.main')
                 .flatMap(f => f.getProperty('value'))
+                .toRight()
                 .get().value;
             return expect(temperature).to.be.equal(36);
         });
@@ -337,7 +339,8 @@ describe('viessmann api client', async () => {
                 .get('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort')
                 .reply(200, responseBody('heating.circuits.0.operating.programs.comfort'));
             client = await new Client(config).connect(credentials);
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'deactivate', {});
+            const result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'deactivate', {});
+            expect(result.toRight().get()).to.be.true;
             dataScope.done();
         });
 
@@ -349,7 +352,8 @@ describe('viessmann api client', async () => {
                 .get('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort')
                 .reply(200, responseBody('heating.circuits.0.operating.programs.comfort'));
             client = await new Client(config).connect(credentials);
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+            const result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+            expect(result.toRight().get()).to.be.true;
             dataScope.done();
         });
 
@@ -359,15 +363,20 @@ describe('viessmann api client', async () => {
                     {targetTemperature: 22})
                 .reply(400);
             client = await new Client(config).connect(credentials);
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+            const result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+            expect(result.toLeft().get()).to.be.equal('ERROR');
             dataScope.done();
         });
 
         it('should validate the action payload and not call action if validation failed', async () => {
             client = await new Client(config).connect(credentials);
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {});
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature');
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 'hello'});
+            let result;
+            result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {});
+            expect(result.toLeft().get()).to.be.equal('FeatureAction[setTemperature]: validation failed: ["Field[targetTemperature]: required but not found"]');
+            result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature');
+            expect(result.toLeft().get()).to.be.equal('FeatureAction[setTemperature]: no payload');
+            result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 'hello'});
+            expect(result.toLeft().get()).to.be.equal('FeatureAction[setTemperature]: validation failed: ["Field[targetTemperature]: required type number but was string"]');
             dataScope.done();
         });
     });

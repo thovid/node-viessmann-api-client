@@ -1,5 +1,7 @@
-import { OAuthClient } from './oauth-client';
-import { Client, ViessmannClientConfig } from './viessmann-api-client';
+import {OAuthClient} from './oauth-client';
+import {Client, ViessmannClientConfig} from './viessmann-api-client';
+
+export {Either} from './lib/either';
 
 export {
     Client,

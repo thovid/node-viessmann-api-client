@@ -1,4 +1,5 @@
 import Optional from 'typescript-optional';
+import {Either, leftPromiseTransformer} from './lib/either';
 
 import {log, LoggerFunction, setCustomLogger} from './logger';
 import {Credentials, OAuthClient, ViessmannOAuthConfig} from './oauth-client';
@@ -89,21 +90,28 @@ export class Client {
         return Array.from(this.features.values());
     }
 
-    public getFeature(name: string): Optional<Feature> {
-        return Optional.ofNullable(this.features.get(name));
+    public getFeature(name: string): Either<string, Feature> {
+        const result = this.features.get(name);
+        if (result) {
+            return Either.right(result);
+        }
+        return Either.left(`Feature [${name}] not found`);
     }
 
-    public async executeAction(featureName: string, actionName: string, payload?: any): Promise<void> {
+    public async executeAction(featureName: string, actionName: string, payload?: any): Promise<Either<string, boolean>> {
         log(`ViessmannClient: executing action ${featureName}/${actionName}`, 'info');
         return this.getFeature(featureName)
             .flatMap(feature => feature.getAction(actionName))
             .flatMap(action => action.validated(payload))
-            .map(action => this.oauth.authenticated(action.method, action.href, payload)
+            .flatMap(action => this.oauth.authenticated(action.method, action.href, payload)
                 .then((response) => log(`ViessmannClient: action ${featureName}/${actionName} - received response ${JSON.stringify(response)}`, 'debug'))
                 .then(() => this.fetchFeature(featureName))
                 .then(fetchedFeature => fetchedFeature.ifPresent(f => this.updateObservers(f)))
-                .catch(err => log(`ViessmannClient: failed to execute action ${featureName}/${actionName} due to ${JSON.stringify(err)}`)))
-            .orElse(null);
+                .then(() => Either.right<string, boolean>(true))
+                .catch(err => {
+                    log(`ViessmannClient: failed to execute action ${featureName}/${actionName} due to ${JSON.stringify(err)}`);
+                    return Either.left<string, boolean>('ERROR');
+                }), leftPromiseTransformer());
     }
 
     public observeConnection(observer: ConnectionObserver): void {

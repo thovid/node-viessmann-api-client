@@ -1,4 +1,4 @@
-import Optional from 'typescript-optional';
+import { Either } from './lib/either';
 import { LoggerFunction } from './logger';
 import { Credentials, OAuthClient, ViessmannOAuthConfig } from './oauth-client';
 import { Feature, Property } from './parser/viessmann-schema';
@@ -33,7 +33,7 @@ export declare class Client {
     isConnected(): boolean;
     getInstallation(): ViessmannInstallation;
     getFeatures(): Feature[];
-    getFeature(name: string): Optional<Feature>;
+    getFeature(name: string): Either<string, Feature>;
     executeAction(featureName: string, actionName: string, payload?: any): Promise<void>;
     observeConnection(observer: ConnectionObserver): void;
     observe(observer: FeatureObserver): void;

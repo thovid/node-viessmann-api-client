@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const typescript_optional_1 = require("typescript-optional");
+const either_1 = require("../lib/either");
 const logger_1 = require("../logger");
 const siren_1 = require("./siren");
 class SimpleProperty {
@@ -26,22 +27,25 @@ class FeatureAction extends siren_1.Action {
     }
     validated(payload) {
         if (!this.isExecutable) {
-            logger_1.log(`FeatureAction[${this.name}]: not executable`, 'warn');
-            return typescript_optional_1.default.empty();
+            const msg = `FeatureAction[${this.name}]: not executable`;
+            logger_1.log(msg, 'warn');
+            return either_1.Either.left(msg);
         }
         if (payload === undefined) {
-            logger_1.log(`FeatureAction[${this.name}]: no payload`, 'warn');
-            return typescript_optional_1.default.empty();
+            const msg = `FeatureAction[${this.name}]: no payload`;
+            logger_1.log(msg, 'warn');
+            return either_1.Either.left(msg);
         }
         const validationErrors = [];
         this.fields.forEach(field => {
             this.validateField(field, payload).ifPresent(error => validationErrors.push(error));
         });
         if (validationErrors.length !== 0) {
-            logger_1.log(`FeatureAction[${this.name}]: validation failed: ${JSON.stringify(validationErrors)}`, 'warn');
-            return typescript_optional_1.default.empty();
+            const msg = `FeatureAction[${this.name}]: validation failed: ${JSON.stringify(validationErrors)}`;
+            logger_1.log(msg, 'warn');
+            return either_1.Either.left(msg);
         }
-        return typescript_optional_1.default.of(this);
+        return either_1.Either.right(this);
     }
     validateField(field, payload) {
         logger_1.log(`FeatureAction[${this.name}]: validating field ${field.name}`, 'debug');
@@ -89,11 +93,17 @@ class SirenFeature {
     }
     getProperty(name) {
         const result = this.properties.find(p => name === p.name);
-        return typescript_optional_1.default.ofNullable(result);
+        if (result) {
+            return either_1.Either.right(result);
+        }
+        return either_1.Either.left(`Property [${name}] does not exist in Feature[${this.meta.feature}]`);
     }
     getAction(name) {
         const result = this.actions.find(a => name === a.name);
-        return typescript_optional_1.default.ofNullable(result);
+        if (result) {
+            return either_1.Either.right(result);
+        }
+        return either_1.Either.left(`Action [${name}] does not exist in Feature [${this.meta.feature}]`);
     }
 }
 exports.SirenFeature = SirenFeature;
