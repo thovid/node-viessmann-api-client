@@ -1,4 +1,5 @@
 import { Client, ViessmannClientConfig } from './viessmann-api-client';
+export { Either, leftPromiseTransformer, LeftTransformer } from './lib/either';
 export { Client, ViessmannClientConfig, ViessmannAPIURLs, ViessmannInstallation, FeatureObserver, ConnectionObserver, } from './viessmann-api-client';
 export { ViessmannOAuthConfig, UserCredentials, TokenCredentials, Credentials, OnRefresh, AuthenticationFailed, RequestFailed, } from './oauth-client';
 export { Feature, MetaInformation, Property, ComplexProperty, SimpleProperty, FeatureAction, } from './parser/viessmann-schema';

@@ -110,7 +110,7 @@ export class Client {
                 .then(() => Either.right<string, boolean>(true))
                 .catch(err => {
                     log(`ViessmannClient: failed to execute action ${featureName}/${actionName} due to ${JSON.stringify(err)}`);
-                    return Either.left<string, boolean>('ERROR');
+                    return Either.left<string, boolean>(`FeatureAction[${featureName}/${actionName}]: error executing action`);
                 }), leftPromiseTransformer());
     }
 

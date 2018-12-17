@@ -24,6 +24,22 @@ function either(l, r) {
     }
 }
 exports.either = either;
+function leftUnitTransformer() {
+    return {
+        left: (x) => {
+            return Either.left(x);
+        },
+    };
+}
+exports.leftUnitTransformer = leftUnitTransformer;
+function leftPromiseTransformer() {
+    return {
+        left: (x) => {
+            return Promise.resolve(Either.left(x));
+        },
+    };
+}
+exports.leftPromiseTransformer = leftPromiseTransformer;
 /**
  * @name Either
  * @class Either has exactly two sub types, Left (L) and Right (R). If an
@@ -49,15 +65,22 @@ class Either {
         return this.caseOf({ left: () => true, right: () => false });
     }
     isRight() {
-        return this.caseOf({ left: () => false, right: () => true });
+        return !this.isLeft();
     }
     unit(t) {
         return Either.right(t);
     }
-    flatMap(f) {
-        return this.type === EitherType.Right ?
-            f(this.r) :
-            Either.left(this.l);
+    flatMap(f, transf) {
+        if (transf === undefined) {
+            const g = f;
+            return this.flatMap(g, leftUnitTransformer());
+        }
+        if (this.type === EitherType.Right) {
+            return f(this.r);
+        }
+        else {
+            return transf.left(this.l);
+        }
     }
     map(f) {
         return this.flatMap(v => this.unit(f(v)));
@@ -66,11 +89,6 @@ class Either {
         return this.type === EitherType.Right ?
             pattern.right(this.r) :
             pattern.left(this.l);
-    }
-    equals(other) {
-        return other.type === this.type &&
-            ((this.type === EitherType.Left && eq(other.l, this.l)) ||
-                (this.type === EitherType.Right && eq(other.r, this.r)));
     }
     toRight() {
         if (this.isRight()) {
@@ -86,22 +104,4 @@ class Either {
     }
 }
 exports.Either = Either;
-function eq(a, b) {
-    let idx = 0;
-    if (a === b) {
-        return true;
-    }
-    if (typeof a.equals === 'function') {
-        return a.equals(b);
-    }
-    if (a.length > 0 && a.length === b.length) {
-        for (; idx < a.length; idx += 1) {
-            if (!eq(a[idx], b[idx])) {
-                return false;
-            }
-        }
-        return true;
-    }
-    return false;
-}
 //# sourceMappingURL=either.js.map

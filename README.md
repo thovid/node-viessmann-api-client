@@ -11,6 +11,8 @@ Inspired by https://github.com/thetrueavatar and his project https://github.com/
 Note that this is a private project, so use at your own risk! It is not supported or endorsed by Viessmann!
 
 ## Changelog
+### 2.1.0 (2018/12/17)
+- execution of actions returns `Either<string, boolean>`, with `left` containing an error message in case of errors, and `right` containing `true` for a sucessful execution
 ### 2.0.0 (2018/12/15)
 - added experimental implementation to execute actions
 - changed some functions to return `Optional<T>` instead of `T | null`
@@ -43,8 +45,9 @@ const client = await new Client(config).connect(credentials);
 const feature:Optional<Feature> = client.getFeature('heating.circuits.0.operating.programs.comfort');
 // access properties of feature:
 const propertyValue:Optional<number> = feature
-    .map(f => f.getProperty('temperature'))
-    .map(p => p.value);
+    .flatMap(f => f.getProperty('temperature'))
+    .flatMap(p => p.value)
+    .toRight();
 ```
 
 3. subscribe to updates
@@ -62,7 +65,11 @@ client.observeConnection(connectionObserver);
 ```
 5. execute an action on a feature
 ```typescript
-await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+const result: Either<string, boolean> = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+result.caseOf({
+    left: error:string => /* log error */,
+    right: ok:boolean => /* success */,
+});
 ```
 will execute the `setTemperature` action on the given feature using the given payload. The payload is (rudimentarily) validated against the field definition specified for this action.
 

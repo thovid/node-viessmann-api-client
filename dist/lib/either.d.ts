@@ -7,8 +7,12 @@ export interface EitherPatterns<L, R, T> {
     left: (l: L) => T;
     right: (r: R) => T;
 }
-export declare type OptionalEitherPatterns<L, R, T> = Partial<EitherPatterns<L, R, T>>;
 export declare function either<L, R>(l?: L, r?: R): Either<L, R>;
+export interface LeftTransformer<L, N> {
+    left(x: L): N;
+}
+export declare function leftUnitTransformer<L, T>(): LeftTransformer<L, Either<L, T>>;
+export declare function leftPromiseTransformer<L, T>(): LeftTransformer<L, Promise<Either<L, T>>>;
 /**
  * @name Either
  * @class Either has exactly two sub types, Left (L) and Right (R). If an
@@ -28,10 +32,10 @@ export declare class Either<L, R> {
     isRight(): boolean;
     unit<T>(t: T): Either<L, T>;
     flatMap<T>(f: (r: R) => Either<L, T>): Either<L, T>;
+    flatMap<N>(f: (r: R) => N, transf: LeftTransformer<L, N>): N;
     of: <T>(t: T) => Either<L, T>;
     map<T>(f: (r: R) => T): Either<L, T>;
     caseOf<T>(pattern: EitherPatterns<L, R, T>): T;
-    equals(other: Either<L, R>): boolean;
     toRight(): Optional<R>;
     toLeft(): Optional<L>;
 }

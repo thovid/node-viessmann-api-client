@@ -1,7 +1,7 @@
 import {OAuthClient} from './oauth-client';
 import {Client, ViessmannClientConfig} from './viessmann-api-client';
 
-export {Either} from './lib/either';
+export {Either, leftPromiseTransformer, LeftTransformer} from './lib/either';
 
 export {
     Client,

@@ -364,7 +364,7 @@ describe('viessmann api client', async () => {
                 .reply(400);
             client = await new Client(config).connect(credentials);
             const result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
-            expect(result.toLeft().get()).to.be.equal('ERROR');
+            expect(result.toLeft().get()).to.be.equal('FeatureAction[heating.circuits.0.operating.programs.comfort/setTemperature]: error executing action');
             dataScope.done();
         });
 

@@ -34,7 +34,7 @@ export declare class Client {
     getInstallation(): ViessmannInstallation;
     getFeatures(): Feature[];
     getFeature(name: string): Either<string, Feature>;
-    executeAction(featureName: string, actionName: string, payload?: any): Promise<void>;
+    executeAction(featureName: string, actionName: string, payload?: any): Promise<Either<string, boolean>>;
     observeConnection(observer: ConnectionObserver): void;
     observe(observer: FeatureObserver): void;
     clearObservers(): void;

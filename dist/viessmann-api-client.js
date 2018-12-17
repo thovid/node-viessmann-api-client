@@ -82,13 +82,15 @@ class Client {
             return this.getFeature(featureName)
                 .flatMap(feature => feature.getAction(actionName))
                 .flatMap(action => action.validated(payload))
-                .map(action => this.oauth.authenticated(action.method, action.href, payload)
+                .flatMap(action => this.oauth.authenticated(action.method, action.href, payload)
                 .then((response) => logger_1.log(`ViessmannClient: action ${featureName}/${actionName} - received response ${JSON.stringify(response)}`, 'debug'))
                 .then(() => this.fetchFeature(featureName))
                 .then(fetchedFeature => fetchedFeature.ifPresent(f => this.updateObservers(f)))
-                .catch(err => logger_1.log(`ViessmannClient: failed to execute action ${featureName}/${actionName} due to ${JSON.stringify(err)}`)))
-                .toRight()
-                .orElse(null);
+                .then(() => either_1.Either.right(true))
+                .catch(err => {
+                logger_1.log(`ViessmannClient: failed to execute action ${featureName}/${actionName} due to ${JSON.stringify(err)}`);
+                return either_1.Either.left(`FeatureAction[${featureName}/${actionName}]: error executing action`);
+            }), either_1.leftPromiseTransformer());
         });
     }
     observeConnection(observer) {
