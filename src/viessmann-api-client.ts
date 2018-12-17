@@ -112,6 +112,7 @@ export class Client {
                     log(`ViessmannClient: failed to execute action ${featureName}/${actionName} due to ${JSON.stringify(err)}`);
                     return Either.left<string, boolean>(`FeatureAction[${featureName}/${actionName}]: error executing action`);
                 }), leftPromiseTransformer());
+
     }
 
     public observeConnection(observer: ConnectionObserver): void {
