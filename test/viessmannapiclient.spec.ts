@@ -276,6 +276,7 @@ describe('viessmann api client', async () => {
             const temperature = client
                 .getFeature('heating.sensors.temperature.outside')
                 .flatMap(f => f.getProperty('value'))
+                .toRight()
                 .get().value;
             return expect(temperature).to.be.equal(7.8);
         });
@@ -285,8 +286,31 @@ describe('viessmann api client', async () => {
             const temperature = client.
                 getFeature('heating.boiler.sensors.temperature.main')
                 .flatMap(f => f.getProperty('value'))
+                .toRight()
                 .get().value;
             return expect(temperature).to.be.equal(36);
+        });
+
+        it('should report feature not found when requesting unknown feature', async () => {
+            client = await new Client(config).connect(credentials);
+            const featureOrError = client.getFeature('unknown.feature');
+            expect(featureOrError.isLeft()).to.be.true;
+        });
+
+        it('should report property not found for unknown property', async () => {
+            client = await new Client(config).connect(credentials);
+            const propertyOrError = client.
+                getFeature('heating.boiler.sensors.temperature.main')
+                .flatMap(f => f.getProperty('unknown'));
+            expect(propertyOrError.isLeft()).to.be.true;
+        });
+
+        it('should report action not found for unknown action', async () => {
+            client = await new Client(config).connect(credentials);
+            const actionOrError = client.
+                getFeature('heating.boiler.sensors.temperature.main')
+                .flatMap(f => f.getAction('unknown'));
+            expect(actionOrError.isLeft()).to.be.true;
         });
 
         it('should observe feature properties', async () => {
@@ -337,7 +361,8 @@ describe('viessmann api client', async () => {
                 .get('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort')
                 .reply(200, responseBody('heating.circuits.0.operating.programs.comfort'));
             client = await new Client(config).connect(credentials);
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'deactivate', {});
+            const result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'deactivate', {});
+            expect(result.toRight().get()).to.be.true;
             dataScope.done();
         });
 
@@ -349,7 +374,8 @@ describe('viessmann api client', async () => {
                 .get('/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort')
                 .reply(200, responseBody('heating.circuits.0.operating.programs.comfort'));
             client = await new Client(config).connect(credentials);
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+            const result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+            expect(result.toRight().get()).to.be.true;
             dataScope.done();
         });
 
@@ -359,15 +385,20 @@ describe('viessmann api client', async () => {
                     {targetTemperature: 22})
                 .reply(400);
             client = await new Client(config).connect(credentials);
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+            const result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 22});
+            expect(result.toLeft().get()).to.be.equal('FeatureAction[heating.circuits.0.operating.programs.comfort/setTemperature]: error executing action');
             dataScope.done();
         });
 
         it('should validate the action payload and not call action if validation failed', async () => {
             client = await new Client(config).connect(credentials);
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {});
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature');
-            await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 'hello'});
+            let result;
+            result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {});
+            expect(result.toLeft().get()).to.be.equal('FeatureAction[setTemperature]: validation failed: ["Field[targetTemperature]: required but not found"]');
+            result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature');
+            expect(result.toLeft().get()).to.be.equal('FeatureAction[setTemperature]: no payload');
+            result = await client.executeAction('heating.circuits.0.operating.programs.comfort', 'setTemperature', {targetTemperature: 'hello'});
+            expect(result.toLeft().get()).to.be.equal('FeatureAction[setTemperature]: validation failed: ["Field[targetTemperature]: required type number but was string"]');
             dataScope.done();
         });
     });

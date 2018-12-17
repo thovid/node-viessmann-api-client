@@ -2,6 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const oauth_client_1 = require("./oauth-client");
 const viessmann_api_client_1 = require("./viessmann-api-client");
+var either_1 = require("./lib/either");
+exports.Either = either_1.Either;
+exports.leftPromiseTransformer = either_1.leftPromiseTransformer;
 var viessmann_api_client_2 = require("./viessmann-api-client");
 exports.Client = viessmann_api_client_2.Client;
 var oauth_client_2 = require("./oauth-client");

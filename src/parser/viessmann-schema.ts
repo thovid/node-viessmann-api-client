@@ -1,4 +1,5 @@
 import Optional from 'typescript-optional';
+import {Either} from '../lib/either';
 import {log} from '../logger';
 import {Action, Entity, Field} from './siren';
 
@@ -35,15 +36,17 @@ export class FeatureAction extends Action {
         super(action);
     }
 
-    public validated(payload?: any): Optional<FeatureAction> {
+    public validated(payload?: any): Either<string, FeatureAction> {
         if (!this.isExecutable) {
-            log(`FeatureAction[${this.name}]: not executable`, 'warn');
-            return Optional.empty();
+            const msg = `FeatureAction[${this.name}]: not executable`;
+            log(msg, 'warn');
+            return Either.left(msg);
         }
 
         if (payload === undefined) {
-            log(`FeatureAction[${this.name}]: no payload`, 'warn');
-            return Optional.empty();
+            const msg = `FeatureAction[${this.name}]: no payload`;
+            log(msg, 'warn');
+            return Either.left(msg);
         }
 
         const validationErrors: string[] = [];
@@ -51,10 +54,11 @@ export class FeatureAction extends Action {
             this.validateField(field, payload).ifPresent(error => validationErrors.push(error));
         });
         if (validationErrors.length !== 0) {
-            log(`FeatureAction[${this.name}]: validation failed: ${JSON.stringify(validationErrors)}`, 'warn');
-            return Optional.empty();
+            const msg = `FeatureAction[${this.name}]: validation failed: ${JSON.stringify(validationErrors)}`;
+            log(msg, 'warn');
+            return Either.left(msg);
         }
-        return Optional.of(this);
+        return Either.right(this);
     }
 
     private validateField(field: Field, payload?: any): Optional<string> {
@@ -74,8 +78,8 @@ export interface Feature {
     properties: Property[];
     actions: FeatureAction[];
     meta: MetaInformation;
-    getProperty(name: string): Optional<Property>;
-    getAction(name: string): Optional<FeatureAction>;
+    getProperty(name: string): Either<string, Property>;
+    getAction(name: string): Either<string, FeatureAction>;
 }
 
 export class SirenFeature implements Feature {
@@ -115,14 +119,20 @@ export class SirenFeature implements Feature {
         this.actions = entity.actions.map(a => new FeatureAction(a));
     }
 
-    public getProperty(name: string): Optional<Property> {
+    public getProperty(name: string): Either<string, Property> {
         const result = this.properties.find(p => name === p.name);
-        return Optional.ofNullable(result);
+        if (result) {
+            return Either.right(result);
+        }
+        return Either.left(`Property [${name}] does not exist in Feature[${this.meta.feature}]`);
     }
 
-    public getAction(name: string): Optional<FeatureAction> {
+    public getAction(name: string): Either<string, FeatureAction> {
         const result = this.actions.find(a => name === a.name);
-        return Optional.ofNullable(result);
+        if (result) {
+            return Either.right(result);
+        }
+        return Either.left(`Action [${name}] does not exist in Feature [${this.meta.feature}]`);
     }
 }
 
@@ -146,7 +156,7 @@ function getMetaInformation(entity: Entity): Optional<MetaInformation> {
 
 function selectLeafFeaturesOf(entity: Entity): Entity[] {
     const grandChildren = entity.entities.map(e => selectLeafFeaturesOf(e));
-    const leafs = flatten(grandChildren, []);
+    const leafs = flatten<Entity>(grandChildren);
     if (isFeatureWithProperties(entity)) {
         leafs.push(entity);
     }

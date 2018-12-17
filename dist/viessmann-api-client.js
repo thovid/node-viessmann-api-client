@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const typescript_optional_1 = require("typescript-optional");
+const either_1 = require("./lib/either");
 const logger_1 = require("./logger");
 const oauth_client_1 = require("./oauth-client");
 const siren_1 = require("./parser/siren");
@@ -70,7 +70,11 @@ class Client {
         return Array.from(this.features.values());
     }
     getFeature(name) {
-        return typescript_optional_1.default.ofNullable(this.features.get(name));
+        const result = this.features.get(name);
+        if (result) {
+            return either_1.Either.right(result);
+        }
+        return either_1.Either.left(`Feature [${name}] not found`);
     }
     executeAction(featureName, actionName, payload) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -78,12 +82,15 @@ class Client {
             return this.getFeature(featureName)
                 .flatMap(feature => feature.getAction(actionName))
                 .flatMap(action => action.validated(payload))
-                .map(action => this.oauth.authenticated(action.method, action.href, payload)
+                .flatMap(action => this.oauth.authenticated(action.method, action.href, payload)
                 .then((response) => logger_1.log(`ViessmannClient: action ${featureName}/${actionName} - received response ${JSON.stringify(response)}`, 'debug'))
                 .then(() => this.fetchFeature(featureName))
                 .then(fetchedFeature => fetchedFeature.ifPresent(f => this.updateObservers(f)))
-                .catch(err => logger_1.log(`ViessmannClient: failed to execute action ${featureName}/${actionName} due to ${JSON.stringify(err)}`)))
-                .orElse(null);
+                .then(() => either_1.Either.right(true))
+                .catch(err => {
+                logger_1.log(`ViessmannClient: failed to execute action ${featureName}/${actionName} due to ${JSON.stringify(err)}`);
+                return either_1.Either.left(`FeatureAction[${featureName}/${actionName}]: error executing action`);
+            }), either_1.leftPromiseTransformer());
         });
     }
     observeConnection(observer) {

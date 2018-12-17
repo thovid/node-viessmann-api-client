@@ -1,4 +1,5 @@
 import Optional from 'typescript-optional';
+import { Either } from '../lib/either';
 import { Action, Entity } from './siren';
 export interface MetaInformation {
     apiVersion: number;
@@ -29,15 +30,15 @@ export declare class ComplexProperty implements Property {
 }
 export declare class FeatureAction extends Action {
     constructor(action: Action);
-    validated(payload?: any): Optional<FeatureAction>;
+    validated(payload?: any): Either<string, FeatureAction>;
     private validateField;
 }
 export interface Feature {
     properties: Property[];
     actions: FeatureAction[];
     meta: MetaInformation;
-    getProperty(name: string): Optional<Property>;
-    getAction(name: string): Optional<FeatureAction>;
+    getProperty(name: string): Either<string, Property>;
+    getAction(name: string): Either<string, FeatureAction>;
 }
 export declare class SirenFeature implements Feature {
     readonly meta: MetaInformation;
@@ -46,6 +47,6 @@ export declare class SirenFeature implements Feature {
     static of(entity: Entity): Optional<Feature>;
     static createFeatures(entity: Entity, enabledOnly?: boolean): Map<string, SirenFeature>;
     constructor(meta: MetaInformation, entity: Entity);
-    getProperty(name: string): Optional<Property>;
-    getAction(name: string): Optional<FeatureAction>;
+    getProperty(name: string): Either<string, Property>;
+    getAction(name: string): Either<string, FeatureAction>;
 }
