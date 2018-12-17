@@ -156,7 +156,7 @@ function getMetaInformation(entity: Entity): Optional<MetaInformation> {
 
 function selectLeafFeaturesOf(entity: Entity): Entity[] {
     const grandChildren = entity.entities.map(e => selectLeafFeaturesOf(e));
-    const leafs = flatten(grandChildren, []);
+    const leafs = flatten<Entity>(grandChildren);
     if (isFeatureWithProperties(entity)) {
         leafs.push(entity);
     }

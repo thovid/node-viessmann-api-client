@@ -291,6 +291,28 @@ describe('viessmann api client', async () => {
             return expect(temperature).to.be.equal(36);
         });
 
+        it('should report feature not found when requesting unknown feature', async () => {
+            client = await new Client(config).connect(credentials);
+            const featureOrError = client.getFeature('unknown.feature');
+            expect(featureOrError.isLeft()).to.be.true;
+        });
+
+        it('should report property not found for unknown property', async () => {
+            client = await new Client(config).connect(credentials);
+            const propertyOrError = client.
+                getFeature('heating.boiler.sensors.temperature.main')
+                .flatMap(f => f.getProperty('unknown'));
+            expect(propertyOrError.isLeft()).to.be.true;
+        });
+
+        it('should report action not found for unknown action', async () => {
+            client = await new Client(config).connect(credentials);
+            const actionOrError = client.
+                getFeature('heating.boiler.sensors.temperature.main')
+                .flatMap(f => f.getAction('unknown'));
+            expect(actionOrError.isLeft()).to.be.true;
+        });
+
         it('should observe feature properties', async () => {
             dataScope
                 .get(featuresPath())
