@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const typescript_optional_1 = require("typescript-optional");
 const either_1 = require("../lib/either");
+const number_utils_1 = require("../lib/number-utils");
 const logger_1 = require("../logger");
 const siren_1 = require("./siren");
 class SimpleProperty {
@@ -55,6 +56,23 @@ class FeatureAction extends siren_1.Action {
         }
         if (value !== undefined && field.type !== typeof value) {
             return typescript_optional_1.default.of(`Field[${field.name}]: required type ${field.type} but was ${typeof value}`);
+        }
+        if (field.type === 'number') {
+            const val = value;
+            if (field.min !== undefined && val < field.min) {
+                return typescript_optional_1.default.of(`Field[${field.name}]: value ${value} must not be smaller than ${field.min}`);
+            }
+            if (field.max !== undefined && val > field.max) {
+                return typescript_optional_1.default.of(`Field[${field.name}]: value ${value} must not be greater than ${field.min}`);
+            }
+            if (field.stepping !== undefined && !number_utils_1.NumberUtils.isStepping(field.min, val, field.stepping)) {
+                return typescript_optional_1.default.of(`Field[${field.name}]: value ${value} must match the stepping ${field.stepping}`);
+            }
+        }
+        if (field.type === 'string' && field.enum !== undefined && Array.isArray(field.enum)) {
+            if (field.enum.indexOf(value) < 0) {
+                return typescript_optional_1.default.of(`Field[${field.name}]: value ${value} must be one of ${JSON.stringify(field.enum)}`);
+            }
         }
         return typescript_optional_1.default.empty();
     }

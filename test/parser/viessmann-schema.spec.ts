@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import * as chai from 'chai';
 import 'mocha';
-import {Entity} from '../../src/parser/siren';
+import {Entity, Field} from '../../src/parser/siren';
 import * as viessmann from '../../src/parser/viessmann-schema';
 
 // tslint:disable-next-line:no-var-requires
@@ -127,9 +127,83 @@ describe('schema', () => {
             });
         });
     });
+
+    describe('validating action payloads', async () => {
+        it('should validate required field', async () => {
+            const action = actionWithField({
+                name: 'targetTemperature',
+                required: true,
+                type: 'number',
+            });
+
+            expect(action.validated({targetTemperature: 10}).toRight().isPresent).to.be.true;
+            expect(action.validated({someProp: 10}).toRight().isPresent).to.be.false;
+        });
+
+        it('should validate simple type', async () => {
+            const action = actionWithField({
+                name: 'targetTemperature',
+                required: true,
+                type: 'number',
+            });
+
+            expect(action.validated({targetTemperature: '10'}).toRight().isPresent).to.be.false;
+        });
+
+        it('should validate special number constraints', async () => {
+            const action = actionWithField({
+                name: 'targetTemperature',
+                required: true,
+                type: 'number',
+                min: 4.1,
+                max: 37,
+                stepping: 0.1,
+            });
+
+            expect(action.validated({targetTemperature: 4}).toRight().isPresent, '4 less than min').to.be.false;
+            expect(action.validated({targetTemperature: 38}).toRight().isPresent, '38 greater then max').to.be.false;
+            expect(action.validated({targetTemperature: 20.05}).toRight().isPresent, '20.05 not matching stepping').to.be.false;
+
+            expect(action.validated({targetTemperature: 4.1}).toRight().isPresent, '4.1 equals min').to.be.true;
+            expect(action.validated({targetTemperature: 4.7}).toRight().isPresent, '4.7 matches stepping').to.be.true;
+            expect(action.validated({targetTemperature: 36.9}).toRight().isPresent, '46.9 matches stepping').to.be.true;
+            expect(action.validated({targetTemperature: 37}).toRight().isPresent, '37 equals max').to.be.true;
+        });
+
+        it('should validate special string constraints', async () => {
+            const action = actionWithField({
+                name: 'mode',
+                required: true,
+                type: 'string',
+                enum: [
+                    'standby',
+                    'dhw',
+                    'dhwAndHeating',
+                    'forcedReduced',
+                    'forcedNormal',
+                ],
+            });
+
+            expect(action.validated({mode: 'standby'}).toRight().isPresent, 'standby is valid enum value').to.be.true;
+            expect(action.validated({mode: 'something'}).toRight().isPresent, 'something is not valid enum value').to.be.false;
+        });
+    });
 });
 
 const defaultMetaInformation = null;
+
+function actionWithField(field: Field): viessmann.FeatureAction {
+    return new viessmann.FeatureAction({
+        method: 'POST',
+        isExecutable: true,
+        href: 'someref/setTemperature',
+        name: 'setTemperature',
+        fields: [
+            field,
+        ],
+        type: 'application/json',
+    });
+}
 
 function getMetaInformationOf(entity: Entity): viessmann.MetaInformation {
     const features = viessmann.SirenFeature.createFeatures(entity);

@@ -9,12 +9,13 @@ const parsed = new Entity(allFeatures);
 const features = helper.SirenFeature.createFeatures(parsed, true);
 console.log(`found ${features.size} active features:`);
 
-Array.from(features.values())
+const results = Array.from(features.values())
     .map(f => {
         return {
             name: f.meta.feature,
-            properties: f.properties,
+            // properties: f.properties,
             actions: f.actions,
         };
-    })
-    .forEach(f => console.log(JSON.stringify(f)));
+    }).filter(f => f.actions.length > 0);
+    console.log(JSON.stringify(results));
+    // .forEach(f => console.log(JSON.stringify(f)));

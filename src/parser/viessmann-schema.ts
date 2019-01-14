@@ -1,5 +1,6 @@
 import Optional from 'typescript-optional';
 import {Either} from '../lib/either';
+import {NumberUtils} from '../lib/number-utils';
 import {log} from '../logger';
 import {Action, Entity, Field} from './siren';
 
@@ -70,6 +71,26 @@ export class FeatureAction extends Action {
         if (value !== undefined && field.type !== typeof value) {
             return Optional.of(`Field[${field.name}]: required type ${field.type} but was ${typeof value}`);
         }
+
+        if (field.type === 'number') {
+            const val = value as number;
+            if (field.min !== undefined && val < field.min) {
+                return Optional.of(`Field[${field.name}]: value ${value} must not be smaller than ${field.min}`);
+            }
+            if (field.max !== undefined && val > field.max) {
+                return Optional.of(`Field[${field.name}]: value ${value} must not be greater than ${field.min}`);
+            }
+            if (field.stepping !== undefined && !NumberUtils.isStepping(field.min, val, field.stepping)) {
+                return Optional.of(`Field[${field.name}]: value ${value} must match the stepping ${field.stepping}`);
+            }
+        }
+
+        if (field.type === 'string' && field.enum !== undefined && Array.isArray(field.enum)) {
+            if (field.enum.indexOf(value) < 0) {
+                return Optional.of(`Field[${field.name}]: value ${value} must be one of ${JSON.stringify(field.enum)}`);
+            }
+        }
+
         return Optional.empty();
     }
 }
