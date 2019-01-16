@@ -187,6 +187,187 @@ describe('schema', () => {
             expect(action.validated({mode: 'standby'}).toRight().isPresent, 'standby is valid enum value').to.be.true;
             expect(action.validated({mode: 'something'}).toRight().isPresent, 'something is not valid enum value').to.be.false;
         });
+
+        describe('validating complex type Schedule', async () => {
+            it('should accept a complete schedule', async () => {
+                const action = actionWithField(scheduleField()).validated({newSchedule: complexSchedule()});
+                const msg = action.toLeft().orElse('');
+                expect(action.toRight().isPresent, msg).to.be.true;
+            });
+
+            it('should not allow wrong day name', async () => {
+                const action = actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        xyz: [{
+                            start: '05:30',
+                            end: '22:00',
+                            mode: 'on',
+                            position: 0,
+                        }],
+                    },
+                });
+                expect(action.toLeft().isPresent).to.be.true;
+            });
+
+            it('should not allow wrong day type', async () => {
+                const action = actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        mon: { // note: not array
+                            start: '05:30',
+                            end: '22:00',
+                            mode: 'on',
+                            position: 0,
+                        },
+                    },
+                });
+                expect(action.toLeft().isPresent).to.be.true;
+            });
+
+            it('should not allow wrong day schedule element', async () => {
+                expect(actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        mon: [{
+                            // start: '05:30',
+                            end: '22:00',
+                            mode: 'on',
+                            position: 0,
+                        }],
+                    },
+                }).toLeft().isPresent).to.be.true;
+                expect(actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        mon: [{
+                            start: '05:30',
+                            // end: '22:00',
+                            mode: 'on',
+                            position: 0,
+                        }],
+                    },
+                }).toLeft().isPresent).to.be.true;
+                expect(actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        mon: [{
+                            start: '05:30',
+                            end: '22:00',
+                            // mode: 'on',
+                            position: 0,
+                        }],
+                    },
+                }).toLeft().isPresent).to.be.true;
+                expect(actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        mon: [{
+                            start: '05:30',
+                            end: '22:00',
+                            mode: 'on',
+                            // position: 0,
+                        }],
+                    },
+                }).toLeft().isPresent).to.be.true;
+            });
+
+            it('should not allow wrong time for start and end', async () => {
+                expect(actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        mon: [{
+                            start: '05',
+                            end: '22:00',
+                            mode: 'on',
+                            position: 0,
+                        }],
+                    },
+                }).toLeft().isPresent, 'start not hh:mm but 05').to.be.true;
+                expect(actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        mon: [{
+                            start: '05:00',
+                            end: '22:xx',
+                            mode: 'on',
+                            position: 0,
+                        }],
+                    },
+                }).toLeft().isPresent, 'end not hh:mm but 22:xx').to.be.true;
+                expect(actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        mon: [{
+                            start: '05:61',
+                            end: '22:00',
+                            mode: 'on',
+                            position: 0,
+                        }],
+                    },
+                }).toLeft().isPresent, 'start not hh:mm but 05:61').to.be.true;
+                expect(actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        mon: [{
+                            start: '05:00',
+                            end: '25:00',
+                            mode: 'on',
+                            position: 0,
+                        }],
+                    },
+                }).toLeft().isPresent, 'end not hh:mm but 25:00').to.be.true;
+            });
+
+            it('should validate mode', async () => {
+                expect(actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        mon: [{
+                            start: '05:00',
+                            end: '25:00',
+                            mode: 'not-supported',
+                            position: 0,
+                        }],
+                    },
+                }).toLeft().isPresent, 'mode not supported').to.be.true;
+            });
+
+            it('should validate position', async () => {
+                expect(actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        mon: [{
+                            start: '05:00',
+                            end: '25:00',
+                            mode: 'on',
+                            position: -10,
+                        }],
+                    },
+                }).toLeft().isPresent, 'position must be positive').to.be.true;
+            });
+
+            it('should validate max entries', async () => {
+                expect(actionWithField(scheduleField()).validated({
+                    newSchedule: {
+                        mon: [{
+                            start: '05:00',
+                            end: '06:00',
+                            mode: 'on',
+                            position: 0,
+                        }, {
+                            start: '06:00',
+                            end: '07:00',
+                            mode: 'on',
+                            position: 1,
+                        }, {
+                            start: '07:00',
+                            end: '08:00',
+                            mode: 'on',
+                            position: 2,
+                        }, {
+                            start: '08:00',
+                            end: '09:00',
+                            mode: 'on',
+                            position: 3,
+                        }, {
+                            start: '09:00',
+                            end: '10:00',
+                            mode: 'on',
+                            position: 4,
+                        }],
+                    },
+                }).toLeft().isPresent, 'max 4 entries per day').to.be.true;
+            });
+        });
     });
 });
 
@@ -203,6 +384,81 @@ function actionWithField(field: Field): viessmann.FeatureAction {
         ],
         type: 'application/json',
     });
+}
+
+function scheduleField(): Field {
+    return {
+        name: 'newSchedule',
+        required: true,
+        type: 'Schedule',
+        maxEntries: 4,
+        resolution: 10,
+        modes: [
+            'on',
+        ],
+        defaultMode: 'off',
+    };
+}
+
+function complexSchedule(): any {
+    return {
+        mon: [
+            {
+                start: '05:30',
+                end: '22:00',
+                mode: 'on',
+                position: 0,
+            },
+        ],
+        tue: [
+            {
+                start: '05:30',
+                end: '22:00',
+                mode: 'on',
+                position: 0,
+            },
+        ],
+        wed: [
+            {
+                start: '05:30',
+                end: '22:00',
+                mode: 'on',
+                position: 0,
+            },
+        ],
+        thu: [
+            {
+                start: '05:30',
+                end: '22:00',
+                mode: 'on',
+                position: 0,
+            },
+        ],
+        fri: [
+            {
+                start: '05:30',
+                end: '22:00',
+                mode: 'on',
+                position: 0,
+            },
+        ],
+        sat: [
+            {
+                start: '05:30',
+                end: '22:00',
+                mode: 'on',
+                position: 0,
+            },
+        ],
+        sun: [
+            {
+                start: '05:30',
+                end: '22:00',
+                mode: 'on',
+                position: 0,
+            },
+        ],
+    };
 }
 
 function getMetaInformationOf(entity: Entity): viessmann.MetaInformation {
