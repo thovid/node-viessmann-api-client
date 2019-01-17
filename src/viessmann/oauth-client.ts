@@ -1,6 +1,6 @@
 import * as request from 'request-promise-native';
 import * as simpleOAuth from 'simple-oauth2';
-import {log} from './logger';
+import {log} from '../lib/logger';
 
 export interface ViessmannOAuthConfig {
     host: string;

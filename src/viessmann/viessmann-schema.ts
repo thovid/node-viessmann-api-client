@@ -1,8 +1,8 @@
 import Optional from 'typescript-optional';
 import {Either} from '../lib/either';
+import {log} from '../lib/logger';
 import {NumberUtils} from '../lib/number-utils';
-import {log} from '../logger';
-import {Action, Entity, Field} from './siren';
+import {Action, Entity, Field} from '../parser/siren';
 
 export interface MetaInformation {
     apiVersion: number;

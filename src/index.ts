@@ -1,5 +1,5 @@
-import {OAuthClient} from './oauth-client';
-import {Client, ViessmannClientConfig} from './viessmann-api-client';
+import {OAuthClient} from './viessmann/oauth-client';
+import {Client, ViessmannClientConfig} from './viessmann/viessmann-api-client';
 
 export {Either, leftPromiseTransformer, LeftTransformer} from './lib/either';
 
@@ -10,7 +10,7 @@ export {
     ViessmannInstallation,
     FeatureObserver,
     ConnectionObserver,
-} from './viessmann-api-client';
+} from './viessmann/viessmann-api-client';
 
 export {
     ViessmannOAuthConfig,
@@ -20,7 +20,7 @@ export {
     OnRefresh,
     AuthenticationFailed,
     RequestFailed,
-} from './oauth-client';
+} from './viessmann/oauth-client';
 
 export {
     Feature,
@@ -29,11 +29,11 @@ export {
     ComplexProperty,
     SimpleProperty,
     FeatureAction,
-} from './parser/viessmann-schema';
+} from './viessmann/viessmann-schema';
 
 export {
     LoggerFunction,
-} from './logger';
+} from './lib/logger';
 
 export default function(config: ViessmannClientConfig): Client {
     return new Client(config, new OAuthClient(config.auth));

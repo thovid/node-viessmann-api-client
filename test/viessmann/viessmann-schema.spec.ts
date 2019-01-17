@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import * as chai from 'chai';
 import 'mocha';
 import {Entity, Field} from '../../src/parser/siren';
-import * as viessmann from '../../src/parser/viessmann-schema';
+import * as viessmann from '../../src/viessmann/viessmann-schema';
 
 // tslint:disable-next-line:no-var-requires
 const chaiSubset = require('chai-subset');
