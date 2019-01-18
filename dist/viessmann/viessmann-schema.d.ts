@@ -31,7 +31,6 @@ export declare class ComplexProperty implements Property {
 export declare class FeatureAction extends Action {
     constructor(action: Action);
     validated(payload?: any): Either<string, FeatureAction>;
-    private validateField;
 }
 export interface Feature {
     properties: Property[];
