@@ -1,6 +1,6 @@
 {
   "name": "viessmann-api-client",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "a node js api client for the viessmann heating api",
   "keywords": [
     "nodejs",

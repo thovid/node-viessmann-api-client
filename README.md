@@ -11,6 +11,9 @@ Inspired by https://github.com/thetrueavatar and his project https://github.com/
 Note that this is a private project, so use at your own risk! It is not supported or endorsed by Viessmann!
 
 ## Changelog
+### 2.2.0 (2019/01/18)
+- improved validation of `number` and `string` fields in action payloads: `number` fields validate `min`, `max` and `stepping` properties, `string` fields validate `enum` property
+- added support for `Schedule` field in action payload 
 ### 2.1.0 (2018/12/17)
 - execution of actions returns `Either<string, boolean>`, with `left` containing an error message in case of errors, and `right` containing `true` for a sucessful execution
 ### 2.0.0 (2018/12/15)
