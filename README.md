@@ -74,9 +74,7 @@ result.caseOf({
     right: ok:boolean => /* success */,
 });
 ```
-will execute the `setTemperature` action on the given feature using the given payload. The payload is (rudimentarily) validated against the field definition specified for this action.
-
-*Note:* Currently, only actions with basic fields (number, boolean, string) can be executed. So, setting a new schedule, for example for heating or warm water, is not possible at the moment.
+will execute the `setTemperature` action on the given feature using the given payload. The payload is validated against the field definition specified for this action.
 
 ## Authentication
 The Viessmann API uses OAuth2 for authentication. 
