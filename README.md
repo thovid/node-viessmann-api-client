@@ -11,6 +11,9 @@ Inspired by https://github.com/thetrueavatar and his project https://github.com/
 Note that this is a private project, so use at your own risk! It is not supported or endorsed by Viessmann!
 
 ## Changelog
+### 2.2.0 (2019/01/18)
+- improved validation of `number` and `string` fields in action payloads: `number` fields validate `min`, `max` and `stepping` properties, `string` fields validate `enum` property
+- added support for `Schedule` field in action payload 
 ### 2.1.0 (2018/12/17)
 - execution of actions returns `Either<string, boolean>`, with `left` containing an error message in case of errors, and `right` containing `true` for a sucessful execution
 ### 2.0.0 (2018/12/15)
@@ -71,9 +74,7 @@ result.caseOf({
     right: ok:boolean => /* success */,
 });
 ```
-will execute the `setTemperature` action on the given feature using the given payload. The payload is (rudimentarily) validated against the field definition specified for this action.
-
-*Note:* Currently, only actions with basic fields (number, boolean, string) can be executed. So, setting a new schedule, for example for heating or warm water, is not possible at the moment.
+will execute the `setTemperature` action on the given feature using the given payload. The payload is validated against the field definition specified for this action.
 
 ## Authentication
 The Viessmann API uses OAuth2 for authentication. 

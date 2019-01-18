@@ -7,19 +7,17 @@ export class Scheduler {
     constructor(private readonly intervalInMs: number, private readonly onTick: OnTick) {}
 
     public start(): void {
-        log('Scheduler: starting...', 'debug');
         if (this.isStopped()) {
             this.timer = setInterval(() => this.onTick(), this.intervalInMs);
-            log('Scheduler: ...started', 'debug');
+            log('Scheduler started', 'debug');
         }
     }
 
     public stop(): void {
-        log('Scheduler: stopping...', 'debug');
         if (!this.isStopped()) {
             clearInterval(this.timer);
             this.timer = null;
-            log('Scheduler: ...stopped', 'debug');
+            log('Scheduler stopped', 'debug');
         }
     }
 

@@ -5,9 +5,9 @@ import * as chaiAsPromised from 'chai-as-promised';
 import 'mocha';
 import * as nock from 'nock';
 
-import {AuthenticationFailed, Credentials, ViessmannOAuthConfig} from '../src/oauth-client';
-import {Feature, Property} from '../src/parser/viessmann-schema';
-import {Client, ViessmannClientConfig, ViessmannInstallation} from '../src/viessmann-api-client';
+import {AuthenticationFailed, Credentials, ViessmannOAuthConfig} from '../../src/viessmann/oauth-client';
+import {Client, ViessmannClientConfig, ViessmannInstallation} from '../../src/viessmann/viessmann-api-client';
+import {Feature, Property} from '../../src/viessmann/viessmann-schema';
 
 // Note: augmenting nock.Interceptor here until type def is fixed
 declare module 'nock' {
@@ -439,6 +439,6 @@ function featuresPath(): string {
 }
 
 function responseBody(name: string): string {
-    return JSON.stringify(require('./data/testresponse.' + name + '.json'));
+    return JSON.stringify(require('../data/testresponse.' + name + '.json'));
 
 }

@@ -1,7 +1,8 @@
 import Optional from 'typescript-optional';
 import {Either} from '../lib/either';
-import {log} from '../logger';
-import {Action, Entity, Field} from './siren';
+import {log} from '../lib/logger';
+import {Action, Entity} from '../parser/siren';
+import {validateField} from './action-validation';
 
 export interface MetaInformation {
     apiVersion: number;
@@ -50,27 +51,15 @@ export class FeatureAction extends Action {
         }
 
         const validationErrors: string[] = [];
-        this.fields.forEach(field => {
-            this.validateField(field, payload).ifPresent(error => validationErrors.push(error));
-        });
+        this.fields.forEach(field => validateField(field, payload)
+            .ifPresent(error => validationErrors.push(error)));
+
         if (validationErrors.length !== 0) {
             const msg = `FeatureAction[${this.name}]: validation failed: ${JSON.stringify(validationErrors)}`;
             log(msg, 'warn');
             return Either.left(msg);
         }
         return Either.right(this);
-    }
-
-    private validateField(field: Field, payload?: any): Optional<string> {
-        log(`FeatureAction[${this.name}]: validating field ${field.name}`, 'debug');
-        const value = payload[field.name];
-        if (value === undefined && field.required) {
-            return Optional.of(`Field[${field.name}]: required but not found`);
-        }
-        if (value !== undefined && field.type !== typeof value) {
-            return Optional.of(`Field[${field.name}]: required type ${field.type} but was ${typeof value}`);
-        }
-        return Optional.empty();
     }
 }
 

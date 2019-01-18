@@ -1,0 +1,189 @@
+[
+    {
+        "name": "heating.circuits.0.heating.curve",
+        "actions": [
+            {
+                "fields": [
+                    {
+                        "name": "slope",
+                        "required": true,
+                        "type": "number",
+                        "min": 0.2,
+                        "max": 3.5,
+                        "stepping": 0.1
+                    },
+                    {
+                        "name": "shift",
+                        "required": true,
+                        "type": "number",
+                        "min": -13,
+                        "max": 40,
+                        "stepping": 1
+                    }
+                ],
+                "name": "setCurve"
+            }
+        ]
+    },
+    {
+        "name": "heating.circuits.0.operating.modes.active",
+        "actions": [
+            {
+                "fields": [
+                    {
+                        "name": "mode",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "standby",
+                            "dhw",
+                            "dhwAndHeating",
+                            "forcedReduced",
+                            "forcedNormal"
+                        ]
+                    }
+                ],
+                "name": "setMode"
+            }
+        ]
+    },
+    {
+        "name": "heating.circuits.0.operating.programs.comfort",
+        "actions": [
+            {
+                "fields": [
+                    {
+                        "name": "targetTemperature",
+                        "required": true,
+                        "type": "number",
+                        "min": 4,
+                        "max": 37,
+                        "stepping": 1
+                    }
+                ],
+                "name": "setTemperature"
+            },
+            {
+                "fields": [],
+                "name": "activate"
+            },
+            {
+                "fields": [],
+                "name": "deactivate"
+            }
+        ]
+    },
+    {
+        "name": "heating.circuits.0.operating.programs.eco",
+        "actions": [
+            {
+                "fields": [
+                    {
+                        "name": "temperature",
+                        "required": false,
+                        "type": "number",
+                        "min": 3,
+                        "max": 37,
+                        "stepping": 1
+                    }
+                ],
+                "name": "activate"
+            },
+            {
+                "fields": [],
+                "name": "deactivate"
+            }
+        ]
+    },
+    {
+        "name": "heating.circuits.0.operating.programs.holiday",
+        "actions": [
+            {
+                "fields": [
+                    {
+                        "name": "start",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "end",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "name": "schedule"
+            },
+            {
+                "fields": [],
+                "name": "unschedule"
+            }
+        ]
+    },
+    {
+        "name": "heating.circuits.0.operating.programs.normal",
+        "actions": [
+            {
+                "fields": [
+                    {
+                        "name": "targetTemperature",
+                        "required": true,
+                        "type": "number",
+                        "min": 3,
+                        "max": 37,
+                        "stepping": 1
+                    }
+                ],
+                "name": "setTemperature"
+            }
+        ]
+    },
+    {
+        "name": "heating.circuits.0.operating.programs.reduced",
+        "actions": [
+            {
+                "fields": [
+                    {
+                        "name": "targetTemperature",
+                        "required": true,
+                        "type": "number",
+                        "min": 3,
+                        "max": 37,
+                        "stepping": 1
+                    }
+                ],
+                "name": "setTemperature"
+            }
+        ]
+    },
+    {
+        "name": "heating.dhw.oneTimeCharge",
+        "actions": [
+            {
+                "fields": [],
+                "name": "activate"
+            },
+            {
+                "fields": [],
+                "name": "deactivate"
+            }
+        ]
+    },
+    {
+        "name": "heating.dhw.temperature",
+        "actions": [
+            {
+                "fields": [
+                    {
+                        "name": "temperature",
+                        "required": true,
+                        "type": "number",
+                        "min": 10,
+                        "max": 60,
+                        "stepping": 1
+                    }
+                ],
+                "name": "setTargetTemperature"
+            }
+        ]
+    }
+]

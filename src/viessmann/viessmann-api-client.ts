@@ -1,11 +1,11 @@
 import Optional from 'typescript-optional';
-import {Either, leftPromiseTransformer} from './lib/either';
+import {Either, leftPromiseTransformer} from '../lib/either';
 
-import {log, LoggerFunction, setCustomLogger} from './logger';
+import {log, LoggerFunction, setCustomLogger} from '../lib/logger';
+import {Scheduler} from '../lib/scheduler';
+import {Entity} from '../parser/siren';
 import {Credentials, OAuthClient, ViessmannOAuthConfig} from './oauth-client';
-import {Entity} from './parser/siren';
-import {Feature, Property, SirenFeature} from './parser/viessmann-schema';
-import {Scheduler} from './scheduler';
+import {Feature, Property, SirenFeature} from './viessmann-schema';
 
 export interface ViessmannClientConfig {
     auth: ViessmannOAuthConfig;
