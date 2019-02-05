@@ -105,7 +105,7 @@ The client will refresh the token proactively if it is expired and also will try
 A custom log fuction can be provided by setting the `logger` property of the config object.
 
 # Legal
-- Viessmann and Vitroconnect are registered Trademarks of the Viessmann Werke GmbH & Co. KG. 
+- Viessmann and Vitoconnect are registered Trademarks of the Viessmann Werke GmbH & Co. KG. 
 
 - This project is not offically supported or endorsed by the Viessmann Werke GmbH & Co. KG.
 
