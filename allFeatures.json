@@ -1,6 +1,113 @@
 [
     {
+        "name": "heating.circuits.0.circulation.schedule",
+        "properties": [
+            {
+                "name": "active",
+                "type": "boolean",
+                "value": true
+            },
+            {
+                "name": "entries",
+                "customType": "Schedule",
+                "value": {
+                    "mon": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ],
+                    "tue": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ],
+                    "wed": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ],
+                    "thu": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ],
+                    "fri": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ],
+                    "sat": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ],
+                    "sun": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ]
+                },
+                "type": "object"
+            }
+        ],
+        "actions": [
+            {
+                "fields": [
+                    {
+                        "name": "newSchedule",
+                        "required": true,
+                        "type": "Schedule",
+                        "maxEntries": 4,
+                        "resolution": 10,
+                        "modes": [
+                            "on"
+                        ],
+                        "defaultMode": "off"
+                    }
+                ],
+                "method": "POST",
+                "isExecutable": true,
+                "name": "setSchedule",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.circulation.schedule/setSchedule"
+            }
+        ]
+    },
+    {
         "name": "heating.circuits.0.heating.curve",
+        "properties": [
+            {
+                "name": "shift",
+                "type": "number",
+                "value": 10
+            },
+            {
+                "name": "slope",
+                "type": "number",
+                "value": 1.2
+            }
+        ],
         "actions": [
             {
                 "fields": [
@@ -21,12 +128,118 @@
                         "stepping": 1
                     }
                 ],
-                "name": "setCurve"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "setCurve",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.curve/setCurve"
+            }
+        ]
+    },
+    {
+        "name": "heating.circuits.0.heating.schedule",
+        "properties": [
+            {
+                "name": "active",
+                "type": "boolean",
+                "value": true
+            },
+            {
+                "name": "entries",
+                "customType": "Schedule",
+                "value": {
+                    "mon": [
+                        {
+                            "start": "06:00",
+                            "end": "22:00",
+                            "mode": "normal",
+                            "position": 0
+                        }
+                    ],
+                    "tue": [
+                        {
+                            "start": "06:00",
+                            "end": "22:00",
+                            "mode": "normal",
+                            "position": 0
+                        }
+                    ],
+                    "wed": [
+                        {
+                            "start": "06:00",
+                            "end": "22:00",
+                            "mode": "normal",
+                            "position": 0
+                        }
+                    ],
+                    "thu": [
+                        {
+                            "start": "06:00",
+                            "end": "22:00",
+                            "mode": "normal",
+                            "position": 0
+                        }
+                    ],
+                    "fri": [
+                        {
+                            "start": "06:00",
+                            "end": "23:00",
+                            "mode": "normal",
+                            "position": 0
+                        }
+                    ],
+                    "sat": [
+                        {
+                            "start": "06:00",
+                            "end": "23:00",
+                            "mode": "normal",
+                            "position": 0
+                        }
+                    ],
+                    "sun": [
+                        {
+                            "start": "06:00",
+                            "end": "22:00",
+                            "mode": "normal",
+                            "position": 0
+                        }
+                    ]
+                },
+                "type": "object"
+            }
+        ],
+        "actions": [
+            {
+                "fields": [
+                    {
+                        "name": "newSchedule",
+                        "required": true,
+                        "type": "Schedule",
+                        "maxEntries": 4,
+                        "resolution": 10,
+                        "modes": [
+                            "normal"
+                        ],
+                        "defaultMode": "reduced"
+                    }
+                ],
+                "method": "POST",
+                "isExecutable": true,
+                "name": "setSchedule",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.heating.schedule/setSchedule"
             }
         ]
     },
     {
         "name": "heating.circuits.0.operating.modes.active",
+        "properties": [
+            {
+                "name": "value",
+                "type": "string",
+                "value": "dhwAndHeating"
+            }
+        ],
         "actions": [
             {
                 "fields": [
@@ -43,12 +256,28 @@
                         ]
                     }
                 ],
-                "name": "setMode"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "setMode",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.modes.active/setMode"
             }
         ]
     },
     {
         "name": "heating.circuits.0.operating.programs.comfort",
+        "properties": [
+            {
+                "name": "active",
+                "type": "boolean",
+                "value": false
+            },
+            {
+                "name": "temperature",
+                "type": "number",
+                "value": 20
+            }
+        ],
         "actions": [
             {
                 "fields": [
@@ -61,20 +290,44 @@
                         "stepping": 1
                     }
                 ],
-                "name": "setTemperature"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "setTemperature",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/setTemperature"
             },
             {
                 "fields": [],
-                "name": "activate"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "activate",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/activate"
             },
             {
                 "fields": [],
-                "name": "deactivate"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "deactivate",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.comfort/deactivate"
             }
         ]
     },
     {
         "name": "heating.circuits.0.operating.programs.eco",
+        "properties": [
+            {
+                "name": "active",
+                "type": "boolean",
+                "value": false
+            },
+            {
+                "name": "temperature",
+                "type": "number",
+                "value": 16
+            }
+        ],
         "actions": [
             {
                 "fields": [
@@ -87,16 +340,41 @@
                         "stepping": 1
                     }
                 ],
-                "name": "activate"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "activate",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.eco/activate"
             },
             {
                 "fields": [],
-                "name": "deactivate"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "deactivate",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.eco/deactivate"
             }
         ]
     },
     {
         "name": "heating.circuits.0.operating.programs.holiday",
+        "properties": [
+            {
+                "name": "active",
+                "type": "boolean",
+                "value": false
+            },
+            {
+                "name": "start",
+                "type": "string",
+                "value": ""
+            },
+            {
+                "name": "end",
+                "type": "string",
+                "value": ""
+            }
+        ],
         "actions": [
             {
                 "fields": [
@@ -111,16 +389,36 @@
                         "type": "string"
                     }
                 ],
-                "name": "schedule"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "schedule",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.holiday/schedule"
             },
             {
                 "fields": [],
-                "name": "unschedule"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "unschedule",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.holiday/unschedule"
             }
         ]
     },
     {
         "name": "heating.circuits.0.operating.programs.normal",
+        "properties": [
+            {
+                "name": "active",
+                "type": "boolean",
+                "value": true
+            },
+            {
+                "name": "temperature",
+                "type": "number",
+                "value": 20
+            }
+        ],
         "actions": [
             {
                 "fields": [
@@ -133,12 +431,28 @@
                         "stepping": 1
                     }
                 ],
-                "name": "setTemperature"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "setTemperature",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.normal/setTemperature"
             }
         ]
     },
     {
         "name": "heating.circuits.0.operating.programs.reduced",
+        "properties": [
+            {
+                "name": "active",
+                "type": "boolean",
+                "value": false
+            },
+            {
+                "name": "temperature",
+                "type": "number",
+                "value": 16
+            }
+        ],
         "actions": [
             {
                 "fields": [
@@ -151,25 +465,51 @@
                         "stepping": 1
                     }
                 ],
-                "name": "setTemperature"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "setTemperature",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.circuits.0.operating.programs.reduced/setTemperature"
             }
         ]
     },
     {
         "name": "heating.dhw.oneTimeCharge",
+        "properties": [
+            {
+                "name": "active",
+                "type": "boolean",
+                "value": false
+            }
+        ],
         "actions": [
             {
                 "fields": [],
-                "name": "activate"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "activate",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.oneTimeCharge/activate"
             },
             {
                 "fields": [],
-                "name": "deactivate"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "deactivate",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.oneTimeCharge/deactivate"
             }
         ]
     },
     {
         "name": "heating.dhw.temperature",
+        "properties": [
+            {
+                "name": "value",
+                "type": "number",
+                "value": 50
+            }
+        ],
         "actions": [
             {
                 "fields": [
@@ -182,7 +522,106 @@
                         "stepping": 1
                     }
                 ],
-                "name": "setTargetTemperature"
+                "method": "POST",
+                "isExecutable": true,
+                "name": "setTargetTemperature",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.temperature/setTargetTemperature"
+            }
+        ]
+    },
+    {
+        "name": "heating.dhw.schedule",
+        "properties": [
+            {
+                "name": "active",
+                "type": "boolean",
+                "value": true
+            },
+            {
+                "name": "entries",
+                "customType": "Schedule",
+                "value": {
+                    "mon": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ],
+                    "tue": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ],
+                    "wed": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ],
+                    "thu": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ],
+                    "fri": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ],
+                    "sat": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ],
+                    "sun": [
+                        {
+                            "start": "05:30",
+                            "end": "22:00",
+                            "mode": "on",
+                            "position": 0
+                        }
+                    ]
+                },
+                "type": "object"
+            }
+        ],
+        "actions": [
+            {
+                "fields": [
+                    {
+                        "name": "newSchedule",
+                        "required": true,
+                        "type": "Schedule",
+                        "maxEntries": 4,
+                        "resolution": 10,
+                        "modes": [
+                            "on"
+                        ],
+                        "defaultMode": "off"
+                    }
+                ],
+                "method": "POST",
+                "isExecutable": true,
+                "name": "setSchedule",
+                "type": "application/json",
+                "href": "https://api.mockedapi.com/operational-data/installations/99999/gateways/123456/devices/0/features/heating.dhw.schedule/setSchedule"
             }
         ]
     }

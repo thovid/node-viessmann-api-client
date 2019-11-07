@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -64,6 +65,9 @@ class OAuthClient {
                     method: method,
                     auth: {
                         bearer: accessToken,
+                    },
+                    headers: {
+                        'x-api-key': API_KEY,
                     },
                     uri: uri,
                     resolveWithFullResponse: true,
@@ -141,6 +145,9 @@ class OAuthClient {
                     user: user,
                     pass: password,
                 },
+                headers: {
+                    'x-api-key': API_KEY,
+                },
                 resolveWithFullResponse: true,
                 simple: false,
             };
@@ -209,6 +216,7 @@ class OAuthClient {
 exports.OAuthClient = OAuthClient;
 const CLIENT_ID = '79742319e39245de5f91d15ff4cac2a8';
 const SECRET = '8ad97aceb92c5892e102b093c7c083fa';
+const API_KEY = 'token 38c97795ed8ae0ec139409d785840113bb0f5479893a72997932d447bd1178c8';
 const SCOPE = 'offline_access';
 const CALLBACK_URL = 'vicare://oauth-callback/everest';
 //# sourceMappingURL=oauth-client.js.map

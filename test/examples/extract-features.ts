@@ -1,6 +1,6 @@
 // tslint:disable:no-console
 import {Entity} from '../../src/parser/siren';
-import * as helper from '../../src/parser/viessmann-schema';
+import * as helper from '../../src/viessmann/viessmann-schema';
 
 // tslint:disable-next-line:no-var-requires
 const allFeatures = require('../data/testresponse.features.json');
@@ -13,7 +13,7 @@ const results = Array.from(features.values())
     .map(f => {
         return {
             name: f.meta.feature,
-            // properties: f.properties,
+            properties: f.properties,
             actions: f.actions,
         };
     }).filter(f => f.actions.length > 0);
