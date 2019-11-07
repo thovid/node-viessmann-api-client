@@ -216,5 +216,5 @@ export class OAuthClient {
 const CLIENT_ID = '79742319e39245de5f91d15ff4cac2a8';
 const SECRET = '8ad97aceb92c5892e102b093c7c083fa';
 const API_KEY = 'token 38c97795ed8ae0ec139409d785840113bb0f5479893a72997932d447bd1178c8';
-const SCOPE = 'openid';
+const SCOPE = 'offline_access';
 const CALLBACK_URL = 'vicare://oauth-callback/everest';
